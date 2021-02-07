@@ -2,7 +2,7 @@ import React from 'react';
 import {Icon} from 'native-base';
 import {View, SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
-import {Formik} from 'formik';
+import {Formik, FormikHelpers} from 'formik';
 
 import {Input, Button} from '../components';
 
@@ -24,6 +24,20 @@ const INITIALRegisterFORM: RegisterFormValueProps = {
 
 const Register = (props: RegisterProps) => {
   const {navigation} = props;
+
+  /**
+   * Called when sign up button is pressed
+   * @param values form's value submitted
+   * @param actions formik action helper function
+   */
+  const handleSignUp = (
+    values: RegisterFormValueProps,
+    actions: FormikHelpers<RegisterFormValueProps>,
+  ) => {
+    console.log(JSON.stringify(values, null, 2));
+    actions.setSubmitting(false);
+  };
+
   return (
     <Container>
       <SafeAreaView />
@@ -35,12 +49,7 @@ const Register = (props: RegisterProps) => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Register</HeaderText>
-      <Formik
-        initialValues={INITIALRegisterFORM}
-        onSubmit={(values, actions) => {
-          console.log(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }}>
+      <Formik initialValues={INITIALRegisterFORM} onSubmit={handleSignUp}>
         {({handleChange, handleSubmit, values}) => (
           <View>
             <Input label="Username" onChangeText={handleChange('username')} />
@@ -51,16 +60,7 @@ const Register = (props: RegisterProps) => {
               secureTextEntry={true}
             />
             <ButtonWrapper>
-              <Button
-                text="SIGN UP"
-                block
-                onPress={handleSubmit}
-                disabled={
-                  values.email === '' ||
-                  values.password === '' ||
-                  values.username === ''
-                }
-              />
+              <Button text="SIGN UP" block onPress={handleSubmit} />
             </ButtonWrapper>
           </View>
         )}

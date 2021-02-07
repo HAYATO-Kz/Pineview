@@ -5,13 +5,23 @@ import styled from 'styled-components/native';
 import {Tab, TabProps} from './Tab';
 
 interface FilterTabsProps {
+  /**
+   * Tabs
+   */
   tabs: Omit<TabProps, 'onPress' | 'isActive'>[];
-  onChange?: (newValue: string) => void;
+  /**
+   * default tab value
+   */
   defaultValue?: string;
+  /**
+   * Call when selected tab is changed
+   */
+  onChange?: (newValue: string) => void;
 }
 
 export const FilterTabs = (props: FilterTabsProps) => {
   const {tabs, onChange, defaultValue = tabs[0].value} = props;
+
   const [selected, setSelected] = useState(defaultValue);
 
   const onTabSelect = (value: string) => {

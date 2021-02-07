@@ -3,6 +3,9 @@ import styled from 'styled-components/native';
 import {TextInputProps} from 'react-native';
 
 interface InputProps extends TextInputProps {
+  /**
+   * Inout label
+   */
   label?: string;
 }
 

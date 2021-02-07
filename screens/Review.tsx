@@ -20,8 +20,8 @@ import {
   ActionSheetIOS,
 } from 'react-native';
 import styled from 'styled-components/native';
-import GoogleMapIcon from './images/google_map_icon.png';
 
+import GoogleMapIcon from './images/google_map_icon.png';
 import {MOCKDATA} from '../mock_data';
 
 interface ReviewProps {
@@ -38,18 +38,25 @@ const Review = (props: ReviewProps) => {
 
   const [source, setSource] = useState<any>('');
 
+  /**
+   *  Redirect to google map application with use lat & long to set destination
+   * @param lat latitude's blog
+   * @param long longitude's blog
+   */
   const openInGoogleMap = async (lat: number, long: number) => {
     const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${long}&dir_action=navigate`;
     const supported = await Linking.canOpenURL(url);
     if (supported) {
-      // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-      // by some browser in the mobile
       await Linking.openURL(url);
     } else {
       console.log(`Don't know how to open this URL: ${url}`);
     }
   };
 
+  /**
+   * share pantip blog to other social medai applcation
+   * @param id Pantip blog's id
+   */
   const share = async (id: string) => {
     try {
       const result = await Share.share({
@@ -69,6 +76,9 @@ const Review = (props: ReviewProps) => {
     }
   };
 
+  /**
+   * Open action sheet (redirect to google map, share to other social media applcation)
+   */
   const openActionSheet = async () => {
     ActionSheetIOS.showActionSheetWithOptions(
       {

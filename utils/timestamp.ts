@@ -1,3 +1,7 @@
+/**
+ * Get date from timestamp
+ * @param time time in timestamp
+ */
 export const getDate = (time: any) => {
   const date = new Date(Number(time * 1000));
   return `${date.getDate()}/${

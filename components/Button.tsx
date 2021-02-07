@@ -2,11 +2,26 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 export interface ButtonProps {
+  /**
+   * Button's text
+   */
   text: string;
+  /**
+   *  Option to fit button width to its parent width
+   */
   block?: boolean;
+  /**
+   * Set the button type to outline
+   */
   outline?: boolean;
-  onPress: () => void;
+  /**
+   * Set the button to disabled state
+   */
   disabled?: boolean;
+  /**
+   * Called when button is pressed
+   */
+  onPress: () => void;
 }
 
 export const Button = (props: ButtonProps) => {

@@ -46,6 +46,7 @@ const Map = (props: MapProps) => {
   const {navigation} = props;
 
   useEffect(() => {
+    // Get current position and set to initial postion of map
     Geolocation.getCurrentPosition((info) => {
       setInitlat(info.coords.latitude);
       setInitLong(info.coords.longitude);

@@ -2,7 +2,7 @@ import React from 'react';
 import {Icon} from 'native-base';
 import {View, Text, SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
-import {Formik} from 'formik';
+import {Formik, FormikHelpers} from 'formik';
 
 import {Input, Button} from '../components';
 
@@ -19,6 +19,20 @@ const INITIALLOGINFORM: LoginFormValueProps = {email: '', password: ''};
 
 const Login = (props: LoginProps) => {
   const {navigation} = props;
+
+  /**
+   * Called when login button is pressed
+   * @param values form's value submitted
+   * @param actions formik action helper function
+   */
+  const handleLogin = (
+    values: LoginFormValueProps,
+    actions: FormikHelpers<LoginFormValueProps>,
+  ) => {
+    console.log(JSON.stringify(values, null, 2));
+    actions.setSubmitting(false);
+  };
+
   return (
     <Container>
       <SafeAreaView />
@@ -30,12 +44,7 @@ const Login = (props: LoginProps) => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Login</HeaderText>
-      <Formik
-        initialValues={INITIALLOGINFORM}
-        onSubmit={(values, actions) => {
-          console.log(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }}>
+      <Formik initialValues={INITIALLOGINFORM} onSubmit={handleLogin}>
         {({handleChange, handleSubmit, values}) => (
           <View>
             <Input label="email" onChangeText={handleChange('email')} />
