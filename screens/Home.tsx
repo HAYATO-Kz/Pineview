@@ -1,45 +1,61 @@
 import React from 'react';
-import {Container, Content, Text, Button} from 'native-base';
-import {Image, SafeAreaView} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import styled from 'styled-components/native';
 
-interface HomeSceneProps {
+import {Button} from '../components/Button';
+
+interface HomeProps {
   navigation: any;
 }
 
-const HomeScene = (props: HomeSceneProps) => {
+const Home = (props: HomeProps) => {
   const {navigation} = props;
 
   return (
     <HomeContainer>
-      <Logo source={require('./images/logo.png')} />
-      <Mascot source={require('./images/mascot.png')} />
+      <Logo source={require('../images/logo.png')} />
+      <Mascot source={require('../images/mascot.png')} />
       <ButtonContainer>
-        <PrimaryButtonWithStyled
+        <Button
+          text="USE WITHOUT LOGIN"
           onPress={() => {
             navigation.navigate('Map');
-          }}>
-          <WhiteText>USE WITHOUT LOGIN</WhiteText>
-        </PrimaryButtonWithStyled>
+          }}
+          block
+        />
         <DividerRow>
           {/* <DividerLine /> */}
           <Divider>OR</Divider>
           {/* <DividerLine /> */}
         </DividerRow>
         <SecondaryButtonContainer>
-          <LoginButtonWithStyled>
-            <BrownText>LOGIN</BrownText>
-          </LoginButtonWithStyled>
-          <RegisterButtonWithStyled>
-            <WhiteText>REGISTER</WhiteText>
-          </RegisterButtonWithStyled>
+          <SecondartButtonWrapper>
+            <Button
+              text="LOGIN"
+              block
+              outline
+              onPress={() => {
+                navigation.navigate('Login');
+              }}
+            />
+          </SecondartButtonWrapper>
+          <Space />
+          <SecondartButtonWrapper>
+            <Button
+              text="REGISTER"
+              block
+              onPress={() => {
+                navigation.navigate('Register');
+              }}
+            />
+          </SecondartButtonWrapper>
         </SecondaryButtonContainer>
       </ButtonContainer>
     </HomeContainer>
   );
 };
 
-export default HomeScene;
+export default Home;
 
 const HomeContainer = styled(SafeAreaView)`
   background-color: #ffeeb4;
@@ -58,34 +74,6 @@ const Logo = styled.Image`
 const Mascot = styled.Image`
   max-width: 100%;
   /* flex: 1; */
-`;
-
-const RegisterButtonWithStyled = styled(Button)`
-  /* flex: 1; */
-  background: #613400;
-  width: 48%;
-  height: 47px;
-  justify-content: center;
-  border-radius: 5px;
-`;
-
-const LoginButtonWithStyled = styled(Button)`
-  /* flex: 1; */
-  background: #fff;
-  width: 48%;
-  height: 47px;
-  border: 2px solid #613400;
-  justify-content: center;
-  border-radius: 5px;
-`;
-
-const PrimaryButtonWithStyled = styled(Button)`
-  /* flex: 1; */
-  height: 47px;
-  width: 100%;
-  background: #613400;
-  justify-content: center;
-  border-radius: 5px;
 `;
 
 const DividerRow = styled.View`
@@ -120,14 +108,10 @@ const SecondaryButtonContainer = styled.View`
   align-items: flex-start;
 `;
 
-const WhiteText = styled.Text`
-  font-weight: 700;
-  font-size: 14px;
-  color: #fff;
+const SecondartButtonWrapper = styled.View`
+  flex: 1;
 `;
 
-const BrownText = styled.Text`
-  font-weight: 700;
-  font-size: 14px;
-  color: #613400;
+const Space = styled.View`
+  width: 16px;
 `;
