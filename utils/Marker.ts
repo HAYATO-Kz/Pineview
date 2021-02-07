@@ -1,6 +1,6 @@
-import CafeMarker from '../images/cafe_marker.png';
-import RetaurantMaker from '../images/restaurant_marker.png';
-import TouristSpotMarker from '../images/tourist_marker.png';
+import CafeMarker from '../images/marker/afe_marker.png';
+import RetaurantMaker from '../images/marker/restaurant_marker.png';
+import TouristSpotMarker from '../images/marker/tourist_marker.png';
 
 export const getMarker = (type: string) => {
   switch (type) {
