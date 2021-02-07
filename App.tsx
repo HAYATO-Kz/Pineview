@@ -20,7 +20,6 @@ const App = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Map" component={Map} />
         <Stack.Screen name="Review" component={Review} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
