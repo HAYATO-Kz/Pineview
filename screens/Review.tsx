@@ -21,7 +21,6 @@ import {
 } from 'react-native';
 import styled from 'styled-components/native';
 
-import GoogleMapIcon from './images/google_map_icon.png';
 import {MOCKDATA} from '../mock_data';
 
 interface ReviewProps {
