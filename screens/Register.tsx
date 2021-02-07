@@ -22,11 +22,37 @@ const INITIALRegisterFORM: RegisterFormValueProps = {
   password: '',
 };
 
+const registerValidator = (values: RegisterFormValueProps) => {
+  const errors: RegisterFormValueProps = {
+    username: '',
+    email: '',
+    password: '',
+  };
+
+  // mail validate
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  // password validate
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+
+  // username validate
+  if (!values.username) {
+    errors.username = 'Required';
+  }
+  return errors;
+};
+
 const Register = (props: RegisterProps) => {
   const {navigation} = props;
 
   /**
-   * Called when sign up button is pressed
+   * Called when form is submitted
    * @param values form's value submitted
    * @param actions formik action helper function
    */
@@ -49,7 +75,10 @@ const Register = (props: RegisterProps) => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Register</HeaderText>
-      <Formik initialValues={INITIALRegisterFORM} onSubmit={handleSignUp}>
+      <Formik
+        initialValues={INITIALRegisterFORM}
+        onSubmit={handleSignUp}
+        validate={registerValidator}>
         {({handleChange, handleSubmit, values}) => (
           <View>
             <Input label="Username" onChangeText={handleChange('username')} />

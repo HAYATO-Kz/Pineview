@@ -21,7 +21,7 @@ const Login = (props: LoginProps) => {
   const {navigation} = props;
 
   /**
-   * Called when login button is pressed
+   * Called when form is submitted
    * @param values form's value submitted
    * @param actions formik action helper function
    */
