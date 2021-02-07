@@ -38,21 +38,29 @@ const Register = (props: RegisterProps) => {
       <Formik
         initialValues={INITIALRegisterFORM}
         onSubmit={(values, actions) => {
-          console.log({values, actions});
           console.log(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
         }}>
         {({handleChange, handleSubmit, values}) => (
           <View>
-            <Input label="Username" onChange={handleChange('username')} />
-            <Input label="Email" onChange={handleChange('email')} />
+            <Input label="Username" onChangeText={handleChange('username')} />
+            <Input label="Email" onChangeText={handleChange('email')} />
             <Input
               label="Password"
-              onChange={handleChange('password')}
+              onChangeText={handleChange('password')}
               secureTextEntry={true}
             />
             <ButtonWrapper>
-              <Button text="SIGN UP" block onPress={handleSubmit} />
+              <Button
+                text="SIGN UP"
+                block
+                onPress={handleSubmit}
+                disabled={
+                  values.email === '' ||
+                  values.password === '' ||
+                  values.username === ''
+                }
+              />
             </ButtonWrapper>
           </View>
         )}

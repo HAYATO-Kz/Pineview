@@ -6,12 +6,17 @@ export interface ButtonProps {
   block?: boolean;
   outline?: boolean;
   onPress: () => void;
+  disabled?: boolean;
 }
 
 export const Button = (props: ButtonProps) => {
-  const {text, block, outline, onPress} = props;
+  const {text, block, outline, onPress, disabled} = props;
   return (
-    <ButtonWithStyled onPress={onPress} outline={outline} block={block}>
+    <ButtonWithStyled
+      onPress={onPress}
+      outline={outline}
+      block={block}
+      disabled={disabled}>
       <ButtonText outline={outline}>{text}</ButtonText>
     </ButtonWithStyled>
   );

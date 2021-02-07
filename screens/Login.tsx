@@ -33,20 +33,24 @@ const Login = (props: LoginProps) => {
       <Formik
         initialValues={INITIALLOGINFORM}
         onSubmit={(values, actions) => {
-          console.log({values, actions});
           console.log(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
         }}>
         {({handleChange, handleSubmit, values}) => (
           <View>
-            <Input label="email" onChange={handleChange('email')} />
+            <Input label="email" onChangeText={handleChange('email')} />
             <Input
               label="password"
-              onChange={handleChange('password')}
+              onChangeText={handleChange('password')}
               secureTextEntry={true}
             />
             <ButtonWrapper>
-              <Button text="LOGIN" block onPress={handleSubmit} />
+              <Button
+                text="LOGIN"
+                block
+                onPress={handleSubmit}
+                disabled={values.email === '' || values.password === ''}
+              />
             </ButtonWrapper>
           </View>
         )}

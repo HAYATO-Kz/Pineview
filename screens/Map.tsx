@@ -9,28 +9,6 @@ import {getMarker} from '../utils/Marker';
 
 import {MOCKDATA} from '../mock_data';
 
-// // mock data
-// const mockData = [
-//   {
-//     id: 'marker_1',
-//     latitude: 13.822907,
-//     longtitude: 100.528219,
-//     type: 'cafe',
-//   },
-//   {
-//     id: 'marker_2',
-//     latitude: 13.822707,
-//     longtitude: 100.528419,
-//     type: 'restaurant',
-//   },
-//   {
-//     id: 'marker_3',
-//     latitude: 13.822707,
-//     longtitude: 100.528819,
-//     type: 'attraction',
-//   },
-// ];
-
 interface MapProps {
   navigation: any;
 }
@@ -72,11 +50,6 @@ const Map = (props: MapProps) => {
       setInitlat(info.coords.latitude);
       setInitLong(info.coords.longitude);
     });
-    // navigator.geolocation.watchPosition((position) => {
-    //   // Create the object to update this.state.mapRegion through the onRegionChange function
-    //   setInitlat(position.coords.latitude)
-    //   setInitLoing(position.coords.longitude)
-    // }, (error)=>console.log(error));
   }, []);
 
   return (

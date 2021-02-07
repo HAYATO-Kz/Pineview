@@ -24,9 +24,7 @@ const Home = (props: HomeProps) => {
           block
         />
         <DividerRow>
-          {/* <DividerLine /> */}
           <Divider>OR</Divider>
-          {/* <DividerLine /> */}
         </DividerRow>
         <SecondaryButtonContainer>
           <SecondartButtonWrapper>
@@ -68,12 +66,10 @@ const HomeContainer = styled(SafeAreaView)`
 
 const Logo = styled.Image`
   width: 100%;
-  /* flex: 1; */
 `;
 
 const Mascot = styled.Image`
   max-width: 100%;
-  /* flex: 1; */
 `;
 
 const DividerRow = styled.View`
