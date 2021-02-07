@@ -19,7 +19,7 @@ const Home = (props: HomeProps) => {
         <Button
           text="USE WITHOUT LOGIN"
           onPress={() => {
-            navigation.navigate('Map');
+            navigation.navigate('Main');
           }}
           block
         />

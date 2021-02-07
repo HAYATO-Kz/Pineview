@@ -1,4 +1,4 @@
-import CafeMarker from '../images/marker/afe_marker.png';
+import CafeMarker from '../images/marker/cafe_marker.png';
 import RetaurantMaker from '../images/marker/restaurant_marker.png';
 import TouristSpotMarker from '../images/marker/tourist_marker.png';
 
