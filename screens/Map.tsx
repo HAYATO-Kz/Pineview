@@ -2,32 +2,12 @@ import MapView, {Marker} from 'react-native-maps';
 import React, {useEffect, useState} from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import styled from 'styled-components/native';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
-import {FilterTabs} from './components/FilterTabs';
-import {getMarker} from './utils/Marker';
+import {FilterTabs} from '../components/FilterTabs';
+import {getMarker} from '../utils/Marker';
 
-// mock data
-const mockData = [
-  {
-    id: 'marker_1',
-    latitude: 13.822907,
-    longtitude: 100.528219,
-    type: 'cafe',
-  },
-  {
-    id: 'marker_2',
-    latitude: 13.822707,
-    longtitude: 100.528419,
-    type: 'restaurant',
-  },
-  {
-    id: 'marker_3',
-    latitude: 13.822707,
-    longtitude: 100.528819,
-    type: 'attraction',
-  },
-];
+import {MOCKDATA} from '../mock_data';
 
 interface MapProps {
   navigation: any;
@@ -66,15 +46,11 @@ const Map = (props: MapProps) => {
   const {navigation} = props;
 
   useEffect(() => {
+    // Get current position and set to initial postion of map
     Geolocation.getCurrentPosition((info) => {
       setInitlat(info.coords.latitude);
       setInitLong(info.coords.longitude);
     });
-    // navigator.geolocation.watchPosition((position) => {
-    //   // Create the object to update this.state.mapRegion through the onRegionChange function
-    //   setInitlat(position.coords.latitude)
-    //   setInitLoing(position.coords.longitude)
-    // }, (error)=>console.log(error));
   }, []);
 
   return (
@@ -89,12 +65,12 @@ const Map = (props: MapProps) => {
           latitudeDelta: 0.009,
           longitudeDelta: 0.009,
         }}>
-        {mockData.map((data) => {
+        {MOCKDATA.map((data) => {
           if (data.type === filter || filter === 'all')
             return (
               <Marker
                 onPress={() => {
-                  navigation.navigate('Review', {id: data.id});
+                  navigation.navigate('Review', {id: data.lazy});
                 }}
                 image={getMarker(data.type)}
                 key={data.id}
@@ -105,27 +81,9 @@ const Map = (props: MapProps) => {
               />
             );
         })}
-        {/* <Picker
-              mode="dropdown"
-              style={{
-                marginTop: 20,
-                display:'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'brown',
-              }}
-              placeholder="Select One"
-              placeholderStyle={{ color: "#2874F0" }}
-              note={false}
-              onValueChange={(value)=>console.log(value)}
-            >
-              <Picker.Item label="Cafe" value="key0" />
-              <Picker.Item label="Winng" value="key1" />
-            </Picker> */}
-        {/* </SafeAreaView> */}
       </MapView>
       <Container>
-        <AreaView />
+        <SafeAreaView />
         <FilterTabs
           tabs={filterTabs}
           defaultValue="all"
@@ -137,8 +95,6 @@ const Map = (props: MapProps) => {
 };
 
 export default Map;
-
-const AreaView = styled(SafeAreaView)``;
 
 const Container = styled.View`
   padding: 0 10px;
