@@ -17,7 +17,7 @@ const Home = (props: HomeProps) => {
       <Mascot source={require('../images/mascot.png')} />
       <ButtonContainer>
         <Button
-          text="USE WITHOUT LOGIN"
+          text="USE WITHOUT LOG IN"
           onPress={() => {
             navigation.navigate('Main');
           }}
@@ -29,7 +29,7 @@ const Home = (props: HomeProps) => {
         <SecondaryButtonContainer>
           <SecondartButtonWrapper>
             <Button
-              text="LOGIN"
+              text="LOG IN"
               block
               outline
               onPress={() => {

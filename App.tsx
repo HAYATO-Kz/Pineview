@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import Map from './screens/Map';
 import Review from './screens/Review';
 import Home from './screens/Home';
 import Login from './screens/Login';

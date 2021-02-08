@@ -43,7 +43,7 @@ const Login = (props: LoginProps) => {
         onPress={() => {
           navigation.navigate('Home');
         }}></Icon>
-      <HeaderText>Login</HeaderText>
+      <HeaderText>Log in</HeaderText>
       <Formik initialValues={INITIALLOGINFORM} onSubmit={handleLogin}>
         {({handleChange, handleSubmit, values}) => (
           <View>

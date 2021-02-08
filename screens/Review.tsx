@@ -48,7 +48,7 @@ const Review = (props: ReviewProps) => {
     if (supported) {
       await Linking.openURL(url);
     } else {
-      console.log(`Don't know how to open this URL: ${url}`);
+      console.log(`Invalid: ${url}`);
     }
   };
 
@@ -135,7 +135,7 @@ const Review = (props: ReviewProps) => {
             <Title>{source.title}</Title>
           </Row>
           <Row style={{marginVertical: 5}}>
-            <Text>Reviewer : {source.nickname}</Text>
+            <Text>REVIEWER : {source.nickname}</Text>
           </Row>
           <Row>
             <Col size={3}>

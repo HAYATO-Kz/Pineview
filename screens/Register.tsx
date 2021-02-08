@@ -89,7 +89,7 @@ const Register = (props: RegisterProps) => {
               secureTextEntry={true}
             />
             <ButtonWrapper>
-              <Button text="SIGN UP" block onPress={handleSubmit} />
+              <Button text="REGISTER NOW" block onPress={handleSubmit} />
             </ButtonWrapper>
           </View>
         )}
