@@ -23,7 +23,7 @@ const INITIALRegisterFORM: RegisterFormValueProps = {
 };
 
 const registerValidator = (values: RegisterFormValueProps) => {
-  const errors: RegisterFormValueProps = {
+  const errors: Partial<RegisterFormValueProps> = {
     username: '',
     email: '',
     password: '',
@@ -79,14 +79,23 @@ const Register = (props: RegisterProps) => {
         initialValues={INITIALRegisterFORM}
         onSubmit={handleSignUp}
         validate={registerValidator}>
-        {({handleChange, handleSubmit, values}) => (
+        {({handleChange, handleSubmit, errors, values}) => (
           <View>
-            <Input label="Username" onChangeText={handleChange('username')} />
-            <Input label="Email" onChangeText={handleChange('email')} />
+            <Input
+              label="Username"
+              onChangeText={handleChange('username')}
+              errorMessage={errors.username}
+            />
+            <Input
+              label="Email"
+              onChangeText={handleChange('email')}
+              errorMessage={errors.email}
+            />
             <Input
               label="Password"
               onChangeText={handleChange('password')}
               secureTextEntry={true}
+              errorMessage={errors.password}
             />
             <ButtonWrapper>
               <Button text="REGISTER NOW" block onPress={handleSubmit} />
