@@ -55,7 +55,7 @@ const Login = (props: LoginProps) => {
             />
             <ButtonWrapper>
               <Button
-                text="LOGIN"
+                text="LOG IN"
                 block
                 onPress={handleSubmit}
                 disabled={values.email === '' || values.password === ''}
