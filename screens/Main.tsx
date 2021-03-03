@@ -18,7 +18,6 @@ const Main = (props: MainProps) => {
 
   const initialSignInStatus = async () => {
     const authToken = await AsyncStorage.getItem('authToken');
-    console.log('auth:',authToken)
     if(!!authToken){
       setIsSignin(true)
     }
