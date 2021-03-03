@@ -71,7 +71,6 @@ const Register = (props: RegisterProps) => {
     actions: FormikHelpers<RegisterFormValueProps>,
   ) => {
     setLoading(true);
-    console.log(values)
     const response = await axios
       .post('http://localhost:3000/signUp', values)
       .catch((error) => {
