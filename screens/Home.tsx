@@ -1,15 +1,15 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native';
+import { SafeAreaView } from 'react-native';
 import styled from 'styled-components/native';
 
-import {Button} from '../components/Button';
+import { Button } from '../components/Button';
 
 interface HomeProps {
   navigation: any;
 }
 
 const Home = (props: HomeProps) => {
-  const {navigation} = props;
+  const { navigation } = props;
 
   return (
     <HomeContainer>

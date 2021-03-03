@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {TextInputProps} from 'react-native';
+import { TextInputProps } from 'react-native';
 
 interface InputProps extends TextInputProps {
   /**
@@ -18,7 +18,7 @@ interface InputProps extends TextInputProps {
 }
 
 export const Input = (props: InputProps) => {
-  const {label, errorMessage, disabled} = props;
+  const { label, errorMessage, disabled } = props;
 
   return (
     <Container>
@@ -33,7 +33,7 @@ export const Input = (props: InputProps) => {
   );
 };
 
-const InputWithStyled = styled.TextInput<{isError?: boolean}>`
+const InputWithStyled = styled.TextInput<{ isError?: boolean }>`
   border-radius: 4px;
   height: 52px;
   padding: 16px;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Header,
@@ -10,9 +10,9 @@ import {
   Button,
   Right,
 } from 'native-base';
-import {Col, Row, Grid} from 'react-native-easy-grid';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import HTML from 'react-native-render-html';
-import {getDate} from '../utils/timestamp';
+import { getDate } from '../utils/timestamp';
 import {
   Share,
   Linking,
@@ -21,7 +21,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components/native';
 
-import {MOCKDATA} from '../mock_data';
+import { MOCKDATA } from '../mock_data';
 
 interface ReviewProps {
   navigation: any;
@@ -31,7 +31,7 @@ interface ReviewProps {
 const Review = (props: ReviewProps) => {
   const [love, setLove] = useState(false);
 
-  const {navigation, route} = props;
+  const { navigation, route } = props;
 
   const contentWidth = useWindowDimensions().width - 30;
 
@@ -113,7 +113,11 @@ const Review = (props: ReviewProps) => {
             onPress={() => {
               navigation.navigate('Map');
             }}>
-            <Icon type="Entypo" name="chevron-left" style={{color: 'black'}} />
+            <Icon
+              type="Entypo"
+              name="chevron-left"
+              style={{ color: 'black' }}
+            />
           </Button>
         </Left>
         <Body>
@@ -124,29 +128,29 @@ const Review = (props: ReviewProps) => {
             <Icon
               name="dots-three-vertical"
               type="Entypo"
-              style={{color: '#000'}}
+              style={{ color: '#000' }}
             />
           </Button>
         </Right>
       </Header>
-      <Content style={{padding: 20}}>
+      <Content style={{ padding: 20 }}>
         <Grid>
-          <Row style={{marginBottom: 20}}>
+          <Row style={{ marginBottom: 20 }}>
             <Title>{source.title}</Title>
           </Row>
-          <Row style={{marginVertical: 5}}>
+          <Row style={{ marginVertical: 5 }}>
             <Text>REVIEWER : {source.nickname}</Text>
           </Row>
           <Row>
             <Col size={3}>
-              <Row style={{marginVertical: 5}}>
+              <Row style={{ marginVertical: 5 }}>
                 <Text>DATE : {getDate(source.created_time)}.</Text>
               </Row>
             </Col>
           </Row>
-          <RowWithStyled style={{marginVertical: 5}}>
+          <RowWithStyled style={{ marginVertical: 5 }}>
             <HTML
-              source={{html: source.desc_full || '<div></div>'}}
+              source={{ html: source.desc_full || '<div></div>' }}
               contentWidth={contentWidth}
               computeEmbeddedMaxWidth={(s) => contentWidth - 50}
             />

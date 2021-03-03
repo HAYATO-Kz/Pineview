@@ -1,10 +1,11 @@
-import React from 'react';
-import {Icon} from 'native-base';
-import {View, Text, SafeAreaView} from 'react-native';
+import React, { useState } from 'react';
+import { Icon } from 'native-base';
+import { View, Text, SafeAreaView, Alert, AsyncStorage } from 'react-native';
 import styled from 'styled-components/native';
-import {Formik, FormikHelpers} from 'formik';
+import { Formik, FormikHelpers } from 'formik';
+import axios from 'axios';
 
-import {Input, Button} from '../components';
+import { Input, Button } from '../components';
 
 interface LoginProps {
   navigation: any;
@@ -15,22 +16,35 @@ interface LoginFormValueProps {
   password: string;
 }
 
-const INITIALLOGINFORM: LoginFormValueProps = {email: '', password: ''};
+const INITIALLOGINFORM: LoginFormValueProps = { email: '', password: '' };
 
 const Login = (props: LoginProps) => {
-  const {navigation} = props;
+  const { navigation } = props;
+  const [loading, setLoading] = useState(false);
 
   /**
    * Called when form is submitted
    * @param values form's value submitted
    * @param actions formik action helper function
    */
-  const handleLogin = (
+  const handleLogin = async (
     values: LoginFormValueProps,
     actions: FormikHelpers<LoginFormValueProps>,
   ) => {
-    console.log(JSON.stringify(values, null, 2));
+    setLoading(true);
+    const response = await axios
+      .post('http://localhost:3000/signIn', values)
+            .catch((error) => {
+              const {message} = error.response.data
+        Alert.alert(message)
+      });
+    if (response) {
+      const { authToken } = response.data;
+      await AsyncStorage.setItem('authToken', 'tokenJa');
+      navigation.navigate('Main');
+    }
     actions.setSubmitting(false);
+    setLoading(false);
   };
 
   return (
@@ -39,15 +53,19 @@ const Login = (props: LoginProps) => {
       <Icon
         type="Entypo"
         name="chevron-left"
-        style={{color: 'black'}}
+        style={{ color: 'black' }}
         onPress={() => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Log in</HeaderText>
       <Formik initialValues={INITIALLOGINFORM} onSubmit={handleLogin}>
-        {({handleChange, handleSubmit, values}) => (
+        {({ handleChange, handleSubmit, values }) => (
           <View>
-            <Input label="email" onChangeText={handleChange('email')} />
+            <Input
+              label="email"
+              onChangeText={handleChange('email')}
+              autoCapitalize="none"
+            />
             <Input
               label="password"
               onChangeText={handleChange('password')}

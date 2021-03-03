@@ -25,8 +25,8 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
-  const {text, ...buttonProps} = props;
-  const {block, onPress, ...textProps} = buttonProps;
+  const { text, ...buttonProps } = props;
+  const { block, onPress, ...textProps } = buttonProps;
 
   return (
     <ButtonWithStyled {...buttonProps}>
