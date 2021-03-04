@@ -16,7 +16,7 @@ interface LoginFormValueProps {
   password: string;
 }
 
-const INITIALLOGINFORM: LoginFormValueProps = { email: '', password: '' };
+const INITIAL_LOGIN_FORM: LoginFormValueProps = { email: '', password: '' };
 
 const Login = (props: LoginProps) => {
   const { navigation } = props;
@@ -40,7 +40,7 @@ const Login = (props: LoginProps) => {
       });
     if (response) {
       const { authToken } = response.data;
-      await AsyncStorage.setItem('authToken', 'tokenJa');
+      await AsyncStorage.setItem('authToken', authToken);
       navigation.navigate('Main');
     }
     actions.setSubmitting(false);
@@ -58,7 +58,7 @@ const Login = (props: LoginProps) => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Log in</HeaderText>
-      <Formik initialValues={INITIALLOGINFORM} onSubmit={handleLogin}>
+      <Formik initialValues={INITIAL_LOGIN_FORM} onSubmit={handleLogin}>
         {({ handleChange, handleSubmit, values }) => (
           <View>
             <Input

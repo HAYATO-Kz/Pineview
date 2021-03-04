@@ -17,7 +17,7 @@ interface RegisterFormValueProps {
   password: string;
 }
 
-const INITIALREGISTERFORM: RegisterFormValueProps = {
+const INITIAL_REGISTER_FORM: RegisterFormValueProps = {
   username: '',
   email: '',
   password: '',
@@ -49,7 +49,7 @@ const registerValidator = (values: RegisterFormValueProps) => {
     errors.username = 'Required';
   }
 
-  //  No error detected!!!!
+  //  No error detected
   if(checkedErrors === errors){
     return {}
   }
@@ -98,7 +98,7 @@ const Register = (props: RegisterProps) => {
         }}></Icon>
       <HeaderText>Register</HeaderText>
       <Formik
-        initialValues={INITIALREGISTERFORM}
+        initialValues={INITIAL_REGISTER_FORM}
         onSubmit={handleSignUp}
         validate={registerValidator}
         validateOnChange={false}>

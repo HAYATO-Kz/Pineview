@@ -4,7 +4,7 @@ import { TextInputProps } from 'react-native';
 
 interface InputProps extends TextInputProps {
   /**
-   * Inout label
+   * Input label
    */
   label?: string;
   /**
