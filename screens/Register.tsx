@@ -1,10 +1,11 @@
-import React from 'react';
-import {Icon} from 'native-base';
-import {View, SafeAreaView} from 'react-native';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import {Formik, FormikHelpers} from 'formik';
+import axios from 'axios';
+import { Icon } from 'native-base';
+import { View, SafeAreaView, Alert, AsyncStorage } from 'react-native';
+import { Formik, FormikHelpers } from 'formik';
 
-import {Input, Button} from '../components';
+import { Input, Button } from '../components';
 
 interface RegisterProps {
   navigation: any;
@@ -16,18 +17,20 @@ interface RegisterFormValueProps {
   password: string;
 }
 
-const INITIALRegisterFORM: RegisterFormValueProps = {
+const INITIAL_REGISTER_FORM: RegisterFormValueProps = {
   username: '',
   email: '',
   password: '',
 };
 
 const registerValidator = (values: RegisterFormValueProps) => {
-  const errors: RegisterFormValueProps = {
+  const errors: Partial<RegisterFormValueProps> = {
     username: '',
     email: '',
     password: '',
   };
+
+  const checkedErrors = errors
 
   // mail validate
   if (!values.email) {
@@ -45,23 +48,42 @@ const registerValidator = (values: RegisterFormValueProps) => {
   if (!values.username) {
     errors.username = 'Required';
   }
+
+  //  No error detected
+  if(checkedErrors === errors){
+    return {}
+  }
+
   return errors;
 };
 
 const Register = (props: RegisterProps) => {
-  const {navigation} = props;
+  const { navigation } = props;
+  const [loading, setLoading] = useState(false);
 
   /**
    * Called when form is submitted
    * @param values form's value submitted
    * @param actions formik action helper function
    */
-  const handleSignUp = (
+  const handleSignUp = async (
     values: RegisterFormValueProps,
     actions: FormikHelpers<RegisterFormValueProps>,
   ) => {
-    console.log(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
+    setLoading(true);
+    const response = await axios
+      .post('http://localhost:3000/signUp', values)
+      .catch((error) => {
+        const { message } = error.response.data;
+        Alert.alert(message)
+      });
+      if(response){
+    const { authToken } = response.data;
+    await AsyncStorage.setItem('authToken',authToken)
+    navigation.navigate('Main')
+      }
+      actions.setSubmitting(false);
+    setLoading(false);
   };
 
   return (
@@ -70,23 +92,36 @@ const Register = (props: RegisterProps) => {
       <Icon
         type="Entypo"
         name="chevron-left"
-        style={{color: 'black'}}
+        style={{ color: 'black' }}
         onPress={() => {
           navigation.navigate('Home');
         }}></Icon>
       <HeaderText>Register</HeaderText>
       <Formik
-        initialValues={INITIALRegisterFORM}
+        initialValues={INITIAL_REGISTER_FORM}
         onSubmit={handleSignUp}
-        validate={registerValidator}>
-        {({handleChange, handleSubmit, values}) => (
+        validate={registerValidator}
+        validateOnChange={false}>
+        {({ handleChange, handleSubmit, errors, values }) => (
           <View>
-            <Input label="Username" onChangeText={handleChange('username')} />
-            <Input label="Email" onChangeText={handleChange('email')} />
+            <Input
+              label="Username"
+              onChangeText={handleChange('username')}
+              errorMessage={errors.username}
+              autoCapitalize="none"
+            />
+            <Input
+              label="Email"
+              onChangeText={handleChange('email')}
+              errorMessage={errors.email}
+              autoCapitalize="none"
+            />
             <Input
               label="Password"
               onChangeText={handleChange('password')}
               secureTextEntry={true}
+              errorMessage={errors.password}
+              autoCapitalize="none"
             />
             <ButtonWrapper>
               <Button text="REGISTER NOW" block onPress={handleSubmit} />

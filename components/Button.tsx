@@ -25,14 +25,12 @@ export interface ButtonProps {
 }
 
 export const Button = (props: ButtonProps) => {
-  const {text, block, outline, onPress, disabled} = props;
+  const { text, ...buttonProps } = props;
+  const { block, onPress, ...textProps } = buttonProps;
+
   return (
-    <ButtonWithStyled
-      onPress={onPress}
-      outline={outline}
-      block={block}
-      disabled={disabled}>
-      <ButtonText outline={outline}>{text}</ButtonText>
+    <ButtonWithStyled {...buttonProps}>
+      <ButtonText {...textProps}>{text}</ButtonText>
     </ButtonWithStyled>
   );
 };
@@ -46,15 +44,58 @@ const ButtonWithStyled = styled.TouchableOpacity<{
   justify-content: center;
   align-self: center;
   min-height: 47px;
-  border: 2px solid #613400;
   border-radius: 5px;
-  background: ${(p) => (p.outline ? '#ffffff' : '#613400')};
   width: ${(p) => (p.block ? '100%' : 'null')};
+
+  ${(props) => {
+    if (props.outline) {
+      if (props.disabled) {
+        return `
+            border: 2px solid rgba(97, 52, 0, 0.6);
+            background: #F0F0F0;   
+                `;
+      } else {
+        return `
+            border: 2px solid #613400;
+            background: #ffffff;   
+            `;
+      }
+    } else {
+      if (props.disabled) {
+        return `
+            min-height: 51px;
+            background: rgba(97, 52, 0, 0.6);   
+            `;
+      } else {
+        return `
+            min-height: 51px;
+            background: #613400;   
+            `;
+      }
+    }
+  }}
 `;
 
-const ButtonText = styled.Text<{outline?: boolean}>`
+const ButtonText = styled.Text<{
+  outline?: boolean;
+  disabled?: boolean;
+}>`
   font-weight: 700;
   font-size: 14px;
   margin: 16px;
-  color: ${(p) => (p.outline ? '#613400' : '#ffffff')};
+  ${(props) => {
+    if (props.outline) {
+      if (props.disabled) {
+        return `color: rgba(97, 52, 0, 0.6)`;
+      } else {
+        return `color: #613400`;
+      }
+    } else {
+      if (props.disabled) {
+        return `color: #f0f0f0`;
+      } else {
+        return `color: #ffffff`;
+      }
+    }
+  }}
 `;

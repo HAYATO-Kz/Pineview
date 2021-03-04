@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { AsyncStorage } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Profile from './Profile';
 import Collection from './Collection';
@@ -13,10 +14,20 @@ interface MainProps {
 const Main = (props: MainProps) => {
   const [isSignIn, setIsSignin] = useState(false);
 
-  const {navigation} = props;
+  const { navigation } = props;
+
+  const initialSignInStatus = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    if(!!authToken){
+      setIsSignin(true)
+    }
+  };
+
+  useEffect(() => {
+    initialSignInStatus();
+  }, []);
 
   const Tab = createBottomTabNavigator();
-
   return (
     <>
       {isSignIn ? (

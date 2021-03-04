@@ -1,13 +1,13 @@
-import MapView, {Marker} from 'react-native-maps';
-import React, {useEffect, useState} from 'react';
+import MapView, { Marker } from 'react-native-maps';
+import React, { useEffect, useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
 import styled from 'styled-components/native';
-import {SafeAreaView} from 'react-native';
+import { SafeAreaView } from 'react-native';
 
-import {FilterTabs} from '../components/FilterTabs';
-import {getMarker} from '../utils/Marker';
+import { FilterTabs } from '../components/FilterTabs';
+import { getMarker } from '../utils/Marker';
 
-import {MOCKDATA} from '../mock_data';
+import { MOCKDATA } from '../mock_data';
 
 interface MapProps {
   navigation: any;
@@ -43,7 +43,7 @@ const Map = (props: MapProps) => {
   // mock state for filter feature
   const [filter, setFiltered] = useState('all');
 
-  const {navigation} = props;
+  const { navigation } = props;
 
   useEffect(() => {
     // Get current position and set to initial postion of map
@@ -70,7 +70,7 @@ const Map = (props: MapProps) => {
             return (
               <Marker
                 onPress={() => {
-                  navigation.navigate('Review', {id: data.lazy});
+                  navigation.navigate('Review', { id: data.lazy });
                 }}
                 image={getMarker(data.type)}
                 key={data.id}

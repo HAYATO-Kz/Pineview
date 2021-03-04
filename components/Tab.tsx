@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {TouchableOpacity, View, Text} from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 
 export interface TabProps {
   /**
@@ -26,7 +26,7 @@ export interface TabProps {
 }
 
 export const Tab = (props: TabProps) => {
-  const {label, isActive, color = '#531DAB', onPress} = props;
+  const { label, isActive, color = '#531DAB', onPress } = props;
 
   return (
     <ButtonWithStyled active={isActive} color={color} onPress={onPress}>
@@ -48,7 +48,7 @@ const ButtonWithStyled = styled(TouchableOpacity)<{
   border: 1px solid ${(p) => p.color};
 `;
 
-const TextWithStyled = styled.Text<{active?: boolean; color: string}>`
+const TextWithStyled = styled.Text<{ active?: boolean; color: string }>`
   color: ${(p) => (p.active ? '#fff' : p.color)};
   font-size: 14px;
   font-weight: ${(p) => (p.active ? 700 : 400)};

@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
-import {Tab, TabProps} from './Tab';
+import { Tab, TabProps } from './Tab';
 
 interface FilterTabsProps {
   /**
@@ -20,7 +20,7 @@ interface FilterTabsProps {
 }
 
 export const FilterTabs = (props: FilterTabsProps) => {
-  const {tabs, onChange, defaultValue = tabs[0].value} = props;
+  const { tabs, onChange, defaultValue = tabs[0].value } = props;
 
   const [selected, setSelected] = useState(defaultValue);
 
@@ -33,7 +33,7 @@ export const FilterTabs = (props: FilterTabsProps) => {
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={{overflow: 'visible'}}>
+      style={{ overflow: 'visible' }}>
       <FilterContainer>
         {tabs.map((tab) => (
           <Tab
