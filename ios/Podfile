@@ -83,7 +83,6 @@ target 'demo' do
     inherit! :complete
     # Pods for testing
   end
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-google-maps', :path => rn_maps_path
   pod 'GoogleMaps'
