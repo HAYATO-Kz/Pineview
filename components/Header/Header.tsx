@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { Container, Title, Wrapper } from './Header.style';
+import React, { ReactNode } from 'react';
+import { View } from 'react-native';
+
+import { Container, Title } from './Header.style';
 
 export interface HeaderProps {
   title?: string;
-  rightComponent?: any;
-  leftComponent?: any;
-  hasBorder?: boolean
+  rightComponent?: ReactNode;
+  leftComponent?: ReactNode;
+  hasBorder?: boolean;
 }
 
 export const Header = (props: HeaderProps) => {
@@ -13,9 +15,9 @@ export const Header = (props: HeaderProps) => {
 
   return (
     <Container hasBorder={hasBorder}>
-      <Wrapper>{leftComponent}</Wrapper>
+      <View>{leftComponent}</View>
       <Title>{title}</Title>
-      <Wrapper>{rightComponent}</Wrapper>
+      <View>{rightComponent}</View>
     </Container>
   );
 };

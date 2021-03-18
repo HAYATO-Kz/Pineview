@@ -1,11 +1,9 @@
 import React from 'react'
-import { Text } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { IconWrapper } from './TouchableIcon.style'
 
 interface TouchableIconProps {
-    onPress: () => {}
+    onPress: () => void
     icon: React.ReactNode
 }
 
