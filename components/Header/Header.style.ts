@@ -22,4 +22,3 @@ export const Title = styled.Text`
   color: #613400;
 `;
 
-export const Wrapper = styled.View``;
