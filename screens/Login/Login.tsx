@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Alert, AsyncStorage } from 'react-native';
+import { Alert, AsyncStorage, View} from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 
-import { HeaderText, ButtonWrapper, FormContainer, Icon } from './Login.style';
+import { HeaderText, ButtonWrapper } from './Login.style';
 import {
   Input,
   Button,
@@ -65,7 +65,7 @@ export const Login = (props: LoginProps) => {
       <HeaderText>เข้าสู่ระบบ</HeaderText>
       <Formik initialValues={INITIAL_LOGIN_FORM} onSubmit={handleLogin}>
         {({ handleChange, handleSubmit, values }) => (
-          <FormContainer>
+          <View>
             <Input
               label="อีเมล"
               onChangeText={handleChange('email')}
@@ -84,10 +84,9 @@ export const Login = (props: LoginProps) => {
                 disabled={values.email === '' || values.password === ''}
               />
             </ButtonWrapper>
-          </FormContainer>
+          </View>
         )}
       </Formik>
-      {/* </Container> */}
     </ContainerWithSafeArea>
   );
 };
