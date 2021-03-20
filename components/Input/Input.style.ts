@@ -1,5 +1,6 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
+import { DefaultText } from '../DefaultText/DefaultText.style';
 
 export const InputWithStyled = styled.TextInput<{ isError?: boolean }>`
   border-radius: 4px;
@@ -33,15 +34,15 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(DefaultText)`
   color: #613400;
   font-size: 15px;
-  font-weight: 700;
-  margin: 0 0 6px;
+  font-weight: 600;
+  margin: 0px 0px 6px;
 `;
 
-export const ErrorMessage = styled.Text`
-  margin: 6px 0 0;
+export const ErrorMessage = styled(DefaultText)`
+  margin: 6px 0px 0px;
   color: #f5222d;
   font-weight: 400;
   font-size: 13px;

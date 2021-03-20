@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components/native';
 
+import { DefaultText } from '../DefaultText/DefaultText.style';
+
 export const Container = styled.View<{ hasBorder?: boolean }>`
   display: flex;
   flex-direction: row;
@@ -15,10 +17,9 @@ export const Container = styled.View<{ hasBorder?: boolean }>`
     `}
 `;
 
-export const Title = styled.Text`
+export const Title = styled(DefaultText)`
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 22px;
   color: #613400;
 `;
-

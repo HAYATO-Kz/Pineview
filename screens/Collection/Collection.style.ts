@@ -1,3 +1,3 @@
 import styled from 'styled-components/native';
 
-export const CollectionContainer = styled.View``;
+export const CollectionContainer = styled.Text``;

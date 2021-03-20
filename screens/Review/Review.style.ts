@@ -1,11 +1,15 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-export const Title = styled.Text`
+import { DefaultText } from '../../components';
+
+export const Title = styled(DefaultText)`
   font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 20px;
+  font-weight: 600;
+  margin: 0px 0px 20px;
 `;
 
-export const SubText = styled.Text`
-    margin: 5px 0;
-`
+export const SubText = styled(DefaultText)`
+  margin: 5px 0px;
+  font-weight: 500;
+  font-size: 13px;
+`;
