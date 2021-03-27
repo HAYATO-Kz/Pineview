@@ -5,13 +5,26 @@ import {
   Linking,
   useWindowDimensions,
   ActionSheetIOS,
+  Modal,
 } from 'react-native';
 
 import { getDate } from '../../utils/timestamp';
-import { Title, SubText } from './Review.style';
-import { ContainerWithSafeArea, TouchableIcon } from '../../components';
+import {
+  Title,
+  SubText,
+  HTMLWrapper,
+  FavoriteContainer,
+  TextContainer,
+} from './Review.style';
+import {
+  ContainerWithSafeArea,
+  TouchableIcon,
+  Favorite,
+} from '../../components';
 import BackIcon from '../../assets/icons/back_icon.svg';
 import MoreFunctionIcon from '../../assets/icons/more_function_icon.svg';
+import ActiveFavoriteIcon from '../../assets/icons/favorite_active_icon.svg';
+import FavoriteIcon from '../../assets/icons/favorite_icon.svg';
 
 import { MOCKDATA } from '../../mock_data';
 
@@ -20,12 +33,25 @@ interface ReviewProps {
   route: any;
 }
 
+const mock_collection = [
+  {
+    label: 'Favorite',
+    value: 'favorite',
+  },
+  {
+    label: 'Collection 2',
+    value: 'collection2',
+  },
+];
+
 export const Review = (props: ReviewProps) => {
-  const [love, setLove] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
+  const [number, setNumber] = useState(0);
 
   const { navigation, route } = props;
 
-  const contentWidth = useWindowDimensions().width - 30;
+  const contentWidth = useWindowDimensions().width - 72;
 
   const [source, setSource] = useState<any>('');
 
@@ -90,6 +116,11 @@ export const Review = (props: ReviewProps) => {
     );
   };
 
+  const onAddFavorite = (selectedValues: string[]) => {
+    console.log(selectedValues);
+    setFavoriteModalVisible(false);
+  };
+
   useEffect(() => {
     if (route.params) {
       setSource(MOCKDATA[route.params.id]);
@@ -114,15 +145,40 @@ export const Review = (props: ReviewProps) => {
         ),
         hasBorder: true,
       }}
-      padding="20px">
+      padding="26px">
       <Title>{source.title}</Title>
       <SubText>ผู้เขียน : {source.nickname}</SubText>
-      <SubText>วันที่รีวิว : {getDate(source.created_time)}.</SubText>
-      <HTML
-        source={{ html: source.desc_full || '<div></div>' }}
-        contentWidth={contentWidth}
-        computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+      <FavoriteContainer>
+        <TextContainer>
+          <SubText>วันที่รีวิว : {getDate(source.created_time)}.</SubText>
+          <SubText>เนื้อหารีวิว :</SubText>
+        </TextContainer>
+        {favorite ? (
+          <TouchableIcon
+            onPress={() => setFavoriteModalVisible(true)}
+            icon={<ActiveFavoriteIcon />}
+          />
+        ) : (
+          <TouchableIcon
+            onPress={() => setFavoriteModalVisible(true)}
+            icon={<FavoriteIcon />}
+          />
+        )}
+      </FavoriteContainer>
+      <HTMLWrapper>
+        <HTML
+          source={{ html: source.desc_full || '<div></div>' }}
+          contentWidth={contentWidth}
+          computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+        />
+      </HTMLWrapper>
+      <Favorite
+        visible={favoriteModalVisible}
+        onDone={onAddFavorite}
+        options={mock_collection}
+        initialValue={['favorite']}
       />
+      {/* <Modal visible><Title>{number}</Title><TouchableIcon/></Modal> */}
     </ContainerWithSafeArea>
   );
 };

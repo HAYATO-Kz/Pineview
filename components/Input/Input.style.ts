@@ -32,6 +32,7 @@ export const InputWithStyled = styled.TextInput<{ isError?: boolean }>`
 export const Container = styled.View`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const Title = styled(DefaultText)`

@@ -50,7 +50,8 @@ export const Map = (props: MapProps) => {
       setInitlat(info.coords.latitude);
       setInitLong(info.coords.longitude);
     });
-  }, []);
+  }, [filter]);
+
 
   return (
     <>

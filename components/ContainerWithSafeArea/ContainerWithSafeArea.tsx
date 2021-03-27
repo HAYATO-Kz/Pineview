@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import { SafeAreaView } from 'react-native';
 
-import { Container } from './ContainerWithSafeAre.style';
+import { Container, ContentContainer} from './ContainerWithSafeAre.style';
 import { Header, HeaderProps} from '../Header/Header'
 
 interface ContainerWithSafeAreaProps {
@@ -10,15 +10,16 @@ interface ContainerWithSafeAreaProps {
 }
 
 export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps> = (props) => {
-  const { children, padding = '0', header } = props;
+  const { children, padding = '0px', header } = props;
 
   return (
-    <Container padding={'0'}>
-      <SafeAreaView />
+    <Container >
+      <SafeAreaView >
       { header && <Header {...header} /> }
-      <Container padding={padding}>
+      <ContentContainer padding={padding}>
       {children}
-      </Container>
+      </ContentContainer>
+      </SafeAreaView>
     </Container>
   );
 };

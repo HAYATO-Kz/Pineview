@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Profile } from '../Profile/Profile';
-import { Collection } from '../Collection/Collection';
+import { CollectionStack } from '../CollectionStack/CollectionStack';
 import { Map } from '../Map/Map';
 
 interface MainProps {
@@ -25,14 +25,13 @@ export const Main = (props: MainProps) => {
   useEffect(() => {
     initialSignInStatus();
   }, []);
-
   const Tab = createBottomTabNavigator();
   return (
     <>
       {isSignIn ? (
         <Tab.Navigator>
           <Tab.Screen name="Map" component={Map} />
-          <Tab.Screen name="Collection" component={Collection} />
+          <Tab.Screen name="Collection" component={CollectionStack} />
           <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
       ) : (
