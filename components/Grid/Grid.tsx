@@ -5,18 +5,20 @@ import { FirstComponentWrapper, SecondComponentWrapper } from './Grid.style';
 
 interface GridProps {
   data: React.ReactNode[];
+  keyBase: string;
   columnSpace?: number;
   rowSpace?: number;
 }
 
 export const Grid = (props: GridProps) => {
-  const { data, columnSpace = 16, rowSpace = 16 } = props;
+  const { data, columnSpace = 16, rowSpace = 16, keyBase } = props;
 
   return (
     <FlatList
       data={data}
       numColumns={2}
       scrollEnabled={false}
+      keyExtractor={(item, index) => `${keyBase}_${index}`}
       renderItem={({ item, index }) => {
         if (index % 2 === 0) {
           return (
@@ -30,7 +32,7 @@ export const Grid = (props: GridProps) => {
         } else {
           return (
             <SecondComponentWrapper
-              rowSpace={rowSpace /2}
+              rowSpace={rowSpace / 2}
               columnSpace={columnSpace / 2}>
               {item}
             </SecondComponentWrapper>

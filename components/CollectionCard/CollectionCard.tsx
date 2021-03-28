@@ -11,6 +11,7 @@ import {
 } from './CollectionCard.style';
 import { TouchableIcon } from '../TouchableIcon/TouchableIcon';
 import { ConfirmationModal } from '../ConfirmationModal/ConfirmationModal';
+import { CollectionAction } from '../CollectionAction/CollectionAction';
 
 import DefaultImage from '../../assets/images/collection_default_image.png';
 import MoreFunctionIcon from '../../assets/icons/more_function_icon.svg';
@@ -37,31 +38,7 @@ export const CollectionCard = (props: CollectionCardProps) => {
   } = props;
 
   const [modalVisible, setModalVisible] = useState(false);
-
-  /**
-   * Open action sheet ( edit, share, delete )
-   */
-  const openActionSheet = async () => {
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: ['แก้ไข', 'แชร์', 'ลบคอลเลกชั่น', 'ยกเลิก'],
-        destructiveButtonIndex: 4,
-        cancelButtonIndex: 4,
-      },
-      (buttonIndex) => {
-        console.log(buttonIndex);
-        if (buttonIndex === 3) {
-          // cancel action
-        } else if (buttonIndex === 0) {
-          onEdit && onEdit();
-        } else if (buttonIndex === 1) {
-          onShare && onShare();
-        } else if (buttonIndex === 2) {
-          setModalVisible(true)
-        }
-      },
-    );
-  };
+  const [actionModalVisible, setActionModalVisible] = useState(false);
 
   return (
     <>
@@ -74,18 +51,34 @@ export const CollectionCard = (props: CollectionCardProps) => {
           </TextContainer>
           <TouchableIcon
             icon={<MoreFunctionIcon heigt={17} width={3} />}
-            onPress={openActionSheet}
+            onPress={() => setActionModalVisible(true)}
           />
         </InformationContainer>
       </Card>
       <ConfirmationModal
-      title="ลบคอลเลกชัน"
-      subtitle="การทำรายการนี้จะลบคอลเลกชันออก และจะไม่สามารถเปลี่ยนแปลงได้ในอนาคต"
+        title="ลบคอลเลกชัน"
+        subtitle="การทำรายการนี้จะลบคอลเลกชันออก และจะไม่สามารถเปลี่ยนแปลงได้ในอนาคต"
         visible={modalVisible}
         cancelText="ยกเลิก"
         confirmText="ลบ"
         onCancel={() => setModalVisible(false)}
         onConfirm={() => onDelete && onDelete()}
+      />
+      <CollectionAction
+        visible={actionModalVisible}
+        onCancel={() => setActionModalVisible(false)}
+        onEdit={() => {
+          setActionModalVisible(false);
+          onEdit && onEdit();
+        }}
+        onDelete={() => {
+          setActionModalVisible(false);
+          setModalVisible(true);
+        }}
+        onShare={() => {
+          setActionModalVisible(false);
+          onShare && onShare();
+        }}
       />
     </>
   );

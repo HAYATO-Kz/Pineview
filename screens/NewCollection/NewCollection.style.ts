@@ -5,7 +5,8 @@ import { DefaultText } from '../../components';
 export const Image = styled.Image`
   width: 228px;
   height: 228px;
-  border: 1px solid rgba(62, 23, 0, 0.5);
+  border-width: 1px;
+  border-color: rgba(62, 23, 0, 0.5);
   border-radius: 24px;
 `;
 

@@ -28,8 +28,7 @@ const App = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Main" component={Main} />
-        {/* <Stack.Screen name="CollectionBlog" component={CollectionBlog} />
-        <Stack.Screen name="NewCollection" component={NewCollection} /> */}
+        <Stack.Screen name="NewCollection" component={NewCollection} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -83,7 +83,7 @@ export const Map = (props: MapProps) => {
         })}
       </MapView>
       <AbsoluteWrapper>
-        <ContainerWithSafeArea padding="0px 10px">
+        <ContainerWithSafeArea padding="0px 10px" isTransparent>
           <FilterBar
             tabs={filterTabs}
             defaultValue="all"

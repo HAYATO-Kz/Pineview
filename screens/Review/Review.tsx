@@ -47,7 +47,6 @@ const mock_collection = [
 export const Review = (props: ReviewProps) => {
   const [favorite, setFavorite] = useState(false);
   const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
-  const [number, setNumber] = useState(0);
 
   const { navigation, route } = props;
 
@@ -175,10 +174,13 @@ export const Review = (props: ReviewProps) => {
       <Favorite
         visible={favoriteModalVisible}
         onDone={onAddFavorite}
+        onCreateNewCollection={() => {
+          setFavoriteModalVisible(false)
+          navigation.navigate('NewCollection');
+        }}
         options={mock_collection}
         initialValue={['favorite']}
       />
-      {/* <Modal visible><Title>{number}</Title><TouchableIcon/></Modal> */}
     </ContainerWithSafeArea>
   );
 };

@@ -6,11 +6,10 @@ import {
   NewCollectionButton,
   NewCollectionButtonText,
   SubContainerText,
-  GridWrapper,
-  ConfirmationModalProps,
+  GridWrapper
 } from './Collection.style';
 import PlusIcon from '../../assets/icons/plus_icon.svg';
-import { CollectionCard, Grid, ContainerWithSafeArea } from '../../components';
+import { CollectionCard, Grid, ContainerWithSafeArea} from '../../components';
 
 interface CollectionProps {
   navigation: any;
@@ -68,9 +67,7 @@ export const Collection = (props: CollectionProps) => {
   const { navigation } = props;
   const [modalVisible, setModalVisible] = useState(false);
 
-  const onDeleteHandle = () => {
-    
-  }
+  const onDeleteHandle = () => {};
 
   return (
     <ContainerWithSafeArea>
@@ -89,6 +86,7 @@ export const Collection = (props: CollectionProps) => {
       </SubContainer>
       <GridWrapper>
         <Grid
+          keyBase="collection"
           data={testData.map((data) => (
             <CollectionCard
               title={data.title}
@@ -106,7 +104,6 @@ export const Collection = (props: CollectionProps) => {
           ))}
         />
       </GridWrapper>
-
     </ContainerWithSafeArea>
   );
 };

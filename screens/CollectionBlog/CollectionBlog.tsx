@@ -47,6 +47,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
       <SubText> สร้างโดย {mock_data.owner} </SubText>
       <GridWrapper>
         <Grid
+          keyBase="collection_blog"
           data={mock_data.review_blogs.map((data) => (
             <CollectionBlogCard title={data.title} />
           ))}

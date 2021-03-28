@@ -17,7 +17,8 @@ export const Card = styled.TouchableOpacity`
 export const CollectionImage = styled.Image`
   width: 100%;
   height: undefined;
-  border: 1px solid #ededed;
+  border-color:#ededed;
+  border-width: 1px;
   aspect-ratio: 1;
 `;
 

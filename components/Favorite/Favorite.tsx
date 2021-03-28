@@ -21,10 +21,17 @@ interface FavoriteProps {
   initialValue?: string[];
   visible: boolean;
   onDone: (selectedValue: string[]) => void;
+  onCreateNewCollection: () => void;
 }
 
 export const Favorite = (props: FavoriteProps) => {
-  const { options, visible, initialValue, onDone } = props;
+  const {
+    options,
+    visible,
+    initialValue,
+    onDone,
+    onCreateNewCollection,
+  } = props;
   const [selectedOption, setSelectedOption] = useState<string[]>(
     initialValue || [],
   );
@@ -50,14 +57,16 @@ export const Favorite = (props: FavoriteProps) => {
               <ButtonText>เสร็จ</ButtonText>
             </Button>
           </HeaderContainer>
-          <CreateNewCollection>
+          <CreateNewCollection onPress={onCreateNewCollection}>
             <PlusBlackIcon />
             <CreateNewCollectionText>
               สร้างคอลเลกชันใหม่
             </CreateNewCollectionText>
           </CreateNewCollection>
-          {options.map((option) => (
-            <OptionContainer onPress={() => onOptionsPressHandle(option.value)}>
+          {options.map((option, index) => (
+            <OptionContainer
+              key={`option_${index}`}
+              onPress={() => onOptionsPressHandle(option.value)}>
               <OptionLabel>{option.label}</OptionLabel>
               {selectedOption.indexOf(option.value) > -1 && <CheckIcon />}
             </OptionContainer>
