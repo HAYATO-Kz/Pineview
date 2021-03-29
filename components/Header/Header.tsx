@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
-import { Container, Title } from './Header.style';
+import { Container, Title, MiddleBox } from './Header.style';
 
 export interface HeaderProps {
   title?: string;
@@ -16,7 +16,9 @@ export const Header = (props: HeaderProps) => {
   return (
     <Container hasBorder={hasBorder}>
       <View>{leftComponent}</View>
-      <Title>{title}</Title>
+      <MiddleBox>
+        <Title>{title}</Title>
+      </MiddleBox>
       <View>{rightComponent}</View>
     </Container>
   );

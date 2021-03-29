@@ -10,15 +10,15 @@ import {
   Email,
   Username,
   Tab,
+  Divider,
 } from './Profile.style';
 import {
   ContainerWithSafeArea,
   ErrorButton,
   ProfileImage,
 } from '../../components';
-import packageJson from '../../package.json'
+import packageJson from '../../package.json';
 import { backendAPI } from '../../utils/api';
-import DefaultImage from '../../assets/images/mascot.png';
 import ArrowRightIcon from '../../assets/icons/arrow_right_icon.svg';
 import UserIcon from '../../assets/icons/user_icon.svg';
 import KeyIcon from '../../assets/icons/key_icon.svg';
@@ -93,16 +93,19 @@ export const Profile = (props: ProfileProps) => {
         <ImageWrapper width={`${-contentWidth / 4}px`}>
           <ProfileImage size={154} color={userData.user_color} />
         </ImageWrapper>
-        <Email>{userData.email}</Email>
         <Username>{userData.username}</Username>
+        <Email>{userData.email}</Email>
         {options.map((option) => (
-          <ButtonTab onPress={option.onPress} key={option.label}>
-            <IconContainer>
-              {option.icon}
-              <IconLabel>{option.label}</IconLabel>
-            </IconContainer>
-            <ArrowRightIcon />
-          </ButtonTab>
+          <React.Fragment key={option.label}>
+            <ButtonTab onPress={option.onPress}>
+              <IconContainer>
+                {option.icon}
+                <IconLabel>{option.label}</IconLabel>
+              </IconContainer>
+              <ArrowRightIcon />
+            </ButtonTab>
+            <Divider />
+          </React.Fragment>
         ))}
         <ButtonTab onPress={() => {}}>
           <IconContainer>
@@ -110,12 +113,14 @@ export const Profile = (props: ProfileProps) => {
             <IconLabel>ให้คะแนนบน App Store</IconLabel>
           </IconContainer>
         </ButtonTab>
+        <Divider />
         <Tab>
           <IconContainer>
             <VersionIcon />
             <IconLabel>เวอร์ชัน {packageJson.version}</IconLabel>
           </IconContainer>
         </Tab>
+        <Divider />
       </Container>
       <ErrorButton text="ออกจากระบบ" onPress={handleSignOut} block />
     </ContainerWithSafeArea>

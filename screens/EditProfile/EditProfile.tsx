@@ -88,12 +88,12 @@ export const EditProfile = (props: EditProfileProps) => {
           />
         </PaletteWrapper>
         <Input
-          label="ชื่อผู้ใช้"
+          label="ชื่อผู้ใช้"  
           defaultValue={username}
           onChangeText={(value) => setUsername(value)}
           autoCapitalize="none"
         />
-        <Input label="อีเมล :" disabled defaultValue={userEmail} />
+        <Input label="อีเมล" disabled defaultValue={userEmail} />
         <Button
           text="บันทึก"
           block

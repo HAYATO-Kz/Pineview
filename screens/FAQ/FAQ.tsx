@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BackIcon from '../../assets/icons/back_icon.svg';
-import { Question, Answer, Divider,Container } from './FAQ.style';
+import { Question, Answer, Divider, Container } from './FAQ.style';
 import { ContainerWithSafeArea, TouchableIcon } from '../../components';
 
 interface FAQProps {
@@ -66,7 +66,9 @@ export const FAQ = (props: FAQProps) => {
       {listOfFAQ.map((faq, index) => (
         <Container key={`faq-${index}`}>
           <Question>ถาม: {faq.question}</Question>
-          <Answer><Question>ตอบ:</Question> {faq.answer}</Answer>
+          <Answer>
+            <Question>ตอบ:</Question> {faq.answer}
+          </Answer>
           {index !== listOfFAQ.length - 1 && <Divider />}
         </Container>
       ))}

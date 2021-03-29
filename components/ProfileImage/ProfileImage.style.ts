@@ -6,7 +6,7 @@ export const Wrapper = styled.View<{ color: string; width: number }>`
   aspect-ratio: 1;
   border-radius: ${(p) => `${p.width / 2}px`};
   background: ${(p) => p.color};
-  border: 5px solid rgba(97, 52, 0, 0.6);
+  border: 2px solid rgba(97, 52, 0, 0.6);
 `;
 
 export const Image = styled.Image`
