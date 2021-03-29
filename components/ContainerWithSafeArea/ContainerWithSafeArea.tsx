@@ -10,15 +10,16 @@ interface ContainerWithSafeAreaProps {
 }
 
 export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps> = (props) => {
-  const { children, padding = '0', header } = props;
+  const { children, padding = '0px', header } = props;
 
   return (
-    <Container padding={'0'}>
-      <SafeAreaView />
+    <Container padding={'0px'}>
+      <SafeAreaView>
       { header && <Header {...header} /> }
       <Container padding={padding}>
       {children}
       </Container>
+      </SafeAreaView>
     </Container>
   );
 };

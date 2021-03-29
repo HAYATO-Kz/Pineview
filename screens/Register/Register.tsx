@@ -35,8 +35,6 @@ const registerValidator = (values: RegisterFormValueProps) => {
     password: '',
   };
 
-  const checkedErrors = errors;
-
   // mail validate
   if (!values.email) {
     errors.email = 'Required';
@@ -55,10 +53,9 @@ const registerValidator = (values: RegisterFormValueProps) => {
   }
 
   //  No error detected
-  if (checkedErrors === errors) {
+  if (errors.username === '' && errors.email === '' && errors.password === '') {
     return {};
   }
-
   return errors;
 };
 
