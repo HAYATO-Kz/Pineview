@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { launchImageLibrary } from 'react-native-image-picker';
 
 import {
   Image,
@@ -26,28 +25,6 @@ export const NewCollection = (props: NewCollectionProps) => {
   const [collectionTitle, setCollectionTitle] = useState('');
   const [collectionImage, setCollectionImage] = useState<any>();
 
-  const uploadImage = () => {
-    try {
-      launchImageLibrary(
-        { mediaType: 'photo', includeBase64: true },
-        (response: any) => {
-          if (response.didCancel) {
-            console.log('cancel');
-          } else if (response.errorMessage) {
-            console.log(response.errorMessage);
-            console.log(response.errorCode);
-          } else {
-            setCollectionImage(
-              `data:${response.type};base64,${response.base64}`,
-            );
-          }
-        },
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleCreateNewCollection = () => {};
 
   return (
@@ -64,14 +41,14 @@ export const NewCollection = (props: NewCollectionProps) => {
       }}
       padding="0 17px">
       <Wrapper>
-        <ImageWrapper onPress={uploadImage}>
+        {/* <ImageWrapper onPress={uploadImage}>
           <Image
             source={collectionImage ? { uri: collectionImage } : DefaultImage}
           />
         </ImageWrapper>
         <TextWrapper onPress={uploadImage}>
           <UploadImageTitle>เลือกภาพปกของคอลเลกชัน</UploadImageTitle>
-        </TextWrapper>
+        </TextWrapper> */}
         <Input
           label="ขื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}

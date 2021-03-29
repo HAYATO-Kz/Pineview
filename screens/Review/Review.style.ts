@@ -31,6 +31,7 @@ export const HTMLWrapper = styled.View`
   shadow-offset: {width: 0, height: -4};
   shadow-opacity: 0.25;
   shadow-radius: 4px;
+  flex:1;
   background: #ffffff;
   padding: 21px;
 `;

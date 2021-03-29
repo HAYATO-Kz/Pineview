@@ -5,7 +5,6 @@ import {
   Linking,
   useWindowDimensions,
   ActionSheetIOS,
-  Modal,
 } from 'react-native';
 
 import { getDate } from '../../utils/timestamp';
@@ -53,7 +52,17 @@ export const Review = (props: ReviewProps) => {
   const contentWidth = useWindowDimensions().width - 72;
 
   const [source, setSource] = useState<any>('');
-
+  const tagsStyles = {
+    i: { fontFamily: 'Kanit', fontWeight: 400 },
+    div: { fontFamily: 'Kanit', fontWeight: 400 },
+    p: { fontFamily: 'Kanit', fontWeight: 400 },
+    span: { fontFamily: 'Kanit', fontWeight: 400 },
+    h1: { fontFamily: 'Kanit', fontWeight: 400 },
+    h2: { fontFamily: 'Kanit', fontWeight: 400 },
+    h3: { fontFamily: 'Kanit', fontWeight: 400 },
+    h4: { fontFamily: 'Kanit', fontWeight: 400 },
+    h5: { fontFamily: 'Kanit', fontWeight: 400 },
+  };
   /**
    *  Redirect to google map application with use lat & long to set destination
    * @param lat latitude's blog
@@ -168,6 +177,7 @@ export const Review = (props: ReviewProps) => {
         <HTML
           source={{ html: source.desc_full || '<div></div>' }}
           contentWidth={contentWidth}
+          tagsStyles={tagsStyles}
           computeEmbeddedMaxWidth={(s) => contentWidth - 50}
         />
       </HTMLWrapper>
@@ -175,7 +185,7 @@ export const Review = (props: ReviewProps) => {
         visible={favoriteModalVisible}
         onDone={onAddFavorite}
         onCreateNewCollection={() => {
-          setFavoriteModalVisible(false)
+          setFavoriteModalVisible(false);
           navigation.navigate('NewCollection');
         }}
         options={mock_collection}
