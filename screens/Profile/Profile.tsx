@@ -16,6 +16,7 @@ import {
   ErrorButton,
   ProfileImage,
 } from '../../components';
+import packageJson from '../../package.json'
 import { backendAPI } from '../../utils/api';
 import DefaultImage from '../../assets/images/mascot.png';
 import ArrowRightIcon from '../../assets/icons/arrow_right_icon.svg';
@@ -112,7 +113,7 @@ export const Profile = (props: ProfileProps) => {
         <Tab>
           <IconContainer>
             <VersionIcon />
-            <IconLabel>เวอร์ชัน 0.0.0</IconLabel>
+            <IconLabel>เวอร์ชัน {packageJson.version}</IconLabel>
           </IconContainer>
         </Tab>
       </Container>
