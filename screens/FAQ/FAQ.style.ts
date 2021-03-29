@@ -3,10 +3,10 @@ import styled from 'styled-components/native';
 import { DefaultText } from '../../components';
 
 export const Container = styled.View`
-    display:flex;
-    flex-direction:column;
-    width:100%;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 
 export const Question = styled(DefaultText)`
   font-size: 15px;

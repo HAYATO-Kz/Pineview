@@ -37,21 +37,21 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
 
   // mail validate
   if (!values.oldPassword) {
-    errors.oldPassword = 'Required';
+    errors.oldPassword = 'กรุณาใส่รหัสผ่านปัจจุบัน';
   }
 
   // password validate
   if (!values.newPassword) {
-    errors.newPassword = 'Required';
+    errors.newPassword = 'กรุณาใส่รหัสผ่านใหม่';
   } else if (values.oldPassword === values.newPassword) {
-    errors.newPassword = 'New password should not be the same as old password';
+    errors.newPassword = 'รหัสผ่านใหม่ต้องไม่ซ้ำกับรหัสผ่านปัจจุบัน กรุณาเปลี่ยนรหัสผ่าน';
   }
 
   // username validate
   if (!values.confirmPassword) {
-    errors.confirmPassword = 'Required';
+    errors.confirmPassword = 'กรุณายืนยันรหัสผ่าน';
   } else if (values.confirmPassword !== values.newPassword) {
-    errors.confirmPassword = 'Confirm password should match new password';
+    errors.confirmPassword = 'รหัสผ่านที่ใช้ในการยืนยันต้องตรงกับรหัสผ่านใหม่';
   }
 
   //  No error detected

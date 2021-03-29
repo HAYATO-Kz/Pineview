@@ -34,8 +34,8 @@ export const Profile = (props: ProfileProps) => {
   const { navigation } = props;
   const [userData, setUserData] = useState({
     username: 'username',
-    email: '@email@email.com',
-    user_color: '#ffffff'
+    email: 'email@email.com',
+    user_color: '#ffffff',
   });
 
   const contentWidth = useWindowDimensions().width - 32;
@@ -75,7 +75,6 @@ export const Profile = (props: ProfileProps) => {
       .catch((err) => console.log(err));
     const user = response.data.user;
     setUserData(user);
-    // console.log(response.data);
   };
 
   useEffect(() => {

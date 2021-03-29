@@ -37,19 +37,19 @@ const registerValidator = (values: RegisterFormValueProps) => {
 
   // mail validate
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'กรุณาใส่อีเมล';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'อีเมลนี้ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง';
   }
 
   // password validate
   if (!values.password) {
-    errors.password = 'Required';
+    errors.password = 'กรุณาใส่รหัสผ่าน';
   }
 
   // username validate
   if (!values.username) {
-    errors.username = 'Required';
+    errors.username = 'กรุณาใส่ชื่อผู้ใช้';
   }
 
   //  No error detected

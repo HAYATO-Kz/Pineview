@@ -1,20 +1,19 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-import { DefaultText } from '../DefaultText/DefaultText.style'
+import { DefaultText } from '../DefaultText/DefaultText.style';
 
 export const Text = styled(DefaultText)`
-    font-size: 14px;
-    font-weight: 500;
-    margin: 0 0 6px 6px;
-`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 6px 6px;
+`;
 
 export const Container = styled.View`
-    display:flex;
-    flex-direction: column;
-    width:100%;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 export const PlateWrapper = styled.TouchableOpacity`
-    /* width:100%; */
-    flex:1;
-    margin: 6px;
-`
+  flex: 1;
+  margin: 6px;
+`;

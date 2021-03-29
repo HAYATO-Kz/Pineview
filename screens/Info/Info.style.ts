@@ -1,6 +1,6 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-import { DefaultText } from '../../components'
+import { DefaultText } from '../../components';
 
 export const Header = styled(DefaultText)`
   font-size: 15px;
@@ -14,8 +14,8 @@ export const Description = styled(DefaultText)`
 `;
 
 export const Container = styled.View`
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    margin-top:17px;
-`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 17px;
+`;
