@@ -59,7 +59,7 @@ export const NewCollection = (props: NewCollectionProps) => {
             onPress={() => navigation.goBack()}
           />
         ),
-        title: 'สร้างคอลเลกชั่นใหม่',
+        title: 'สร้างคอลเลกชันใหม่',
         hasBorder: true,
       }}
       padding="0 17px">
@@ -70,14 +70,14 @@ export const NewCollection = (props: NewCollectionProps) => {
           />
         </ImageWrapper>
         <TextWrapper onPress={uploadImage}>
-          <UploadImageTitle>เลือกภาพปกของคอลเลกชั่น</UploadImageTitle>
+          <UploadImageTitle>เลือกภาพปกของคอลเลกชัน</UploadImageTitle>
         </TextWrapper>
         <Input
-          label="ขื่อคอลเลกชั่น"
+          label="ขื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}
         />
         <Button
-          text="สร้างคอลเลกชั่น"
+          text="สร้างคอลเลกชัน"
           block
           onPress={handleCreateNewCollection}
           disabled={collectionTitle === '' || !!!collectionTitle}

@@ -42,7 +42,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         {/* <TouchableIcon icon={<MoreFuctionIcon />} onPress={() => {}} /> */}
       </TitleContainer>
       <SubText>
-        มี {mock_data.review_blogs.length} รีวิวอยู่ในคอลเลกชั่นนี้
+        มี {mock_data.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้
       </SubText>
       <SubText> สร้างโดย {mock_data.owner} </SubText>
       <GridWrapper>

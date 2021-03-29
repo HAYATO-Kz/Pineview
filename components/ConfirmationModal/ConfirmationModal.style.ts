@@ -63,6 +63,5 @@ export const ConfirmButtonText = styled(DefaultText)`
 export const CancelButtonText = styled(DefaultText)`
   font-size: 18px;
   font-weight: 400;
-  color: #f5222d;
   color: #8c8c8c;
 `;

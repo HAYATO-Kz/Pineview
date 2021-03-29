@@ -59,7 +59,7 @@ export const EditCollection = (props: EditCollectionProps) => {
             onPress={() => navigation.goBack()}
           />
         ),
-        title: 'แก้ไขคอลเลกชั่น',
+        title: 'แก้ไขคอลเลกชัน',
         hasBorder: true,
       }}
       padding="0 34px">
@@ -70,10 +70,10 @@ export const EditCollection = (props: EditCollectionProps) => {
           />
         </ImageWrapper>
         <TextWrapper onPress={uploadImage}>
-          <UploadImageTitle>เลือกภาพปกของคอลเลกชั่น</UploadImageTitle>
+          <UploadImageTitle>เลือกภาพปกของคอลเลกชัน</UploadImageTitle>
         </TextWrapper>
         <Input
-          label="ขื่อคอลเลกชั่น"
+          label="ขื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}
         />
         <Button

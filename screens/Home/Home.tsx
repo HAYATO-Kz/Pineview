@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Container} from '../../components';
+import { Button } from '../../components';
 import {
   HomeContainer,
   Logo,

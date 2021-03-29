@@ -42,6 +42,7 @@ export const HeaderText = styled(DefaultText)`
 export const Button = styled.TouchableOpacity`
   padding: 0 10px;
 `;
+
 export const ButtonText = styled(DefaultText)`
   font-weight: 400;
   font-size: 18px;
@@ -65,8 +66,8 @@ export const CreateNewCollection = styled.TouchableOpacity`
 `;
 
 export const CreateNewCollectionText = styled(DefaultText)`
-    font-weight: 400;
-    font-size: 18px;
-    color: #000000;
-    margin-left: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #000000;
+  margin-left: 10px;
 `;

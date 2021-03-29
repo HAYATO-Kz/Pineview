@@ -71,9 +71,9 @@ export const Collection = (props: CollectionProps) => {
 
   return (
     <ContainerWithSafeArea>
-      <Title>คอลเลกชั่น</Title>
+      <Title>คอลเลกชัน</Title>
       <SubContainer>
-        <SubContainerText>คอลเลกชั่นทั้งหมด</SubContainerText>
+        <SubContainerText>คอลเลกชันทั้งหมด</SubContainerText>
         <NewCollectionButton
           onPress={() => {
             navigation.navigate('NewCollection');

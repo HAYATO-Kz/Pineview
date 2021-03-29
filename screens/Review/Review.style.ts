@@ -35,8 +35,6 @@ export const HTMLWrapper = styled.View`
   padding: 21px;
 `;
 
-
-
 export const ModalContainer = styled.View`
   background: #ffffff;
   display: flex;
@@ -77,6 +75,7 @@ export const HeaderText = styled(DefaultText)`
 export const Button = styled.TouchableOpacity`
   padding: 0 10px;
 `;
+
 export const ButtonText = styled(DefaultText)`
   font-weight: 400;
   font-size: 18px;

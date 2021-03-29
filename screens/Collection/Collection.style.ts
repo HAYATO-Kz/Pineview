@@ -40,6 +40,4 @@ export const SubContainerText = styled(DefaultText)`
 
 export const GridWrapper = styled.View`
   padding: 16px;
-`
-
-export const CollectionContainer = styled.View``;
+`;
