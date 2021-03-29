@@ -50,6 +50,7 @@ export const CollectionCard = (props: CollectionCardProps) => {
             <ReviewCount>{reviewCount} รีวิว</ReviewCount>
           </TextContainer>
           <TouchableIcon
+            padding="0px 0px 0px 16px"
             icon={<MoreFunctionIcon heigt={17} width={3} />}
             onPress={() => setActionModalVisible(true)}
           />

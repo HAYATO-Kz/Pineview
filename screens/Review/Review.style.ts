@@ -28,10 +28,10 @@ export const TextContainer = styled.View`
 
 export const HTMLWrapper = styled.View`
   shadow-color: #000000;
-  shadow-offset: {width: 0, height: -4};
+  shadow-offset: 0px 4px;
   shadow-opacity: 0.25;
   shadow-radius: 4px;
-  flex:1;
+  flex: 1;
   background: #ffffff;
   padding: 21px;
 `;

@@ -8,7 +8,7 @@ export const Card = styled.TouchableOpacity`
   padding: 16px 16px 10px;
   width: 100%;
   shadow-color: #000000;
-  shadow-offset: {width: 0, height: -4};
+  shadow-offset: 0px 4px;
   shadow-opacity: 0.25;
   shadow-radius: 4px;
   background: #ffffff;
@@ -17,7 +17,7 @@ export const Card = styled.TouchableOpacity`
 export const CollectionImage = styled.Image`
   width: 100%;
   height: undefined;
-  border-color:#ededed;
+  border-color: #ededed;
   border-width: 1px;
   aspect-ratio: 1;
 `;

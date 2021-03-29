@@ -53,15 +53,15 @@ export const Review = (props: ReviewProps) => {
 
   const [source, setSource] = useState<any>('');
   const tagsStyles = {
-    i: { fontFamily: 'Kanit', fontWeight: 400 },
-    div: { fontFamily: 'Kanit', fontWeight: 400 },
-    p: { fontFamily: 'Kanit', fontWeight: 400 },
-    span: { fontFamily: 'Kanit', fontWeight: 400 },
-    h1: { fontFamily: 'Kanit', fontWeight: 400 },
-    h2: { fontFamily: 'Kanit', fontWeight: 400 },
-    h3: { fontFamily: 'Kanit', fontWeight: 400 },
-    h4: { fontFamily: 'Kanit', fontWeight: 400 },
-    h5: { fontFamily: 'Kanit', fontWeight: 400 },
+    i: { fontFamily: 'Kanit' },
+    div: { fontFamily: 'Kanit' },
+    p: { fontFamily: 'Kanit' },
+    span: { fontFamily: 'Kanit' },
+    h1: { fontFamily: 'Kanit' },
+    h2: { fontFamily: 'Kanit' },
+    h3: { fontFamily: 'Kanit' },
+    h4: { fontFamily: 'Kanit' },
+    h5: { fontFamily: 'Kanit' },
   };
   /**
    *  Redirect to google map application with use lat & long to set destination
@@ -175,7 +175,7 @@ export const Review = (props: ReviewProps) => {
       </FavoriteContainer>
       <HTMLWrapper>
         <HTML
-          source={{ html: source.desc_full || '<div></div>' }}
+          source={{ html: `<div>${source.desc_full}</div>` || '<div></div>' }}
           contentWidth={contentWidth}
           tagsStyles={tagsStyles}
           computeEmbeddedMaxWidth={(s) => contentWidth - 50}

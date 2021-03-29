@@ -8,7 +8,7 @@ export const Card = styled.TouchableOpacity`
   padding: 16px 16px 10px;
   width: 100%;
   shadow-color: #000000;
-  shadow-offset: {width: 0, height: -4};
+  shadow-offset: 0px 4px;
   shadow-opacity: 0.25;
   shadow-radius: 4px;
   background: #ffffff;
@@ -30,6 +30,6 @@ export const Title = styled(DefaultText)`
   font-size: 10px;
   font-weight: 500;
   color: #613400;
-  height:30px;
-  width:100%;
+  height: 30px;
+  width: 100%;
 `;

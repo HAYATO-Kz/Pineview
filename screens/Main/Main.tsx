@@ -5,6 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Profile } from '../Profile/Profile';
 import { CollectionStack } from '../CollectionStack/CollectionStack';
 import { Map } from '../Map/Map';
+import MapTab from '../../assets/icons/map_tab_icon.svg';
+import CollectionTab from '../../assets/icons/collection_tab_icon.svg';
+import ProfileTab from '../../assets/icons/profile_tab_icon.svg';
 
 interface MainProps {
   navigation: any;
@@ -29,10 +32,31 @@ export const Main = (props: MainProps) => {
   return (
     <>
       {isSignIn ? (
-        <Tab.Navigator>
-          <Tab.Screen name="Map" component={Map} />
-          <Tab.Screen name="Collection" component={CollectionStack} />
-          <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Navigator tabBarOptions={{ style: { height: '90px' } }}>
+          <Tab.Screen
+            name="Map"
+            component={Map}
+            options={{
+              title: 'แผนที่',
+              tabBarIcon: ({ size, focused, color }) => <MapTab />,
+            }}
+          />
+          <Tab.Screen
+            name="Collection"
+            component={CollectionStack}
+            options={{
+              title: 'คอลเลกชัน',
+              tabBarIcon: ({ size, focused, color }) => <CollectionTab />,
+            }}
+          />
+          <Tab.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              title: 'โปรไฟล์',
+              tabBarIcon: ({ size, focused, color }) => <ProfileTab />,
+            }}
+          />
         </Tab.Navigator>
       ) : (
         <Map navigation={navigation} />
