@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Profile } from '../Profile/Profile';
+import { UserProfileStack } from '../UserProfileStack/UserProfileStack';
 import { Collection } from '../Collection/Collection';
 import { Map } from '../Map/Map';
 
@@ -33,7 +33,7 @@ export const Main = (props: MainProps) => {
         <Tab.Navigator>
           <Tab.Screen name="Map" component={Map} />
           <Tab.Screen name="Collection" component={Collection} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Profile" component={UserProfileStack} />
         </Tab.Navigator>
       ) : (
         <Map navigation={navigation} />
