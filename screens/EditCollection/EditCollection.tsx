@@ -41,14 +41,6 @@ export const EditCollection = (props: EditCollectionProps) => {
       }}
       padding="0 34px">
       <Wrapper>
-        {/* <ImageWrapper onPress={uploadImage}>
-          <Image
-            source={collectionImage ? { uri: collectionImage } : DefaultImage}
-          />
-        </ImageWrapper>
-        <TextWrapper onPress={uploadImage}>
-          <UploadImageTitle>เลือกภาพปกของคอลเลกชัน</UploadImageTitle>
-        </TextWrapper> */}
         <Input
           label="ขื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}

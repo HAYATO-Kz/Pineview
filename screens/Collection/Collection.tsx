@@ -6,10 +6,10 @@ import {
   NewCollectionButton,
   NewCollectionButtonText,
   SubContainerText,
-  GridWrapper
+  GridWrapper,
 } from './Collection.style';
 import PlusIcon from '../../assets/icons/plus_icon.svg';
-import { CollectionCard, Grid, ContainerWithSafeArea} from '../../components';
+import { CollectionCard, Grid, ContainerWithSafeArea } from '../../components';
 
 interface CollectionProps {
   navigation: any;
@@ -79,9 +79,7 @@ export const Collection = (props: CollectionProps) => {
             navigation.navigate('NewCollection');
           }}>
           <PlusIcon />
-          <NewCollectionButtonText>
-            สร้างคอลเล็กชั่นใหม่
-          </NewCollectionButtonText>
+          <NewCollectionButtonText>สร้างคอลเลกชันใหม่</NewCollectionButtonText>
         </NewCollectionButton>
       </SubContainer>
       <GridWrapper>
