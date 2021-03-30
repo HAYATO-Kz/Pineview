@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { AsyncStorage } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Profile } from '../Profile/Profile';
 import { CollectionStack } from '../CollectionStack/CollectionStack';
+import { UserProfileStack } from '../UserProfileStack/UserProfileStack';
 import { Map } from '../Map/Map';
 import MapTab from '../../assets/icons/map_tab_icon.svg';
 import CollectionTab from '../../assets/icons/collection_tab_icon.svg';
@@ -51,7 +51,7 @@ export const Main = (props: MainProps) => {
           />
           <Tab.Screen
             name="Profile"
-            component={Profile}
+            component={UserProfileStack}
             options={{
               title: 'โปรไฟล์',
               tabBarIcon: ({ size, focused, color }) => <ProfileTab />,

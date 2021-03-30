@@ -6,7 +6,8 @@ export const InputWithStyled = styled.TextInput<{ isError?: boolean }>`
   border-radius: 4px;
   height: 52px;
   padding: 16px;
-
+  font-family: Kanit;
+  color: #613400;
   ${(props) => {
     if (props.editable) {
       if (props.isError) {
@@ -47,5 +48,5 @@ export const ErrorMessage = styled(DefaultText)`
   color: #f5222d;
   font-weight: 400;
   font-size: 13px;
-  height: 15px;
+  height: 20px;
 `;
