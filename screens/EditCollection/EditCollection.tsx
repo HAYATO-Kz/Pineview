@@ -42,7 +42,7 @@ export const EditCollection = (props: EditCollectionProps) => {
       padding="0 34px">
       <Wrapper>
         <Input
-          label="ขื่อคอลเลกชัน"
+          label="ชื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}
         />
         <Button
