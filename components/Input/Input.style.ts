@@ -48,5 +48,5 @@ export const ErrorMessage = styled(DefaultText)`
   color: #f5222d;
   font-weight: 400;
   font-size: 13px;
-  height: 15px;
+  height: 20px;
 `;
