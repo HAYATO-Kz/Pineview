@@ -76,15 +76,3 @@ export const HeaderText = styled(DefaultText)`
 export const Button = styled.TouchableOpacity`
   padding: 0 10px;
 `;
-
-export const ButtonText = styled(DefaultText)`
-  font-weight: 400;
-  font-size: 18px;
-  color: #888888;
-`;
-
-export const OptionLabel = styled(DefaultText)`
-  font-weight: 400;
-  font-size: 18px;
-  color: #000000;
-`;

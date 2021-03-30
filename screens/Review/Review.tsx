@@ -53,15 +53,15 @@ export const Review = (props: ReviewProps) => {
 
   const [source, setSource] = useState<any>('');
   const tagsStyles = {
-    i: { fontFamily: 'Kanit' },
-    div: { fontFamily: 'Kanit' },
-    p: { fontFamily: 'Kanit' },
-    span: { fontFamily: 'Kanit' },
-    h1: { fontFamily: 'Kanit' },
-    h2: { fontFamily: 'Kanit' },
-    h3: { fontFamily: 'Kanit' },
-    h4: { fontFamily: 'Kanit' },
-    h5: { fontFamily: 'Kanit' },
+    i: { fontFamily: 'Kanit', color: '#613400' },
+    div: { fontFamily: 'Kanit', color: '#613400' },
+    p: { fontFamily: 'Kanit', color: '#613400' },
+    span: { fontFamily: 'Kanit', color: '#613400' },
+    h1: { fontFamily: 'Kanit', color: '#613400' },
+    h2: { fontFamily: 'Kanit', color: '#613400' },
+    h3: { fontFamily: 'Kanit', color: '#613400' },
+    h4: { fontFamily: 'Kanit', color: '#613400' },
+    h5: { fontFamily: 'Kanit', color: '#613400' },
   };
   /**
    *  Redirect to google map application with use lat & long to set destination
