@@ -42,7 +42,7 @@ export const NewCollection = (props: NewCollectionProps) => {
       padding="0 17px">
       <Wrapper>
         <Input
-          label="ขื่อคอลเลกชัน"
+          label="ชื่อคอลเลกชัน"
           onChangeText={(value) => setCollectionTitle(value)}
         />
         <Button
