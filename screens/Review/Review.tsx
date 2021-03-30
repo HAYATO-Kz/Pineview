@@ -8,10 +8,22 @@ import {
 } from 'react-native';
 
 import { getDate } from '../../utils/timestamp';
-import { Title, SubText } from './Review.style';
-import { ContainerWithSafeArea, TouchableIcon } from '../../components';
+import {
+  Title,
+  SubText,
+  HTMLWrapper,
+  FavoriteContainer,
+  TextContainer,
+} from './Review.style';
+import {
+  ContainerWithSafeArea,
+  TouchableIcon,
+  Favorite,
+} from '../../components';
 import BackIcon from '../../assets/icons/back_icon.svg';
 import MoreFunctionIcon from '../../assets/icons/more_function_icon.svg';
+import ActiveFavoriteIcon from '../../assets/icons/favorite_active_icon.svg';
+import FavoriteIcon from '../../assets/icons/favorite_icon.svg';
 
 import { MOCKDATA } from '../../mock_data';
 
@@ -20,15 +32,37 @@ interface ReviewProps {
   route: any;
 }
 
+const mock_collection = [
+  {
+    label: 'Favorite',
+    value: 'favorite',
+  },
+  {
+    label: 'Collection 2',
+    value: 'collection2',
+  },
+];
+
 export const Review = (props: ReviewProps) => {
-  const [love, setLove] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
 
   const { navigation, route } = props;
 
-  const contentWidth = useWindowDimensions().width - 30;
+  const contentWidth = useWindowDimensions().width - 72;
 
   const [source, setSource] = useState<any>('');
-
+  const tagsStyles = {
+    i: { fontFamily: 'Kanit', color: '#613400' },
+    div: { fontFamily: 'Kanit', color: '#613400' },
+    p: { fontFamily: 'Kanit', color: '#613400' },
+    span: { fontFamily: 'Kanit', color: '#613400' },
+    h1: { fontFamily: 'Kanit', color: '#613400' },
+    h2: { fontFamily: 'Kanit', color: '#613400' },
+    h3: { fontFamily: 'Kanit', color: '#613400' },
+    h4: { fontFamily: 'Kanit', color: '#613400' },
+    h5: { fontFamily: 'Kanit', color: '#613400' },
+  };
   /**
    *  Redirect to google map application with use lat & long to set destination
    * @param lat latitude's blog
@@ -90,6 +124,11 @@ export const Review = (props: ReviewProps) => {
     );
   };
 
+  const onAddFavorite = (selectedValues: string[]) => {
+    console.log(selectedValues);
+    setFavoriteModalVisible(false);
+  };
+
   useEffect(() => {
     if (route.params) {
       setSource(MOCKDATA[route.params.id]);
@@ -114,14 +153,43 @@ export const Review = (props: ReviewProps) => {
         ),
         hasBorder: true,
       }}
-      padding="20px">
+      padding="26px">
       <Title>{source.title}</Title>
       <SubText>ผู้เขียน : {source.nickname}</SubText>
-      <SubText>วันที่รีวิว : {getDate(source.created_time)}.</SubText>
-      <HTML
-        source={{ html: source.desc_full || '<div></div>' }}
-        contentWidth={contentWidth}
-        computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+      <FavoriteContainer>
+        <TextContainer>
+          <SubText>วันที่รีวิว : {getDate(source.created_time)}.</SubText>
+          <SubText>เนื้อหารีวิว :</SubText>
+        </TextContainer>
+        {favorite ? (
+          <TouchableIcon
+            onPress={() => setFavoriteModalVisible(true)}
+            icon={<ActiveFavoriteIcon />}
+          />
+        ) : (
+          <TouchableIcon
+            onPress={() => setFavoriteModalVisible(true)}
+            icon={<FavoriteIcon />}
+          />
+        )}
+      </FavoriteContainer>
+      <HTMLWrapper>
+        <HTML
+          source={{ html: `<div>${source.desc_full}</div>` || '<div></div>' }}
+          contentWidth={contentWidth}
+          tagsStyles={tagsStyles}
+          computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+        />
+      </HTMLWrapper>
+      <Favorite
+        visible={favoriteModalVisible}
+        onDone={onAddFavorite}
+        onCreateNewCollection={() => {
+          setFavoriteModalVisible(false);
+          navigation.navigate('NewCollection');
+        }}
+        options={mock_collection}
+        initialValue={['favorite']}
       />
     </ContainerWithSafeArea>
   );

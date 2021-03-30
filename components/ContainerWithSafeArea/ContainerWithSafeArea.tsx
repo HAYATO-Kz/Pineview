@@ -1,25 +1,39 @@
-import React, {FunctionComponent} from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { useState, FunctionComponent } from 'react';
+import { SafeAreaView, Dimensions } from 'react-native';
 
-import { Container } from './ContainerWithSafeAre.style';
-import { Header, HeaderProps} from '../Header/Header'
+import {
+  Container,
+  ContentContainer,
+  Content,
+} from './ContainerWithSafeAre.style';
+import { Header, HeaderProps } from '../Header/Header';
 
 interface ContainerWithSafeAreaProps {
   padding?: string;
-  header?: HeaderProps
+  header?: HeaderProps;
+  isTransparent?: boolean;
 }
 
-export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps> = (props) => {
-  const { children, padding = '0px', header } = props;
+const { height } = Dimensions.get('window');
+
+export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps> = (
+  props,
+) => {
+  const { children, padding = '0px', header, isTransparent } = props;
+  const [screenHeight, setScreenHeight] = useState(0);
+
+  const onContentSizeChange = (contentWidth: any, contentHeight: any) => {
+    setScreenHeight(contentHeight);
+  };
 
   return (
-    <Container padding={'0px'}>
-      <SafeAreaView>
-      { header && <Header {...header} /> }
-      <Container padding={padding}>
-      {children}
-      </Container>
-      </SafeAreaView>
+    <Container isTransparent={isTransparent}>
+      <SafeAreaView>{header && <Header {...header} />}</SafeAreaView>
+      <ContentContainer
+        scrollEnabled={screenHeight > height}
+        onContentSizeChange={onContentSizeChange}>
+        <Content padding={padding}>{children}</Content>
+      </ContentContainer>
     </Container>
   );
 };

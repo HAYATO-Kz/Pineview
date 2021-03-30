@@ -50,7 +50,8 @@ export const Map = (props: MapProps) => {
       setInitlat(info.coords.latitude);
       setInitLong(info.coords.longitude);
     });
-  }, []);
+  }, [filter]);
+
 
   return (
     <>
@@ -82,7 +83,7 @@ export const Map = (props: MapProps) => {
         })}
       </MapView>
       <AbsoluteWrapper>
-        <ContainerWithSafeArea padding="0px 10px">
+        <ContainerWithSafeArea padding="0px 10px" isTransparent>
           <FilterBar
             tabs={filterTabs}
             defaultValue="all"

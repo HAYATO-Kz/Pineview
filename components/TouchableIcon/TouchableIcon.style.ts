@@ -1,5 +1,5 @@
-import styled from 'styled-components/native'
+import styled from 'styled-components/native';
 
-export const IconWrapper = styled.TouchableOpacity`
-    padding: 0px 16px;
-`
+export const IconWrapper = styled.TouchableOpacity<{ padding: string }>`
+  padding: ${(p) => p.padding};
+`;
