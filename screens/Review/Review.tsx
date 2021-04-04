@@ -32,17 +32,6 @@ interface ReviewProps {
   route: any;
 }
 
-const mock_collection = [
-  {
-    label: 'Favorite',
-    value: 'favorite',
-  },
-  {
-    label: 'Collection 2',
-    value: 'collection2',
-  },
-];
-
 export const Review = (props: ReviewProps) => {
   const [collection, setCollection] = useState([]);
   const [favorite, setFavorite] = useState(false);

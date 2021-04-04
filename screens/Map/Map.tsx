@@ -39,7 +39,6 @@ export const Map = (props: MapProps) => {
   const [initlong, setInitLong] = useState(0.0);
   const [reviewData, setReviewData] = useState([]);
 
-  // mock state for filter feature
   const [filter, setFiltered] = useState('all');
 
   const { navigation } = props;
