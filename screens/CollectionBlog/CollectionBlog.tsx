@@ -1,58 +1,103 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { AsyncStorage, Clipboard } from 'react-native';
 
 import {
   Title,
   SubText,
-  TitleContainer,
+  ButtonContainer,
   GridWrapper,
+  ShareCollectionButton,
+  ShareCollectionButtonText,
 } from './CollectionBlog.style';
 import {
   Grid,
   CollectionBlogCard,
-  TouchableIcon,
   ContainerWithSafeArea,
+  ShareCollectionModal,
 } from '../../components';
-import MoreFuctionIcon from '../../assets/icons/more_function_icon.svg';
+import ShareIcon from '../../assets/icons/share_icon.svg';
+import { backendAPI } from '../../utils/api';
 
 interface CollectionBlogProps {
-  collectionId?: string;
+  navigation: any;
+  route: any;
 }
 
-const mock_data = {
-  title: 'favorite',
-  owner: 'username',
-  review_blogs: [
-    { title: 'review_1' },
-    { title: 'review_2_review_review_2_line_place_holder' },
-    { title: 'review_3' },
-    { title: 'review_4' },
-    { title: 'review_5' },
-    { title: 'review_6' },
-  ],
-};
-
 export const CollectionBlog = (props: CollectionBlogProps) => {
-  const { collectionId } = props;
+  const { navigation, route } = props;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [collectionData, setCollectionData] = useState({
+    title: 'title',
+    owner: 'owner',
+    isOwner: false,
+    review_blogs: [],
+  });
+
+  const getCollection = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    const response = await backendAPI
+      .get(`/collection/${route.params.collectionId}?token=${authToken}`)
+      .catch((err) => {
+        console.log(err);
+      });
+
+    if (response) {
+      const { title, owner, isOwner, blogs } = response.data;
+      console.log(blogs);
+      setCollectionData({
+        title: title,
+        isOwner: isOwner,
+        owner: isOwner ? `${owner} (ฉัน)` : owner,
+        review_blogs: blogs,
+      });
+    }
+  };
+
+  const onCopy = () => {
+    Clipboard.setString(`${route.params.collectionId}`);
+    setModalVisible(false);
+  };
+
+  useEffect(() => {
+    getCollection();
+  }, []);
 
   return (
-    <ContainerWithSafeArea>
-      <TitleContainer>
-        <Title>{mock_data.title}</Title>
-        {/* use in share feature */}
-        {/* <TouchableIcon icon={<MoreFuctionIcon />} onPress={() => {}} /> */}
-      </TitleContainer>
+    <ContainerWithSafeArea padding="16px" isInTabMode>
+      <Title>{collectionData.title}</Title>
       <SubText>
-        มี {mock_data.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้
+        มี {collectionData.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้
       </SubText>
-      <SubText> สร้างโดย {mock_data.owner} </SubText>
-      <GridWrapper>
-        <Grid
-          keyBase="collection_blog"
-          data={mock_data.review_blogs.map((data) => (
-            <CollectionBlogCard title={data.title} />
-          ))}
-        />
-      </GridWrapper>
+      <ButtonContainer>
+        <SubText> สร้างโดย {collectionData.owner} </SubText>
+        {collectionData.isOwner && (
+          <ShareCollectionButton onPress={() => setModalVisible(true)}>
+            <ShareIcon />
+            <ShareCollectionButtonText>แชร์</ShareCollectionButtonText>
+          </ShareCollectionButton>
+        )}
+      </ButtonContainer>
+      {collectionData.review_blogs.length !== 0 && (
+        <GridWrapper>
+          <Grid
+            keyBase="collection_blog"
+            data={collectionData.review_blogs.map((data) => (
+              <CollectionBlogCard
+                title={data.kratoo_title}
+                onPress={() =>
+                  navigation.navigate('Review', { id: data.kratoo_id })
+                }
+              />
+            ))}
+          />
+        </GridWrapper>
+      )}
+      <ShareCollectionModal
+        collectionId={route.params.collectionId}
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        onConfirm={onCopy}
+      />
     </ContainerWithSafeArea>
   );
 };

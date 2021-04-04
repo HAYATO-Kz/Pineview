@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
+import { AsyncStorage } from 'react-native';
 
-import {
-  Image,
-  Wrapper,
-  UploadImageTitle,
-  ImageWrapper,
-  TextWrapper,
-} from './NewCollection.style';
+import { Wrapper, MarginWrapper } from './NewCollection.style';
 import {
   Button,
   Input,
   ContainerWithSafeArea,
   TouchableIcon,
+  CollectionIcon,
+  CollectionIconSelection,
+  ColorPalette,
 } from '../../components';
-import DefaultImage from '../../assets/images/collection_default_image.png';
+import { backendAPI } from '../../utils/api';
 import BackIcon from '../../assets/icons/back_icon.svg';
 
 interface NewCollectionProps {
@@ -23,9 +21,28 @@ interface NewCollectionProps {
 export const NewCollection = (props: NewCollectionProps) => {
   const { navigation } = props;
   const [collectionTitle, setCollectionTitle] = useState('');
-  const [collectionImage, setCollectionImage] = useState<any>();
+  const [collectionIconSelected, setCollectionIconSelected] = useState('heart');
+  const [collectionColorSelected, setCollectionColorSelected] = useState(
+    '#ffffff',
+  );
 
-  const handleCreateNewCollection = () => {};
+  const handleCreateNewCollection = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    const newCollection = {
+      collection_icon: collectionIconSelected,
+      collection_color: collectionColorSelected,
+      userToken: authToken,
+      collection_title: collectionTitle,
+    };
+
+    const response = await backendAPI
+      .post('/create_new_collection', newCollection)
+      .catch((err) => console.log(err));
+
+    if (response) {
+      navigation.goBack();
+    }
+  };
 
   return (
     <ContainerWithSafeArea
@@ -39,17 +56,43 @@ export const NewCollection = (props: NewCollectionProps) => {
         title: 'สร้างคอลเลกชันใหม่',
         hasBorder: true,
       }}
-      padding="0 17px">
+      padding="16px 32px">
       <Wrapper>
-        <Input
-          label="ชื่อคอลเลกชัน"
-          onChangeText={(value) => setCollectionTitle(value)}
+        <CollectionIcon
+          size={135}
+          icon={collectionIconSelected}
+          color={collectionColorSelected}
         />
+        <MarginWrapper>
+          <CollectionIconSelection
+            label="เลือกไอคอนประจำคอลเลกชัน"
+            value={collectionIconSelected}
+            onChange={(selectedIcon: string) =>
+              setCollectionIconSelected(selectedIcon)
+            }
+          />
+        </MarginWrapper>
+        <MarginWrapper>
+          <ColorPalette
+            label="เลือกสีพื้นหลังประจำคอลเลกชัน"
+            value={collectionColorSelected}
+            onChange={(selectedColor) =>
+              setCollectionColorSelected(selectedColor)
+            }
+          />
+        </MarginWrapper>
+        <MarginWrapper>
+          <Input
+            label="ชื่อคอลเลกชัน"
+            autoCapitalize="none"
+            onChangeText={(value) => setCollectionTitle(value)}
+          />
+        </MarginWrapper>
         <Button
           text="สร้างคอลเลกชัน"
           block
           onPress={handleCreateNewCollection}
-          disabled={collectionTitle === '' || !!!collectionTitle}
+          disabled={collectionTitle === ''}
         />
       </Wrapper>
     </ContainerWithSafeArea>

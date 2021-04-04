@@ -23,7 +23,7 @@ export const CollectionBlogCard = (props: CollectionBlogCardProps) => {
     <Card onPress={onPress}>
       <CollectionImage source={image} resizeMode="contain" />
       <InformationContainer>
-        <Title>{title}</Title>
+        <Title numberOfLines={2}>{title}</Title>
       </InformationContainer>
     </Card>
   );

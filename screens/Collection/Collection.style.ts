@@ -8,15 +8,7 @@ export const Title = styled(DefaultText)`
   margin: 0 16px;
 `;
 
-export const SubContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 24px 16px 16px;
-  align-items: center;
-`;
-
-export const NewCollectionButton = styled.TouchableOpacity`
+export const ShareCollectionButton = styled.TouchableOpacity`
   border: 1px solid #613400;
   border-radius: 6px;
   display: flex;
@@ -25,7 +17,7 @@ export const NewCollectionButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const NewCollectionButtonText = styled(DefaultText)`
+export const ShareCollectionButtonText = styled(DefaultText)`
   color: #613400;
   font-size: 11px;
   font-weight: 500;
@@ -38,6 +30,32 @@ export const SubContainerText = styled(DefaultText)`
   font-weight: 500;
 `;
 
+export const SubContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 24px 16px 16px;
+  align-items: center;
+`;
+
 export const GridWrapper = styled.View`
   padding: 16px;
+`;
+
+export const NewCollectionButtonCard = styled.TouchableOpacity`
+  width: 100%;
+  min-height: 200px;
+  border-radius: 6px;
+  border: 2px dashed rgba(62, 23, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const NewCollectionText = styled(DefaultText)`
+  margin-top: 26px;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(62, 23, 0, 0.5);
 `;

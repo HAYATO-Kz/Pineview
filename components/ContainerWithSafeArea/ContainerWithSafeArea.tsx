@@ -12,6 +12,7 @@ interface ContainerWithSafeAreaProps {
   padding?: string;
   header?: HeaderProps;
   isTransparent?: boolean;
+  isInTabMode?: boolean;
 }
 
 const { height } = Dimensions.get('window');
@@ -19,7 +20,13 @@ const { height } = Dimensions.get('window');
 export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps> = (
   props,
 ) => {
-  const { children, padding = '0px', header, isTransparent } = props;
+  const {
+    children,
+    padding = '0px',
+    header,
+    isTransparent,
+    isInTabMode,
+  } = props;
   const [screenHeight, setScreenHeight] = useState(0);
 
   const onContentSizeChange = (contentWidth: any, contentHeight: any) => {
@@ -30,7 +37,7 @@ export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps
     <Container isTransparent={isTransparent}>
       <SafeAreaView>{header && <Header {...header} />}</SafeAreaView>
       <ContentContainer
-        scrollEnabled={screenHeight > height}
+        scrollEnabled={screenHeight > (isInTabMode ? height - 80 : height)}
         onContentSizeChange={onContentSizeChange}>
         <Content padding={padding}>{children}</Content>
       </ContentContainer>
