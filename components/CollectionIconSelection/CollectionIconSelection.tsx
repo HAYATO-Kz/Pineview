@@ -29,10 +29,10 @@ export const CollectionIconSelection = (
     <Container>
       <Text>{label}:</Text>
       <IconContainer>
-        {avaliableIconRows.map((avaliableIconRow) => (
-          <RowContainer>
-            {avaliableIconRow.map((avaliableIcon) => (
-              <IconWrapper onPress={() => onChange(avaliableIcon)}>
+        {avaliableIconRows.map((avaliableIconRow,index) => (
+          <RowContainer key={`row_${index}`}>
+            {avaliableIconRow.map((avaliableIcon,aIndex) => (
+              <IconWrapper onPress={() => onChange(avaliableIcon)} key={`row_${index}_${aIndex}`}>
                 <CollectionPlate
                   icon={avaliableIcon}
                   isActive={value === avaliableIcon}

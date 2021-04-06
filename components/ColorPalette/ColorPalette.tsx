@@ -35,7 +35,7 @@ export const ColorPalette = (props: ColorPaletteProps) => {
         numColumns={4}
         data={colors}
         scrollEnabled={false}
-        keyExtractor={(item, index) => `${item}`}
+        keyExtractor={(item, index) => `${item}_${index}`}
         renderItem={({ item, index }) => (
           <PlateWrapper
             onPress={() => {
