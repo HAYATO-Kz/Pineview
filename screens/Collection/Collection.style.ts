@@ -48,7 +48,6 @@ export const NewCollectionButtonCard = styled.TouchableOpacity`
   border: 2px dashed rgba(62, 23, 0, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 16px 16px 10px;
 `;
@@ -63,7 +62,7 @@ export const IconWrapper = styled.View`
 `;
 
 export const NewCollectionText = styled(DefaultText)`
-  margin-top: 26px;
+  margin: 16px 0px 10px;
   font-weight: 500;
   font-size: 14px;
   color: rgba(62, 23, 0, 0.5);
