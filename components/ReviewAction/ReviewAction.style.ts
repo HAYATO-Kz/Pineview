@@ -17,13 +17,6 @@ export const ModalWrapper = styled.View`
   align-items: flex-end;
 `;
 
-export const HeaderContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 8px 16px;
-`;
-
 export const Button = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
@@ -38,16 +31,11 @@ export const ButtonText = styled(DefaultText)`
   font-size: 18px;
 `;
 
-export const HeaderText = styled(DefaultText)`
-  font-weight: 400;
-  font-size: 14px;
-  color: #888888;
-`;
-
 export const Divider = styled.View`
   height: 6px;
   background: rgba(0, 0, 0, 0.05);
 `;
+
 export const CancelButtonText = styled(DefaultText)`
   font-weight: 600;
   font-size: 18px;

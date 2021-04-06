@@ -3,23 +3,25 @@ import styled from 'styled-components/native';
 export const FirstComponentWrapper = styled.View<{
   columnSpace: number;
   rowSpace: number;
-  isLast?: boolean;
 }>`
-  flex: 1;
-  max-width: ${(p) => (p.isLast ? '50%' : '100%')};
+  width: 50%;
   padding-right: ${(p) => `${p.columnSpace}px`};
-  padding-left: ${(p) => `${p.columnSpace}px`};
-  padding-bottom: ${(p) => `${p.rowSpace}px`};
-  padding-top: ${(p) => `${p.rowSpace}px`};
+  margin-top: ${(p) => `${p.rowSpace}px`};
+  height: undefined;
 `;
 
 export const SecondComponentWrapper = styled.View<{
   columnSpace: number;
   rowSpace: number;
 }>`
-  padding-right: ${(p) => `${p.columnSpace}px`};
+  width: 50%;
   padding-left: ${(p) => `${p.columnSpace}px`};
-  padding-bottom: ${(p) => `${p.rowSpace}px`};
-  padding-top: ${(p) => `${p.rowSpace}px`};
-  flex: 1;
+  margin-top: ${(p) => `${p.rowSpace}px`};
+`;
+
+export const GridContainer = styled.View`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;

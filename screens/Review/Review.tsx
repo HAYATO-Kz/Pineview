@@ -5,6 +5,7 @@ import {
   Linking,
   useWindowDimensions,
   ActionSheetIOS,
+  AsyncStorage,
 } from 'react-native';
 
 import { getDate } from '../../utils/timestamp';
@@ -19,39 +20,31 @@ import {
   ContainerWithSafeArea,
   TouchableIcon,
   Favorite,
+  ReviewAction,
 } from '../../components';
+import { backendAPI } from '../../utils/api';
 import BackIcon from '../../assets/icons/back_icon.svg';
 import MoreFunctionIcon from '../../assets/icons/more_function_icon.svg';
 import ActiveFavoriteIcon from '../../assets/icons/favorite_active_icon.svg';
 import FavoriteIcon from '../../assets/icons/favorite_icon.svg';
-
-import { MOCKDATA } from '../../mock_data';
 
 interface ReviewProps {
   navigation: any;
   route: any;
 }
 
-const mock_collection = [
-  {
-    label: 'Favorite',
-    value: 'favorite',
-  },
-  {
-    label: 'Collection 2',
-    value: 'collection2',
-  },
-];
-
 export const Review = (props: ReviewProps) => {
+  const [collection, setCollection] = useState([]);
   const [favorite, setFavorite] = useState(false);
+  const [isSignin, setIsSignin] = useState(false);
   const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
+  const [actionVisible, setActionVisible] = useState(false);
 
   const { navigation, route } = props;
 
   const contentWidth = useWindowDimensions().width - 72;
 
-  const [source, setSource] = useState<any>('');
+  const [kratoo, setKratoo] = useState();
   const tagsStyles = {
     i: { fontFamily: 'Kanit', color: '#613400' },
     div: { fontFamily: 'Kanit', color: '#613400' },
@@ -101,38 +94,91 @@ export const Review = (props: ReviewProps) => {
     }
   };
 
-  /**
-   * Open action sheet (redirect to google map, share to other social media applcation)
-   */
-  const openActionSheet = async () => {
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: ['Go to google map', 'Share', 'Cancel'],
-        destructiveButtonIndex: 3,
-        cancelButtonIndex: 3,
-      },
-      (buttonIndex) => {
-        console.log(buttonIndex);
-        if (buttonIndex === 2) {
-          // cancel action
-        } else if (buttonIndex === 0) {
-          openInGoogleMap(source.latitude, source.longtitude);
-        } else if (buttonIndex === 1) {
-          share(source.id);
-        }
-      },
+  const onAddFavorite = async (
+    selectedValues: string[],
+    initialValue: string[],
+  ) => {
+    let collectoinIds = '';
+    selectedValues.forEach(
+      (selectedValue, index) =>
+        (collectoinIds += `${index !== 0 ? ',' : ''}${selectedValue}`),
     );
-  };
 
-  const onAddFavorite = (selectedValues: string[]) => {
-    console.log(selectedValues);
+    const favoriteCollection = {
+      kratoo_id: route.params.id,
+      collection_id: collectoinIds,
+    };
+    const response = await backendAPI
+      .post('/add_to_collection', favoriteCollection)
+      .catch((err) => console.log(err));
+
+    getCollection(route.params.id);
     setFavoriteModalVisible(false);
   };
 
-  useEffect(() => {
-    if (route.params) {
-      setSource(MOCKDATA[route.params.id]);
+  const onUpdateFavorite = async (
+    selectedValues: string[],
+    initialValue: string[],
+  ) => {
+    const difference = selectedValues.filter(
+      (value) => initialValue.indexOf(value) === -1,
+    );
+    const difference2 = initialValue.filter(
+      (value) => selectedValues.indexOf(value) === -1,
+    );
+
+    const updatedCollection = [...difference, ...difference2];
+    let differenceValueCollectoinIds = '';
+    updatedCollection.forEach(
+      (differenceValue, index) =>
+        (differenceValueCollectoinIds += `${
+          index !== 0 ? ',' : ''
+        }${differenceValue}`),
+    );
+
+    if (differenceValueCollectoinIds !== '') {
+      const favoriteCollection = {
+        kratoo_id: route.params.id,
+        collection_ids: differenceValueCollectoinIds,
+      };
+
+      const response = await backendAPI
+        .put('/update_to_collection', favoriteCollection)
+        .catch((err) => console.log(err));
+      getCollection(route.params.id);
     }
+    setFavoriteModalVisible(false);
+  };
+
+  const getReview = async (kratooId: string) => {
+    const response = await backendAPI
+      .get(`/kratoo/${kratooId}`)
+      .catch((err) => console.log(err));
+
+    if (response) {
+      setKratoo(response.data.kratoo);
+    }
+  };
+
+  const getCollection = async (kratooId: string) => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    if (!!authToken) {
+      setIsSignin(true);
+    }
+
+    const response = await backendAPI
+      .get(`/collection/kratoo/${kratooId}?token=${authToken}`)
+      .catch((err) => console.log(err));
+
+    if (response) {
+      setCollection(response.data.collections);
+      setFavorite(response.data.checkFavorite);
+    }
+  };
+
+  useEffect(() => {
+    getReview(route.params.id);
+    getCollection(route.params.id);
   }, [route.params]);
 
   return (
@@ -148,48 +194,78 @@ export const Review = (props: ReviewProps) => {
         rightComponent: (
           <TouchableIcon
             icon={<MoreFunctionIcon />}
-            onPress={openActionSheet}
+            onPress={() => setActionVisible(true)}
           />
         ),
         hasBorder: true,
       }}
       padding="26px">
-      <Title>{source.title}</Title>
-      <SubText>ผู้เขียน : {source.nickname}</SubText>
-      <FavoriteContainer>
-        <TextContainer>
-          <SubText>วันที่รีวิว : {getDate(source.created_time)}.</SubText>
-          <SubText>เนื้อหารีวิว :</SubText>
-        </TextContainer>
-        {favorite ? (
-          <TouchableIcon
-            onPress={() => setFavoriteModalVisible(true)}
-            icon={<ActiveFavoriteIcon />}
-          />
-        ) : (
-          <TouchableIcon
-            onPress={() => setFavoriteModalVisible(true)}
-            icon={<FavoriteIcon />}
-          />
-        )}
-      </FavoriteContainer>
-      <HTMLWrapper>
-        <HTML
-          source={{ html: `<div>${source.desc_full}</div>` || '<div></div>' }}
-          contentWidth={contentWidth}
-          tagsStyles={tagsStyles}
-          computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+      {kratoo && (
+        <>
+          <Title>{kratoo.kratooTitle}</Title>
+          <SubText>ผู้เขียน : {kratoo.nickname}</SubText>
+          <FavoriteContainer>
+            <TextContainer>
+              <SubText>วันที่รีวิว : {getDate(kratoo.created_time)}.</SubText>
+              <SubText>เนื้อหารีวิว :</SubText>
+            </TextContainer>
+            {isSignin && (
+              <>
+                {favorite ? (
+                  <TouchableIcon
+                    onPress={() => setFavoriteModalVisible(true)}
+                    icon={<ActiveFavoriteIcon />}
+                  />
+                ) : (
+                  <TouchableIcon
+                    onPress={() => setFavoriteModalVisible(true)}
+                    icon={<FavoriteIcon />}
+                  />
+                )}
+              </>
+            )}
+          </FavoriteContainer>
+          <HTMLWrapper>
+            <HTML
+              source={{
+                html: `<div>${kratoo.kratooDesc}</div>` || '<div></div>',
+              }}
+              contentWidth={contentWidth}
+              tagsStyles={tagsStyles}
+              computeEmbeddedMaxWidth={(s) => contentWidth - 50}
+            />
+          </HTMLWrapper>
+        </>
+      )}
+      {collection.length !== 0 && (
+        <Favorite
+          visible={favoriteModalVisible}
+          onDone={favorite ? onUpdateFavorite : onAddFavorite}
+          onCreateNewCollection={() => {
+            setFavoriteModalVisible(false);
+            navigation.navigate('NewCollection');
+          }}
+          options={collection}
+          initialValue={
+            favorite
+              ? collection
+                  .filter((col) => col.isFavorite)
+                  .map((col) => col.collection.collectionID)
+              : [collection[0].collection.collectionID]
+          }
         />
-      </HTMLWrapper>
-      <Favorite
-        visible={favoriteModalVisible}
-        onDone={onAddFavorite}
-        onCreateNewCollection={() => {
-          setFavoriteModalVisible(false);
-          navigation.navigate('NewCollection');
+      )}
+      <ReviewAction
+        visible={actionVisible}
+        onShare={() => {
+          share(kratoo.kratooId);
+          setActionVisible(false);
         }}
-        options={mock_collection}
-        initialValue={['favorite']}
+        onRedirect={() => {
+          openInGoogleMap(kratoo.postions.latitude, kratoo.postions.longtitude);
+          setActionVisible(false);
+        }}
+        onCancel={() => setActionVisible(false)}
       />
     </ContainerWithSafeArea>
   );

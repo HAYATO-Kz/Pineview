@@ -13,7 +13,12 @@ export { CollectionBlogCard } from './CollectionBlogCard/CollectionBlogCard';
 export { ConfirmationModal } from './ConfirmationModal/ConfirmationModal';
 export { Favorite } from './Favorite/Favorite';
 export { ColorPalette } from './ColorPalette/ColorPalette';
+export { CollectionAction } from './CollectionAction/CollectionAction';
 export { ProfileImage } from './ProfileImage/ProfileImage';
-
+export { CollectionIcon } from './CollectionIcon/CollectionIcon';
+export { CollectionIconSelection } from './CollectionIconSelection/CollectionIconSelection';
+export { InputCollectionModal } from './InputCollectionModal/InputCollectionModal';
+export { ShareCollectionModal } from './ShareCollectionModal/ShareCollectionModal';
+export { ReviewAction } from './ReviewAction/ReviewAction';
 // styled
 export { DefaultText } from './DefaultText/DefaultText.style';

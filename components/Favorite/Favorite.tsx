@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-native';
 
 import {
@@ -17,10 +17,10 @@ import CheckIcon from '../../assets/icons/check_icon.svg';
 import PlusBlackIcon from '../../assets/icons/plus_black_icon.svg';
 
 interface FavoriteProps {
-  options: { label: string; value: string }[];
-  initialValue?: string[];
+  options: any[];
+  initialValue: string[];
   visible: boolean;
-  onDone: (selectedValue: string[]) => void;
+  onDone: (selectedValue: string[], initialValue: string) => void;
   onCreateNewCollection: () => void;
 }
 
@@ -32,9 +32,9 @@ export const Favorite = (props: FavoriteProps) => {
     onDone,
     onCreateNewCollection,
   } = props;
-  const [selectedOption, setSelectedOption] = useState<string[]>(
-    initialValue || [],
-  );
+  const [selectedOption, setSelectedOption] = useState<string[]>([
+    ...initialValue,
+  ]);
 
   const onOptionsPressHandle = (value: string) => {
     const updateSelectedOption = [...selectedOption];
@@ -47,13 +47,17 @@ export const Favorite = (props: FavoriteProps) => {
     setSelectedOption(updateSelectedOption);
   };
 
+  useEffect(() => {
+    setSelectedOption(initialValue);
+  }, [initialValue]);
+
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <ModalWrapper>
         <ModalContainer>
           <HeaderContainer>
             <HeaderText>เพิ่มไปยัง...</HeaderText>
-            <Button onPress={() => onDone(selectedOption)}>
+            <Button onPress={() => onDone(selectedOption, initialValue)}>
               <ButtonText>เสร็จ</ButtonText>
             </Button>
           </HeaderContainer>
@@ -66,9 +70,13 @@ export const Favorite = (props: FavoriteProps) => {
           {options.map((option, index) => (
             <OptionContainer
               key={`option_${index}`}
-              onPress={() => onOptionsPressHandle(option.value)}>
-              <OptionLabel>{option.label}</OptionLabel>
-              {selectedOption.indexOf(option.value) > -1 && <CheckIcon />}
+              onPress={() =>
+                onOptionsPressHandle(option.collection.collectionID)
+              }>
+              <OptionLabel>{option.collection.collectionTitle}</OptionLabel>
+              {selectedOption.indexOf(option.collection.collectionID) > -1 && (
+                <CheckIcon />
+              )}
             </OptionContainer>
           ))}
         </ModalContainer>

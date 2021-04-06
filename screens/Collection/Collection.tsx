@@ -1,107 +1,176 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AsyncStorage, Clipboard } from 'react-native';
 
 import {
   Title,
   SubContainer,
-  NewCollectionButton,
-  NewCollectionButtonText,
+  ShareCollectionButton,
+  ShareCollectionButtonText,
   SubContainerText,
   GridWrapper,
+  NewCollectionButtonCard,
+  NewCollectionText,
+  IconWrapper,
 } from './Collection.style';
-import PlusIcon from '../../assets/icons/plus_icon.svg';
-import { CollectionCard, Grid, ContainerWithSafeArea } from '../../components';
+import NewCollectionIcon from '../../assets/icons/new_collection_icon.svg';
+import FireOutline from '../../assets/icons/fire_outline_icon.svg';
+import {
+  CollectionCard,
+  Grid,
+  ContainerWithSafeArea,
+  InputCollectionModal,
+  ConfirmationModal,
+  ShareCollectionModal,
+  CollectionAction,
+} from '../../components';
+import { backendAPI } from '../../utils/api';
 
 interface CollectionProps {
   navigation: any;
 }
 
-const testData = [
-  {
-    id: 1,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 2,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 3,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 4,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 5,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 6,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 7,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 8,
-    title: 'Hello',
-    review: 12,
-  },
-  {
-    id: 9,
-    title: 'Hello',
-    review: 12,
-  },
-];
-
 export const Collection = (props: CollectionProps) => {
   const { navigation } = props;
-  const [modalVisible, setModalVisible] = useState(false);
+  const [shareModalVisible, setShareModalVisible] = useState(false);
+  const [inputModalVisible, setInputModalVisible] = useState(false);
+  const [confirmationModalVisible, setConfirmationModalVisible] = useState(
+    false,
+  );
+  const [actionModalVisible, setActionModalVisible] = useState(false);
+  const [collectionDatas, setCollectionData] = useState([]);
+  const [activeCollectionId, setActiveCollectionId] = useState(0);
 
-  const onDeleteHandle = () => {};
+  const onDelete = async () => {
+    const deleted = { collection_id: activeCollectionId };
+    const response = await backendAPI
+      .delete(`/delete_collection`, { data: deleted })
+      .catch((err) => console.log(err));
+
+    setConfirmationModalVisible(false);
+    getCollection();
+  };
+  const onShare = () => {
+    Clipboard.setString(`${activeCollectionId}`);
+    setShareModalVisible(false);
+  };
+
+  const getCollection = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    const response = await backendAPI
+      .get(`/collections?token=${authToken}`)
+      .catch((err) => console.log(err));
+
+    if (response) {
+      setCollectionData(response.data);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      getCollection();
+    });
+
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
   return (
-    <ContainerWithSafeArea>
+    <ContainerWithSafeArea isInTabMode>
       <Title>คอลเลกชัน</Title>
       <SubContainer>
         <SubContainerText>คอลเลกชันทั้งหมด</SubContainerText>
-        <NewCollectionButton
+        <ShareCollectionButton
           onPress={() => {
-            navigation.navigate('NewCollection');
+            setInputModalVisible(true);
           }}>
-          <PlusIcon />
-          <NewCollectionButtonText>สร้างคอลเลกชันใหม่</NewCollectionButtonText>
-        </NewCollectionButton>
+          <FireOutline />
+          <ShareCollectionButtonText>
+            ดูคอลเลกชันของเพื่อน
+          </ShareCollectionButtonText>
+        </ShareCollectionButton>
       </SubContainer>
       <GridWrapper>
         <Grid
           keyBase="collection"
-          data={testData.map((data) => (
-            <CollectionCard
-              title={data.title}
-              reviewCount={data.review}
-              onEdit={() => {
-                navigation.navigate('EditCollection', {
-                  collectoin_id: data.id,
-                });
-              }}
-              onPress={() => {
-                navigation.navigate('CollectionBlog');
-              }}
-              onDelete={onDeleteHandle}
-            />
-          ))}
+          data={[{}, ...collectionDatas].map((data, index) => {
+            if (index === 0) {
+              return (
+                <NewCollectionButtonCard
+                  onPress={() => {
+                    navigation.navigate('NewCollection');
+                  }}>
+                  <IconWrapper>
+                    <NewCollectionIcon />
+                  </IconWrapper>
+                  <NewCollectionText>สร้างคอลเลกชันใหม่</NewCollectionText>
+                </NewCollectionButtonCard>
+              );
+            } else {
+              return (
+                <CollectionCard
+                  title={data.collectionTitle}
+                  color={data.collectionColor}
+                  icon={data.collectionIcon}
+                  reviewCount={data.kratooCount}
+                  collectionId={data.collectionID}
+                  onMore={(collectionId) => {
+                    setActiveCollectionId(collectionId);
+                    setActionModalVisible(true);
+                  }}
+                  onPress={() => {
+                    navigation.navigate('CollectionBlog', {
+                      collectionId: data.collectionID,
+                    });
+                  }}
+                />
+              );
+            }
+          })}
         />
       </GridWrapper>
+      <InputCollectionModal
+        visible={inputModalVisible}
+        onCancel={() => setInputModalVisible(false)}
+        onConfirm={(collectionId) => {
+          setInputModalVisible(false);
+          navigation.navigate('CollectionBlog', {
+            collectionId: collectionId,
+          });
+        }}
+      />
+      <ConfirmationModal
+        title="ลบคอลเลกชัน"
+        subtitle="การทำรายการนี้จะลบคอลเลกชันออก และจะไม่สามารถเปลี่ยนแปลงได้ในอนาคต"
+        visible={confirmationModalVisible}
+        cancelText="ยกเลิก"
+        confirmText="ลบ"
+        onCancel={() => setConfirmationModalVisible(false)}
+        onConfirm={onDelete}
+      />
+      <ShareCollectionModal
+        collectionId={activeCollectionId}
+        visible={shareModalVisible}
+        onCancel={() => setShareModalVisible(false)}
+        onConfirm={onShare}
+      />
+      <CollectionAction
+        visible={actionModalVisible}
+        onCancel={() => setActionModalVisible(false)}
+        onEdit={() => {
+          setActionModalVisible(false);
+          navigation.navigate('EditCollection', {
+            collectionId: activeCollectionId,
+          });
+        }}
+        onDelete={() => {
+          setActionModalVisible(false);
+          setConfirmationModalVisible(true);
+        }}
+        onShare={() => {
+          setActionModalVisible(false);
+          setShareModalVisible(true);
+        }}
+      />
     </ContainerWithSafeArea>
   );
 };

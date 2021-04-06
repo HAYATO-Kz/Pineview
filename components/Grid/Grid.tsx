@@ -1,7 +1,11 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import { FirstComponentWrapper, SecondComponentWrapper } from './Grid.style';
+import {
+  FirstComponentWrapper,
+  SecondComponentWrapper,
+  GridContainer,
+} from './Grid.style';
 
 interface GridProps {
   data: React.ReactNode[];
@@ -14,31 +18,28 @@ export const Grid = (props: GridProps) => {
   const { data, columnSpace = 16, rowSpace = 16, keyBase } = props;
 
   return (
-    <FlatList
-      data={data}
-      numColumns={2}
-      scrollEnabled={false}
-      keyExtractor={(item, index) => `${keyBase}_${index}`}
-      renderItem={({ item, index }) => {
+    <GridContainer>
+      {data.map((component, index) => {
         if (index % 2 === 0) {
           return (
             <FirstComponentWrapper
-              rowSpace={rowSpace / 2}
               columnSpace={columnSpace / 2}
-              isLast={index === data.length - 1}>
-              {item}
+              rowSpace={index <= 1 ? 0 : rowSpace}
+              key={`${keyBase}_${index}`}>
+              {component}
             </FirstComponentWrapper>
           );
         } else {
           return (
             <SecondComponentWrapper
-              rowSpace={rowSpace / 2}
-              columnSpace={columnSpace / 2}>
-              {item}
+              columnSpace={columnSpace / 2}
+              rowSpace={index <= 1 ? 0 : rowSpace}
+              key={`${keyBase}_${index}`}>
+              {component}
             </SecondComponentWrapper>
           );
         }
-      }}
-    />
+      })}
+    </GridContainer>
   );
 };

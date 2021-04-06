@@ -18,24 +18,40 @@ export const ModalWrapper = styled.View`
   align-items: center;
 `;
 
-export const TextContainer = styled.View`
-  width: 100%;
+export const ContentContainer = styled.View`
   padding: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 `;
 
 export const Title = styled(DefaultText)`
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
+  color: #000000;
+  margin: 0 0 15px;
 `;
 
 export const SubText = styled(DefaultText)`
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   text-align: center;
   color: #888888;
+`;
+
+export const CollectionId = styled(DefaultText)`
+  font-size: 36px;
+  font-weight: 600;
+  text-align: center;
+`;
+
+export const CollectionIdLabel = styled(DefaultText)`
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  margin: 15px 0px;
 `;
 
 export const ButtonContainer = styled.View`
@@ -49,7 +65,6 @@ export const Button = styled.TouchableOpacity`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   flex: 1;
   border: 1px solid rgba(0, 0, 0, 0.06);
 `;
@@ -57,7 +72,7 @@ export const Button = styled.TouchableOpacity`
 export const ConfirmButtonText = styled(DefaultText)`
   font-size: 18px;
   font-weight: 600;
-  color: #f5222d;
+  color: #613400;
 `;
 
 export const CancelButtonText = styled(DefaultText)`

@@ -18,24 +18,31 @@ export const ModalWrapper = styled.View`
   align-items: center;
 `;
 
-export const TextContainer = styled.View`
-  width: 100%;
+export const ContentContainer = styled.View`
   padding: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+`;
+
+export const InputWrapper = styled.View`
+  width: 100%;
 `;
 
 export const Title = styled(DefaultText)`
   font-size: 18px;
   font-weight: 600;
+  text-align: center;
+  color: #000000;
 `;
 
 export const SubText = styled(DefaultText)`
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   text-align: center;
   color: #888888;
+  margin: 15px 0 9px;
 `;
 
 export const ButtonContainer = styled.View`
@@ -49,7 +56,6 @@ export const Button = styled.TouchableOpacity`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   flex: 1;
   border: 1px solid rgba(0, 0, 0, 0.06);
 `;
@@ -57,11 +63,28 @@ export const Button = styled.TouchableOpacity`
 export const ConfirmButtonText = styled(DefaultText)`
   font-size: 18px;
   font-weight: 600;
-  color: #f5222d;
+  color: #613400;
 `;
 
 export const CancelButtonText = styled(DefaultText)`
   font-size: 18px;
   font-weight: 400;
   color: #8c8c8c;
+`;
+
+export const InputWithStyled = styled.TextInput`
+  border-radius: 4px;
+  height: 36px;
+  font-family: Kanit;
+  text-align: center;
+  color: #000000;
+  border: 1px solid #dddddd;
+  background: #ffffff;
+`;
+
+export const ErrorMessage = styled(DefaultText)`
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  color: #f5222d;
 `;

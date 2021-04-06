@@ -14,12 +14,18 @@ export const Card = styled.TouchableOpacity`
   background: #ffffff;
 `;
 
-export const CollectionImage = styled.Image`
+export const CollectionIconWrapper = styled.View<{ color: string }>`
   width: 100%;
   height: undefined;
   border-color: #ededed;
   border-width: 1px;
   aspect-ratio: 1;
+  background: ${(p) => p.color};
+`;
+
+export const CollectionIcon = styled.Image`
+  width: 100%;
+  height: 100%;
 `;
 
 export const InformationContainer = styled.View`

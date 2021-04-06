@@ -1,5 +1,5 @@
 import CafeMarker from '../assets/images/marker/cafe_marker.png';
-import RetaurantMaker from '../assets/images/marker/restaurant_marker.png';
+import RestaurantMarker from '../assets/images/marker/restaurant_marker.png';
 import TouristSpotMarker from '../assets/images/marker/tourist_marker.png';
 
 /**
@@ -11,11 +11,11 @@ export const getMarker = (type: string) => {
     case 'cafe':
       return CafeMarker;
     case 'restaurant':
-      return RetaurantMaker;
+      return RestaurantMarker;
     case 'attraction':
       return TouristSpotMarker;
 
     default:
-      return undefined;
+      return RestaurantMarker;
   }
 };

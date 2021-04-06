@@ -77,6 +77,7 @@ export const EditProfile = (props: EditProfileProps) => {
         title: 'แก้ไขบัญชี',
         hasBorder: true,
       }}
+      isInTabMode
       padding="23px 17px">
       <Wrapper>
         <ProfileImage size={154} color={userColor} />
@@ -88,7 +89,7 @@ export const EditProfile = (props: EditProfileProps) => {
           />
         </PaletteWrapper>
         <Input
-          label="ชื่อผู้ใช้"  
+          label="ชื่อผู้ใช้"
           defaultValue={username}
           onChangeText={(value) => setUsername(value)}
           autoCapitalize="none"

@@ -16,6 +16,11 @@ export const Card = styled.TouchableOpacity`
 
 export const CollectionImage = styled.Image`
   width: 100%;
+  height: 100%;
+`;
+
+export const ImageWrapper = styled.View`
+  width: 100%;
   height: undefined;
   border: 1px solid #ededed;
   aspect-ratio: 1;
