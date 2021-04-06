@@ -51,7 +51,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         title: title,
         isOwner: isOwner,
         owner: {
-          username: isOwner ? `${owner.usernmae} (ฉัน)` : owner.username,
+          username: isOwner ? `${owner.username} (ฉัน)` : owner.username,
           color: owner.color,
         },
         review_blogs: blogs,
@@ -94,7 +94,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         <UserContainer>
           <SubText>สร้างโดย: </SubText>
           <ProfileImage size={30} color={collectionData.owner.color} />
-          <SubText>{collectionData.owner.username}</SubText>
+          <SubText>  {collectionData.owner.username}</SubText>
         </UserContainer>
         {collectionData.isOwner ? (
           <ShareCollectionButton onPress={() => setModalVisible(true)}>
