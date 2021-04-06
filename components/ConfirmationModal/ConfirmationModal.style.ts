@@ -13,8 +13,8 @@ export const ModalWrapper = styled.View`
   flex: 1;
   background: rgba(0, 0, 0, 0.4);
   padding: 0 53px;
-  display:flex;
-  justify-content:center;
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -32,8 +32,8 @@ export const Title = styled(DefaultText)`
 `;
 
 export const SubText = styled(DefaultText)`
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 400;
   text-align: center;
   color: #888888;
 `;

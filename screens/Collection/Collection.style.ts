@@ -44,11 +44,20 @@ export const GridWrapper = styled.View`
 
 export const NewCollectionButtonCard = styled.TouchableOpacity`
   width: 100%;
-  min-height: 200px;
   border-radius: 6px;
   border: 2px dashed rgba(62, 23, 0, 0.5);
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 16px 10px;
+`;
+
+export const IconWrapper = styled.View`
+  width: 100%;
+  height: undefined;
+  aspect-ratio: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
 `;

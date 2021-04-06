@@ -13,7 +13,7 @@ export const ProfileImage = (props: ProfileImageProps) => {
 
   return (
     <Wrapper width={size} color={color}>
-      <Image source={ProfileImageSource} />
+      <Image source={ProfileImageSource} resizeMode="contain" />
     </Wrapper>
   );
 };

@@ -74,20 +74,19 @@ export const Map = (props: MapProps) => {
           latitudeDelta: 0.009,
           longitudeDelta: 0.009,
         }}>
-        {reviewData.map((review) =>  (
-            <Marker
-              onPress={() => {
-                navigation.navigate('Review', { id: review.kratooID });
-              }}
-              image={getMarker(review.type)}
-              key={review.kratooID}
-              coordinate={{
-                latitude: review.postions.lat,
-                longitude: review.postions.lng,
-              }}
-            />
-          );
-        )}
+        {reviewData.map((review) => (
+          <Marker
+            onPress={() => {
+              navigation.navigate('Review', { id: review.kratooID });
+            }}
+            image={getMarker(review.type)}
+            key={review.kratooID}
+            coordinate={{
+              latitude: review.postions.lat,
+              longitude: review.postions.lng,
+            }}
+          />
+        ))}
       </MapView>
       <AbsoluteWrapper>
         <ContainerWithSafeArea padding="0px 10px" isTransparent>

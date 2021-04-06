@@ -10,6 +10,7 @@ import {
   GridWrapper,
   NewCollectionButtonCard,
   NewCollectionText,
+  IconWrapper,
 } from './Collection.style';
 import NewCollectionIcon from '../../assets/icons/new_collection_icon.svg';
 import FireOutline from '../../assets/icons/fire_outline_icon.svg';
@@ -98,7 +99,9 @@ export const Collection = (props: CollectionProps) => {
                   onPress={() => {
                     navigation.navigate('NewCollection');
                   }}>
-                  <NewCollectionIcon />
+                  <IconWrapper>
+                    <NewCollectionIcon />
+                  </IconWrapper>
                   <NewCollectionText>สร้างคอลเลกชันใหม่</NewCollectionText>
                 </NewCollectionButtonCard>
               );

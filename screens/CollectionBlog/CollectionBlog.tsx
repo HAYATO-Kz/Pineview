@@ -8,14 +8,17 @@ import {
   GridWrapper,
   ShareCollectionButton,
   ShareCollectionButtonText,
+  UserContainer,
 } from './CollectionBlog.style';
 import {
   Grid,
   CollectionBlogCard,
   ContainerWithSafeArea,
   ShareCollectionModal,
+  ProfileImage,
 } from '../../components';
 import ShareIcon from '../../assets/icons/share_icon.svg';
+import PlusIcon from '../../assets/icons/plus_icon.svg';
 import { backendAPI } from '../../utils/api';
 
 interface CollectionBlogProps {
@@ -28,7 +31,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [collectionData, setCollectionData] = useState({
     title: 'title',
-    owner: 'owner',
+    owner: { username: 'username', color: '#ffffff' },
     isOwner: false,
     review_blogs: [],
   });
@@ -43,11 +46,14 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
 
     if (response) {
       const { title, owner, isOwner, blogs } = response.data;
-      console.log(blogs);
+      console.log(response.data)
       setCollectionData({
         title: title,
         isOwner: isOwner,
-        owner: isOwner ? `${owner} (ฉัน)` : owner,
+        owner: {
+          username: isOwner ? `${owner.usernmae} (ฉัน)` : owner.username,
+          color: owner.color,
+        },
         review_blogs: blogs,
       });
     }
@@ -56,6 +62,22 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
   const onCopy = () => {
     Clipboard.setString(`${route.params.collectionId}`);
     setModalVisible(false);
+  };
+
+  const onCopyCollection = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    const body = {
+      userToken: authToken,
+      collection_id: route.params.collectionId,
+    };
+    const response = await backendAPI
+      .post('/copy_collection', body)
+      .catch((err) => console.log(err));
+
+    if (response) {
+      console.log(response);
+      navigation.goBack();
+    }
   };
 
   useEffect(() => {
@@ -69,11 +91,22 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         มี {collectionData.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้
       </SubText>
       <ButtonContainer>
-        <SubText> สร้างโดย {collectionData.owner} </SubText>
-        {collectionData.isOwner && (
+        <UserContainer>
+          <SubText>สร้างโดย: </SubText>
+          <ProfileImage size={30} color={collectionData.owner.color} />
+          <SubText>{collectionData.owner.username}</SubText>
+        </UserContainer>
+        {collectionData.isOwner ? (
           <ShareCollectionButton onPress={() => setModalVisible(true)}>
             <ShareIcon />
             <ShareCollectionButtonText>แชร์</ShareCollectionButtonText>
+          </ShareCollectionButton>
+        ) : (
+          <ShareCollectionButton onPress={() => onCopyCollection()}>
+            <PlusIcon />
+            <ShareCollectionButtonText>
+              เพิ่มเข้าคอลเลกชันของฉัน
+            </ShareCollectionButtonText>
           </ShareCollectionButton>
         )}
       </ButtonContainer>

@@ -13,7 +13,6 @@ export const SubText = styled(DefaultText)`
   color: #613400;
   font-size: 13px;
   font-weight: 500;
-  margin: 0px 0px 12px;
 `;
 
 export const ButtonContainer = styled.View`
@@ -21,6 +20,7 @@ export const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin: 8px 0px 0px;
 `;
 
 export const GridWrapper = styled.View`
@@ -42,3 +42,9 @@ export const ShareCollectionButtonText = styled(DefaultText)`
   font-weight: 500;
   margin-left: 5px;
 `;
+
+export const UserContainer = styled.View`
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+`

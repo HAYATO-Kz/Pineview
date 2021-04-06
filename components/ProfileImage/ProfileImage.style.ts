@@ -11,5 +11,5 @@ export const Wrapper = styled.View<{ color: string; width: number }>`
 
 export const Image = styled.Image`
   width: 100%;
-  height:100%;
+  height: 100%;
 `;

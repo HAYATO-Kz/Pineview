@@ -6,6 +6,7 @@ import {
   CollectionImage,
   Title,
   InformationContainer,
+  ImageWrapper,
 } from './CollectionBlogCard.style';
 
 import DefaultImage from '../../assets/images/collection_default_image.png';
@@ -21,7 +22,9 @@ export const CollectionBlogCard = (props: CollectionBlogCardProps) => {
 
   return (
     <Card onPress={onPress}>
-      <CollectionImage source={image} resizeMode="contain" />
+      <ImageWrapper>
+        <CollectionImage source={image} resizeMode="contain" />
+      </ImageWrapper>
       <InformationContainer>
         <Title numberOfLines={2}>{title}</Title>
       </InformationContainer>
