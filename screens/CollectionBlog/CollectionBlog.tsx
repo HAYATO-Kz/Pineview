@@ -46,7 +46,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
 
     if (response) {
       const { title, owner, isOwner, blogs } = response.data;
-      console.log(response.data)
+      console.log(response.data);
       setCollectionData({
         title: title,
         isOwner: isOwner,
@@ -81,9 +81,13 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
   };
 
   useEffect(() => {
-    getCollection();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      getCollection();
+    });
 
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
   return (
     <ContainerWithSafeArea padding="16px" isInTabMode>
       <Title>{collectionData.title}</Title>
@@ -94,7 +98,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         <UserContainer>
           <SubText>สร้างโดย: </SubText>
           <ProfileImage size={30} color={collectionData.owner.color} />
-          <SubText>  {collectionData.owner.username}</SubText>
+          <SubText> {collectionData.owner.username}</SubText>
         </UserContainer>
         {collectionData.isOwner ? (
           <ShareCollectionButton onPress={() => setModalVisible(true)}>
