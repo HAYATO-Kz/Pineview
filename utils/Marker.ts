@@ -16,6 +16,6 @@ export const getMarker = (type: string) => {
       return TouristSpotMarker;
 
     default:
-      return undefined;
+      return RetaurantMaker;
   }
 };
