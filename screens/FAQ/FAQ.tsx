@@ -53,6 +53,7 @@ export const FAQ = (props: FAQProps) => {
   return (
     <ContainerWithSafeArea
       padding="30px 16px"
+      isInTabMode
       header={{
         leftComponent: (
           <TouchableIcon
