@@ -24,7 +24,7 @@ export const ImageWrapper = styled.View`
   height: undefined;
   border: 1px solid #ededed;
   aspect-ratio: 1;
-`
+`;
 
 export const InformationContainer = styled.View`
   margin-top: 12px;

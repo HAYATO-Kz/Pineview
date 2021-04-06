@@ -37,24 +37,10 @@ export const EditCollection = (props: EditCollectionProps) => {
     let editCollection = {
       collection_id: route.params.collectionId,
       userToken: authToken,
+      collection_title: collectionTitle,
+      collection_icon: collectionIconSelected,
+      collection_color: collectionColorSelected,
     };
-    if (collectionTitle !== checkDirty.title && collectionTitle !== '') {
-      editCollection = { collection_title: collectionTitle, ...editCollection };
-    }
-
-    if (collectionIconSelected !== checkDirty.icon) {
-      editCollection = {
-        collection_icon: collectionIconSelected,
-        ...editCollection,
-      };
-    }
-
-    if (collectionColorSelected !== checkDirty.color) {
-      editCollection = {
-        collection_color: collectionColorSelected,
-        ...editCollection,
-      };
-    }
     const response = await backendAPI
       .put(`/edit_collection`, editCollection)
       .catch((err) => console.log(err));

@@ -44,7 +44,7 @@ export const ShareCollectionButtonText = styled(DefaultText)`
 `;
 
 export const UserContainer = styled.View`
-  display:flex;
-  flex-direction:row;
-  align-items:center;
-`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
