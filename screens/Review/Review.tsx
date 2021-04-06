@@ -20,6 +20,7 @@ import {
   ContainerWithSafeArea,
   TouchableIcon,
   Favorite,
+  ReviewAction,
 } from '../../components';
 import { backendAPI } from '../../utils/api';
 import BackIcon from '../../assets/icons/back_icon.svg';
@@ -36,6 +37,7 @@ export const Review = (props: ReviewProps) => {
   const [collection, setCollection] = useState([]);
   const [favorite, setFavorite] = useState(false);
   const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
+  const [actionVisible, setActionVisible] = useState(false);
 
   const { navigation, route } = props;
 
@@ -89,28 +91,6 @@ export const Review = (props: ReviewProps) => {
     } catch (error) {
       console.log(error.message);
     }
-  };
-
-  /**
-   * Open action sheet (redirect to google map, share to other social media applcation)
-   */
-  const openActionSheet = async () => {
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: ['Go to google map', 'Share', 'Cancel'],
-        destructiveButtonIndex: 3,
-        cancelButtonIndex: 3,
-      },
-      (buttonIndex) => {
-        if (buttonIndex === 2) {
-          // cancel action
-        } else if (buttonIndex === 0) {
-          openInGoogleMap(kratoo.postions.latitude, kratoo.postions.longtitude);
-        } else if (buttonIndex === 1) {
-          share(kratoo.kratooId);
-        }
-      },
-    );
   };
 
   const onAddFavorite = async (
@@ -209,7 +189,7 @@ export const Review = (props: ReviewProps) => {
         rightComponent: (
           <TouchableIcon
             icon={<MoreFunctionIcon />}
-            onPress={openActionSheet}
+            onPress={() => setActionVisible(true)}
           />
         ),
         hasBorder: true,
@@ -266,6 +246,18 @@ export const Review = (props: ReviewProps) => {
           }
         />
       )}
+      <ReviewAction
+        visible={actionVisible}
+        onShare={() => {
+          share(kratoo.kratooId);
+          setActionVisible(false);
+        }}
+        onRedirect={() => {
+          openInGoogleMap(kratoo.postions.latitude, kratoo.postions.longtitude);
+          setActionVisible(false);
+        }}
+        onCancel={() => setActionVisible(false)}
+      />
     </ContainerWithSafeArea>
   );
 };

@@ -19,5 +19,6 @@ export { CollectionIcon } from './CollectionIcon/CollectionIcon';
 export { CollectionIconSelection } from './CollectionIconSelection/CollectionIconSelection';
 export { InputCollectionModal } from './InputCollectionModal/InputCollectionModal';
 export { ShareCollectionModal } from './ShareCollectionModal/ShareCollectionModal';
+export { ReviewAction } from './ReviewAction/ReviewAction';
 // styled
 export { DefaultText } from './DefaultText/DefaultText.style';
