@@ -35,6 +35,7 @@ export const Divider = styled.View`
   height: 6px;
   background: rgba(0, 0, 0, 0.05);
 `;
+
 export const CancelButtonText = styled(DefaultText)`
   font-weight: 600;
   font-size: 18px;
