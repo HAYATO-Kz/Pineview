@@ -36,6 +36,7 @@ interface ReviewProps {
 export const Review = (props: ReviewProps) => {
   const [collection, setCollection] = useState([]);
   const [favorite, setFavorite] = useState(false);
+  const [isSignin, setIsSignin] = useState(false);
   const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
   const [actionVisible, setActionVisible] = useState(false);
 
@@ -161,6 +162,10 @@ export const Review = (props: ReviewProps) => {
 
   const getCollection = async (kratooId: string) => {
     const authToken = await AsyncStorage.getItem('authToken');
+    if (!!authToken) {
+      setIsSignin(true);
+    }
+
     const response = await backendAPI
       .get(`/collection/kratoo/${kratooId}?token=${authToken}`)
       .catch((err) => console.log(err));
@@ -204,16 +209,20 @@ export const Review = (props: ReviewProps) => {
               <SubText>วันที่รีวิว : {getDate(kratoo.created_time)}.</SubText>
               <SubText>เนื้อหารีวิว :</SubText>
             </TextContainer>
-            {favorite ? (
-              <TouchableIcon
-                onPress={() => setFavoriteModalVisible(true)}
-                icon={<ActiveFavoriteIcon />}
-              />
-            ) : (
-              <TouchableIcon
-                onPress={() => setFavoriteModalVisible(true)}
-                icon={<FavoriteIcon />}
-              />
+            {isSignin && (
+              <>
+                {favorite ? (
+                  <TouchableIcon
+                    onPress={() => setFavoriteModalVisible(true)}
+                    icon={<ActiveFavoriteIcon />}
+                  />
+                ) : (
+                  <TouchableIcon
+                    onPress={() => setFavoriteModalVisible(true)}
+                    icon={<FavoriteIcon />}
+                  />
+                )}
+              </>
             )}
           </FavoriteContainer>
           <HTMLWrapper>
