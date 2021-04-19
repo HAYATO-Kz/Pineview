@@ -57,6 +57,13 @@ export const Map = (props: MapProps) => {
     latitudeDelta: 0.009,
     longitudeDelta: 0.004,
   });
+
+  const [savedCurrent, setSavedCurrent] = useState({
+    latitude: 13.7468,
+    longitude: 100.5348,
+    latitudeDelta: 0.009,
+    longitudeDelta: 0.004,
+  });
   const [loading, setLoading] = useState(false);
   const [mapChnged, setMapChanged] = useState(false);
   const [reviewData, setReviewData] = useState([]);
@@ -141,6 +148,12 @@ export const Map = (props: MapProps) => {
         latitudeDelta: 0.009,
         longitudeDelta: 0.004,
       });
+      setSavedCurrent({
+        latitude: info.coords.latitude,
+        longitude: info.coords.longitude,
+        latitudeDelta: 0.009,
+        longitudeDelta: 0.004,
+      });
       getReview(filter, {
         latitude: info.coords.latitude,
         longitude: info.coords.longitude,
@@ -162,8 +175,10 @@ export const Map = (props: MapProps) => {
           flex: 1,
         }}
         onRegionChangeComplete={(newRegion) => {
-          setMapChanged(true);
-          setRegion(newRegion);
+          if (newRegion !== savedCurrent) {
+            setMapChanged(true);
+            setRegion(newRegion);
+          }
         }}
         region={{
           latitude: region.latitude,
@@ -171,38 +186,44 @@ export const Map = (props: MapProps) => {
           latitudeDelta: region.latitudeDelta,
           longitudeDelta: region.longitudeDelta,
         }}>
-        {reviewData.map((review: any[]) => (
-          <Marker
-            onPress={
-              review.length === 1
-                ? () => {
-                    navigation.navigate('Review', { id: review[0].kratooID });
-                  }
-                : () => {}
-            }
-            image={getMarker(review[0].type)}
-            key={review[0].kratooID}
-            coordinate={{
-              latitude: review[0].postions.lat,
-              longitude: review[0].postions.lng,
-            }}>
-            {review.length > 1 && (
-              <ToolTipContainer tooltip>
-                {review.map((re, index) => (
-                  <React.Fragment key={re.kratooID}>
-                    <ToolTipLabelWrapper
-                      onPress={() => {
-                        navigation.navigate('Review', { id: re.kratooID });
-                      }}>
-                      <Label>{re.kratooTitle}</Label>
-                    </ToolTipLabelWrapper>
-                    {index !== review.length - 1 && <Divider />}
-                  </React.Fragment>
-                ))}
-              </ToolTipContainer>
-            )}
-          </Marker>
-        ))}
+        {reviewData.map((review: any[]) => {
+          if (true) {
+            return (
+              <Marker
+                onPress={
+                  review.length === 1
+                    ? () => {
+                        navigation.navigate('Review', {
+                          id: review[0].kratooID,
+                        });
+                      }
+                    : () => {}
+                }
+                image={getMarker(review[0].type)}
+                key={review[0].kratooID}
+                coordinate={{
+                  latitude: review[0].postions.lat,
+                  longitude: review[0].postions.lng,
+                }}>
+                {review.length > 1 && (
+                  <ToolTipContainer tooltip>
+                    {review.map((re, index) => (
+                      <React.Fragment key={re.kratooID}>
+                        <ToolTipLabelWrapper
+                          onPress={() => {
+                            navigation.navigate('Review', { id: re.kratooID });
+                          }}>
+                          <Label>{re.kratooTitle}</Label>
+                        </ToolTipLabelWrapper>
+                        {index !== review.length - 1 && <Divider />}
+                      </React.Fragment>
+                    ))}
+                  </ToolTipContainer>
+                )}
+              </Marker>
+            );
+          }
+        })}
       </MapView>
       <AbsoluteWrapper>
         <ContainerWithSafeArea
