@@ -89,6 +89,7 @@ export const NewCollection = (props: NewCollectionProps) => {
             label="ชื่อคอลเลกชัน"
             autoCapitalize="none"
             onChangeText={(value) => setCollectionTitle(value)}
+            maxLength={15}
           />
         </MarginWrapper>
         <Button

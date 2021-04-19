@@ -125,6 +125,7 @@ export const EditCollection = (props: EditCollectionProps) => {
             autoCapitalize="none"
             defaultValue={collectionTitle}
             onChangeText={(value) => setCollectionTitle(value)}
+            maxLength={15}
           />
         </MarginWrapper>
         <Button

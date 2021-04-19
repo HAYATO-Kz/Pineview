@@ -23,7 +23,7 @@ export const Container = styled.View`
   position: relative;
   width: 100%;
   margin: 77px 0px 16px;
-  padding: 90px 0px 29px;;
+  padding: 90px 0px 29px;
 `;
 
 export const ButtonTab = styled.TouchableOpacity`

@@ -6,9 +6,9 @@ import {
   LoadingText,
   ModalWrapper,
   ModalContainer,
-  GifWrapper
+  GifWrapper,
 } from './LoadingModal.style';
-import LoadingSource from '../../assets/images/loading.gif'
+import LoadingSource from '../../assets/images/loading.gif';
 
 interface LoadingModalProps {
   visible?: boolean;
@@ -21,8 +21,8 @@ export const LoadingModal = (props: LoadingModalProps) => {
     <Modal visible={visible} animationType="fade" transparent={true}>
       <ModalWrapper>
         <ModalContainer>
-            <GifWrapper>
-          <LoadingGif source={LoadingSource} />
+          <GifWrapper>
+            <LoadingGif source={LoadingSource} />
           </GifWrapper>
           <LoadingText>กำลังโหลด...</LoadingText>
         </ModalContainer>

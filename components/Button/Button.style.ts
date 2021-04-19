@@ -30,12 +30,12 @@ export const ButtonWithStyled = styled.TouchableOpacity<{
     } else {
       if (props.disabled) {
         return `
-              min-height: 51px;
+              border: 2px solid rgba(97, 52, 0, 0.6);
               background: rgba(97, 52, 0, 0.6);   
               `;
       } else {
         return `
-              min-height: 51px;
+              border: 2px solid #613400;
               background: #613400;   
               `;
       }

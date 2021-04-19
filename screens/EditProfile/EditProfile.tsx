@@ -100,6 +100,7 @@ export const EditProfile = (props: EditProfileProps) => {
           defaultValue={username}
           onChangeText={(value) => setUsername(value)}
           autoCapitalize="none"
+          maxLength={15}
         />
         <Input label="อีเมล" disabled defaultValue={userEmail} />
         <Button

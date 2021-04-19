@@ -37,7 +37,7 @@ export const Main = (props: MainProps) => {
             style: { height: '90px' },
             activeTintColor: '#613400',
             inactiveTintColor: '#bfbfbf',
-            labelStyle: { fontFamily: 'Kanit'}
+            labelStyle: { fontFamily: 'Kanit' },
           }}>
           <Tab.Screen
             name="Map"

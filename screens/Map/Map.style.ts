@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
-import { Callout,CalloutSubview } from 'react-native-maps';
-
+import { Callout, CalloutSubview } from 'react-native-maps';
 
 import { DefaultText } from '../../components';
 
@@ -68,15 +67,15 @@ export const ToolTipContainer = styled(Callout)`
   width: 247px;
 `;
 
-export const ButtonWrapper =  styled.View`
+export const ButtonWrapper = styled.View`
   position: absolute;
   bottom: 24px;
-  width:100%;
+  width: 100%;
   padding: 0px 16px;
-`
+`;
 
 export const ToolTipLabelWrapper = styled(CalloutSubview)`
-  width:100%;
+  width: 100%;
 `;
 
 export const Label = styled(DefaultText)`

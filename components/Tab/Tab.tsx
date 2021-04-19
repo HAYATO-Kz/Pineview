@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TabWrapper, TextWithStyled } from './Tab.style'
+import { TabWrapper, TextWithStyled } from './Tab.style';
 
 export interface TabProps {
   /**

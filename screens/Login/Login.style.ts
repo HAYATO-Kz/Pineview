@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { DefaultText } from '../../components'
+import { DefaultText } from '../../components';
 
 export const HeaderText = styled(DefaultText)`
   color: #613400;

@@ -7,24 +7,26 @@ export const HomeContainer = styled.View`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
   width: 100%;
 `;
 
 export const Logo = styled.Image`
-   max-width: 100%;
+  max-width: 100%;
   max-height: 100%;
 `;
 
 export const LogoWrapper = styled.View`
-  width: 100%;
+  width: 90%;
   max-width: 100%;
-  aspect-ratio: 3;`
+  aspect-ratio: 3;
+  margin-top: 24px;
+`;
 
 export const MascotWrapper = styled.View`
-  width: 100%;
+  width: 90%;
   max-width: 100%;
   aspect-ratio: 0.95;
+  margin: 24px 0px;
 `;
 
 export const Mascot = styled.Image`

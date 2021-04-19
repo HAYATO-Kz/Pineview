@@ -111,6 +111,7 @@ export const Register = (props: RegisterProps) => {
               onChangeText={handleChange('username')}
               errorMessage={errors.username}
               autoCapitalize="none"
+              maxLength={15}
             />
             <Input
               label="อีเมล"

@@ -1,6 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import { AsyncStorage } from 'react-native'
-
+import React, { useState, useEffect } from 'react';
+import { AsyncStorage } from 'react-native';
 
 import { Button, ContainerWithSafeArea } from '../../components';
 import {
@@ -14,6 +13,7 @@ import {
   SecondaryButtonWrapper,
   Space,
   MascotWrapper,
+  HomeContainer
 } from './Home.style';
 
 import MascotImageSource from '../../assets/images/mascot.png';
@@ -30,10 +30,10 @@ export const Home = (props: HomeProps) => {
 
   const initialSignInStatus = async () => {
     const authToken = await AsyncStorage.getItem('authToken');
-    setLoading(false)
+    setLoading(false);
     if (!!authToken) {
-      navigation.navigate('Main')
-    } 
+      navigation.navigate('Main');
+    }
   };
 
   useEffect(() => {
@@ -42,6 +42,7 @@ export const Home = (props: HomeProps) => {
 
   return (
     <ContainerWithSafeArea background="#fffbeb" loading={loading}>
+      <HomeContainer>
       <LogoWrapper>
         <Logo source={LogoImageSource} />
       </LogoWrapper>
@@ -82,6 +83,7 @@ export const Home = (props: HomeProps) => {
           </SecondaryButtonWrapper>
         </SecondaryButtonContainer>
       </ButtonContainer>
+      </HomeContainer>
     </ContainerWithSafeArea>
   );
 };

@@ -26,7 +26,7 @@ const colors = [
 ];
 
 export const ColorPalette = (props: ColorPaletteProps) => {
-  const { value , label, onChange } = props;
+  const { value, label, onChange } = props;
 
   return (
     <Container>
