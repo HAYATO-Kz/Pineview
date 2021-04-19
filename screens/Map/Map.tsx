@@ -2,11 +2,7 @@ import MapView, { Marker, Callout, CalloutSubview } from 'react-native-maps';
 import React, { useEffect, useState } from 'react';
 import Geolocation from '@react-native-community/geolocation';
 
-import {
-  FilterBar,
-  ContainerWithSafeArea,
-  Button,
-} from '../../components';
+import { FilterBar, ContainerWithSafeArea, Button } from '../../components';
 import {
   AbsoluteWrapper,
   SearchInput,
@@ -56,8 +52,8 @@ const filterTabs = [
 
 export const Map = (props: MapProps) => {
   const [region, setRegion] = useState({
-    latitude: 0,
-    longitude: 0,
+    latitude: 13.7468,
+    longitude: 100.5348,
     latitudeDelta: 0.009,
     longitudeDelta: 0.004,
   });
@@ -137,22 +133,26 @@ export const Map = (props: MapProps) => {
     getReview(filter, region);
   };
 
-  useEffect(() => {
-    // Get current position and set to initial postion of map
-    Geolocation.getCurrentPosition((info) => {
+  const getCurrent = async () => {
+    await Geolocation.getCurrentPosition((info) => {
       setRegion({
         latitude: info.coords.latitude,
         longitude: info.coords.longitude,
-        latitudeDelta: region.latitudeDelta,
-        longitudeDelta: region.longitudeDelta,
+        latitudeDelta: 0.009,
+        longitudeDelta: 0.004,
       });
       getReview(filter, {
         latitude: info.coords.latitude,
         longitude: info.coords.longitude,
-        latitudeDelta: region.latitudeDelta,
-        longitudeDelta: region.longitudeDelta,
+        latitudeDelta: 0.009,
+        longitudeDelta: 0.004,
       });
     });
+  };
+
+  useEffect(() => {
+    // Get current position and set to initial postion of map
+    getCurrent();
   }, []);
 
   return (
@@ -216,7 +216,7 @@ export const Map = (props: MapProps) => {
                   onSubmitEditing={(e) => search(e.nativeEvent.text)}
                   placeholder="Search"
                 />
-                <LogoWrapper>
+                <LogoWrapper onPress={() => getCurrent()}>
                   <Logo source={LogoSource} />
                 </LogoWrapper>
               </SearchInputContainer>

@@ -52,7 +52,7 @@ export const Logo = styled.Image`
   border-radius: 19px;
 `;
 
-export const LogoWrapper = styled.View`
+export const LogoWrapper = styled.TouchableOpacity`
   height: 38px;
   width: 38px;
   border-radius: 19px;
