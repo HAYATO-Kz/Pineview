@@ -11,7 +11,7 @@ import {
 import LoadingSource from '../../assets/images/loading.gif';
 
 interface LoadingModalProps {
-  visible?: boolean;
+  visible: boolean;
 }
 
 export const LoadingModal = (props: LoadingModalProps) => {

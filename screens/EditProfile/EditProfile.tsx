@@ -26,7 +26,6 @@ export const EditProfile = (props: EditProfileProps) => {
     username: '',
     color: '#ffffff',
   });
-  const [loading, setLoading] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
   const handleUpdateProfile = async () => {
@@ -54,7 +53,6 @@ export const EditProfile = (props: EditProfileProps) => {
   };
 
   const getUser = async () => {
-    setLoading(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const response = await backendAPI
       .get(`/user/${authToken}`)
@@ -64,7 +62,6 @@ export const EditProfile = (props: EditProfileProps) => {
     setUserColor(user.user_color);
     setUsername(user.username);
     setCheckDirty({ username: user.username, color: user.user_color });
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -85,7 +82,7 @@ export const EditProfile = (props: EditProfileProps) => {
       }}
       isInTabMode
       padding="23px 17px"
-      loading={loading}>
+      loading={false}>
       <Wrapper>
         <ProfileImage size={154} color={userColor} />
         <PaletteWrapper>

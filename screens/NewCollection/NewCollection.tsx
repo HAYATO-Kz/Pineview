@@ -59,6 +59,7 @@ export const NewCollection = (props: NewCollectionProps) => {
         hasBorder: true,
       }}
       padding="16px 32px"
+      isInTabMode
       loading={false}>
       <Wrapper>
         <CollectionIcon

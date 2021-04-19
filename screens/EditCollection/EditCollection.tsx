@@ -31,7 +31,6 @@ export const EditCollection = (props: EditCollectionProps) => {
     icon: 'heart',
     color: '#ffffff',
   });
-  const [loading, setLoading] = useState(false);
   const [waiting, setWaiting] = useState(false);
 
   const handleCreateEditCollection = async () => {
@@ -54,11 +53,9 @@ export const EditCollection = (props: EditCollectionProps) => {
   };
 
   const getCollection = async () => {
-    setLoading(true);
     const response = await backendAPI
       .get(`/collection_detail/${route.params.collectionId}`)
       .catch((err) => console.log(err));
-
     if (response) {
       const {
         collection_color,
@@ -74,7 +71,6 @@ export const EditCollection = (props: EditCollectionProps) => {
       setCollectionIconSelected(collection_icon);
       setCollectionTitle(collection_title);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -94,7 +90,8 @@ export const EditCollection = (props: EditCollectionProps) => {
         hasBorder: true,
       }}
       padding="16px 32px"
-      loading={loading}>
+      loading={false}
+      isInTabMode>
       <Wrapper>
         <CollectionIcon
           size={135}

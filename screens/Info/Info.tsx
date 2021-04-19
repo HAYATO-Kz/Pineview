@@ -12,7 +12,7 @@ const listOfInfo = [
   {
     header: 'เกี่ยวกับ :',
     description:
-      'Pineview เป็นแอปพลิเคชันที่พัฒนาขึ้นเพื่อช่วยให้ผู้ใช้งานหารีวิวของสถานที่ต่างๆ (ร้านอาหาร, คาเฟ, แหล่งท่องเที่ยว) ได้รวดเร็ว และสามารถอ่านรีวิวได้ง่ายดายมากยิ่งขึ้น',
+      'Pineview เป็นแอปพลิเคชันที่พัฒนาขึ้นเพื่อช่วยให้ผู้ใช้งานหารีวิวของสถานที่ต่างๆ รอบตัว (ร้านอาหาร คาเฟ และแหล่งท่องเที่ยว) ได้รวดเร็ว และสามารถอ่านรีวิวของสถานที่ที่มีรีวิวบนพันทิปได้ง่ายดายมากยิ่งขึ้น',
   },
   {
     header: 'ผู้สนับสนุน :',
@@ -21,9 +21,9 @@ const listOfInfo = [
   },
   {
     header: 'ทีมพัฒนา :',
-    description: `  Ms. Kunyaruk Katebunlu
-  Mr. Hayato Kawai
-  Mr. Thanapoom Rattanathummawat`,
+    description: ` Ms. Kunyaruk Katebunlu
+ Mr. Hayato Kawai
+ Mr. Thanapoom Rattanathummawat`,
   },
 ];
 

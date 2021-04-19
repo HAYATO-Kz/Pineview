@@ -15,7 +15,7 @@ interface ContainerWithSafeAreaProps {
   isTransparent?: boolean;
   isInTabMode?: boolean;
   background?: string;
-  loading?: boolean;
+  loading: boolean;
   fullscreen?: boolean;
 }
 
@@ -44,7 +44,7 @@ export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps
     <Container isTransparent={isTransparent} background={background}>
       <SafeAreaView>{header && <Header {...header} />}</SafeAreaView>
       <ContentContainer
-        scrollEnabled={screenHeight > (isInTabMode ? height - 80 : height)}
+        scrollEnabled={screenHeight > (isInTabMode ? height - 175 : height)}
         onContentSizeChange={onContentSizeChange}>
         <Content padding={padding} fullscreen={fullscreen}>
           {children}
