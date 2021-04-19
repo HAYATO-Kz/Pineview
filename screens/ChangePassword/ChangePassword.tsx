@@ -44,7 +44,8 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
   if (!values.newPassword) {
     errors.newPassword = 'กรุณาใส่รหัสผ่านใหม่';
   } else if (values.oldPassword === values.newPassword) {
-    errors.newPassword = 'รหัสผ่านใหม่ต้องไม่ซ้ำกับรหัสผ่านปัจจุบัน กรุณาเปลี่ยนรหัสผ่าน';
+    errors.newPassword =
+      'รหัสผ่านใหม่ต้องไม่ซ้ำกับรหัสผ่านปัจจุบัน กรุณาเปลี่ยนรหัสผ่าน';
   }
 
   // username validate
@@ -55,7 +56,11 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
   }
 
   //  No error detected
-  if (errors.oldPassword === '' && errors.newPassword === '' && errors.confirmPassword === '') {
+  if (
+    errors.oldPassword === '' &&
+    errors.newPassword === '' &&
+    errors.confirmPassword === ''
+  ) {
     return {};
   }
 
@@ -64,7 +69,6 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
 
 export const ChangePassword = (props: ChangePasswordProps) => {
   const { navigation } = props;
-
   /**
    * Called when form is submitted
    * @param values form's value submitted
@@ -78,7 +82,7 @@ export const ChangePassword = (props: ChangePasswordProps) => {
     const response = await backendAPI
       .patch(`/user/${authToken}/password`, values)
       .catch((error) => {
-          console.log(error)
+        console.log(error);
         const { message } = error.response.data;
         Alert.alert(message);
       });
@@ -100,7 +104,8 @@ export const ChangePassword = (props: ChangePasswordProps) => {
         ),
         title: 'เปลี่ยนรหัสผ่าน',
         hasBorder: true,
-      }}>
+      }}
+      loading={false}>
       <Formik
         initialValues={INITIAL_CHANGE_PASSWORD_FORM}
         onSubmit={handleSignUp}

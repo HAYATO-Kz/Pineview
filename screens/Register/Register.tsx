@@ -61,7 +61,7 @@ const registerValidator = (values: RegisterFormValueProps) => {
 
 export const Register = (props: RegisterProps) => {
   const { navigation } = props;
-  const [loading, setLoading] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   /**
    * Called when form is submitted
@@ -72,18 +72,18 @@ export const Register = (props: RegisterProps) => {
     values: RegisterFormValueProps,
     actions: FormikHelpers<RegisterFormValueProps>,
   ) => {
-    setLoading(true);
+    setWaiting(true);
     const response = await backendAPI.post('/signUp', values).catch((error) => {
       const { message } = error.response.data;
       Alert.alert(message);
     });
+    setWaiting(false);
     if (response) {
       const { authToken } = response.data;
       await AsyncStorage.setItem('authToken', authToken);
+      actions.setSubmitting(false);
       navigation.navigate('Main');
     }
-    actions.setSubmitting(false);
-    setLoading(false);
   };
 
   return (
@@ -96,7 +96,8 @@ export const Register = (props: RegisterProps) => {
             onPress={() => navigation.goBack()}
           />
         ),
-      }}>
+      }}
+      loading={false}>
       <HeaderText>ลงทะเบียน</HeaderText>
       <Formik
         initialValues={INITIAL_REGISTER_FORM}
@@ -125,7 +126,12 @@ export const Register = (props: RegisterProps) => {
               autoCapitalize="none"
             />
             <ButtonWrapper>
-              <Button text="ลงทะเบียน" block onPress={handleSubmit} />
+              <Button
+                text="ลงทะเบียน"
+                block
+                onPress={handleSubmit}
+                disabled={waiting}
+              />
             </ButtonWrapper>
           </View>
         )}

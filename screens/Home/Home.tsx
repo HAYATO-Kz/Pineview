@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
+import { AsyncStorage } from 'react-native'
 
-import { Button } from '../../components';
+
+import { Button, ContainerWithSafeArea } from '../../components';
 import {
-  HomeContainer,
   Logo,
+  LogoWrapper,
   Mascot,
   DividerRow,
   Divider,
@@ -11,6 +13,7 @@ import {
   ButtonContainer,
   SecondaryButtonWrapper,
   Space,
+  MascotWrapper,
 } from './Home.style';
 
 import MascotImageSource from '../../assets/images/mascot.png';
@@ -23,10 +26,28 @@ interface HomeProps {
 export const Home = (props: HomeProps) => {
   const { navigation } = props;
 
+  const [loading, setLoading] = useState(true);
+
+  const initialSignInStatus = async () => {
+    const authToken = await AsyncStorage.getItem('authToken');
+    setLoading(false)
+    if (!!authToken) {
+      navigation.navigate('Main')
+    } 
+  };
+
+  useEffect(() => {
+    initialSignInStatus();
+  }, []);
+
   return (
-    <HomeContainer>
-      <Logo source={LogoImageSource} />
-      <Mascot source={MascotImageSource} />
+    <ContainerWithSafeArea background="#fffbeb" loading={loading}>
+      <LogoWrapper>
+        <Logo source={LogoImageSource} />
+      </LogoWrapper>
+      <MascotWrapper>
+        <Mascot source={MascotImageSource} />
+      </MascotWrapper>
       <ButtonContainer>
         <Button
           text="เข้าใช้โดยไม่เข้าสู่ระบบ"
@@ -61,6 +82,6 @@ export const Home = (props: HomeProps) => {
           </SecondaryButtonWrapper>
         </SecondaryButtonContainer>
       </ButtonContainer>
-    </HomeContainer>
+    </ContainerWithSafeArea>
   );
 };

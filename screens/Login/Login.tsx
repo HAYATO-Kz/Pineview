@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, AsyncStorage, View} from 'react-native';
+import { Alert, AsyncStorage, View } from 'react-native';
 import { Formik, FormikHelpers } from 'formik';
 
 import { HeaderText, ButtonWrapper } from './Login.style';
@@ -26,7 +26,7 @@ const INITIAL_LOGIN_FORM: LoginFormValueProps = { email: '', password: '' };
 
 export const Login = (props: LoginProps) => {
   const { navigation } = props;
-  const [loading, setLoading] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   /**
    * Called when form is submitted
@@ -37,23 +37,24 @@ export const Login = (props: LoginProps) => {
     values: LoginFormValueProps,
     actions: FormikHelpers<LoginFormValueProps>,
   ) => {
-    setLoading(true);
+    setWaiting(true);
     const response = await backendAPI.post('/signIn', values).catch((error) => {
       const { message } = error.response.data;
       Alert.alert(message);
     });
+    setWaiting(false);
     if (response) {
       const { authToken } = response.data;
       await AsyncStorage.setItem('authToken', authToken);
       navigation.navigate('Main');
     }
     actions.setSubmitting(false);
-    setLoading(false);
   };
 
   return (
     <ContainerWithSafeArea
       padding="16px"
+      loading={false}
       header={{
         leftComponent: (
           <TouchableIcon
@@ -81,7 +82,9 @@ export const Login = (props: LoginProps) => {
                 text="เข้าสู่ระบบ"
                 block
                 onPress={handleSubmit}
-                disabled={values.email === '' || values.password === ''}
+                disabled={
+                  values.email === '' || values.password === '' || waiting
+                }
               />
             </ButtonWrapper>
           </View>

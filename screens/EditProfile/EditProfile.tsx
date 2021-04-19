@@ -11,7 +11,6 @@ import {
   ProfileImage,
 } from '../../components';
 import { backendAPI } from '../../utils/api';
-import DefaultImage from '../../assets/images/mascot.png';
 import BackIcon from '../../assets/icons/back_icon.svg';
 
 interface EditProfileProps {
@@ -27,8 +26,11 @@ export const EditProfile = (props: EditProfileProps) => {
     username: '',
     color: '#ffffff',
   });
+  const [loading, setLoading] = useState(false);
+  const [waiting, setWaiting] = useState(false);
 
   const handleUpdateProfile = async () => {
+    setWaiting(true);
     const authToken = await AsyncStorage.getItem('authToken');
     let update_profile = {};
     if (username !== checkDirty.username && username !== '') {
@@ -42,6 +44,8 @@ export const EditProfile = (props: EditProfileProps) => {
       .patch(`/user/${authToken}`, update_profile)
       .catch((err) => console.log(err));
 
+    setWaiting(false);
+
     if (response) {
       const { authToken } = response.data;
       await AsyncStorage.setItem('authToken', authToken);
@@ -50,6 +54,7 @@ export const EditProfile = (props: EditProfileProps) => {
   };
 
   const getUser = async () => {
+    setLoading(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const response = await backendAPI
       .get(`/user/${authToken}`)
@@ -59,6 +64,7 @@ export const EditProfile = (props: EditProfileProps) => {
     setUserColor(user.user_color);
     setUsername(user.username);
     setCheckDirty({ username: user.username, color: user.user_color });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -78,7 +84,8 @@ export const EditProfile = (props: EditProfileProps) => {
         hasBorder: true,
       }}
       isInTabMode
-      padding="23px 17px">
+      padding="23px 17px"
+      loading={loading}>
       <Wrapper>
         <ProfileImage size={154} color={userColor} />
         <PaletteWrapper>
@@ -100,8 +107,9 @@ export const EditProfile = (props: EditProfileProps) => {
           block
           onPress={handleUpdateProfile}
           disabled={
-            (checkDirty.username === username || username === '') &&
-            checkDirty.color === userColor
+            ((checkDirty.username === username || username === '') &&
+              checkDirty.color === userColor) ||
+            waiting
           }
         />
       </Wrapper>

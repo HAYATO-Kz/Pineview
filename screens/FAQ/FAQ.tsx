@@ -63,7 +63,8 @@ export const FAQ = (props: FAQProps) => {
         ),
         title: 'คำถามที่พบบ่อย',
         hasBorder: true,
-      }}>
+      }}
+      loading={false}>
       {listOfFAQ.map((faq, index) => (
         <Container key={`faq-${index}`}>
           <Question>ถาม: {faq.question}</Question>

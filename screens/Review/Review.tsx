@@ -39,6 +39,7 @@ export const Review = (props: ReviewProps) => {
   const [isSignin, setIsSignin] = useState(false);
   const [favoriteModalVisible, setFavoriteModalVisible] = useState(false);
   const [actionVisible, setActionVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { navigation, route } = props;
 
@@ -177,8 +178,10 @@ export const Review = (props: ReviewProps) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     getReview(route.params.id);
     getCollection(route.params.id);
+    setLoading(false);
   }, [route.params]);
 
   return (
@@ -199,7 +202,8 @@ export const Review = (props: ReviewProps) => {
         ),
         hasBorder: true,
       }}
-      padding="26px">
+      padding="26px"
+      loading={loading}>
       {kratoo && (
         <>
           <Title>{kratoo.kratooTitle}</Title>

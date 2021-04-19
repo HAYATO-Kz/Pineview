@@ -32,6 +32,7 @@ export const Info = (props: InfoProps) => {
   return (
     <ContainerWithSafeArea
       padding="4px 16px"
+      loading={false}
       header={{
         leftComponent: (
           <TouchableIcon

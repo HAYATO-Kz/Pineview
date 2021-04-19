@@ -38,6 +38,7 @@ export const Profile = (props: ProfileProps) => {
     email: 'email@email.com',
     user_color: '#ffffff',
   });
+  const [loading, setLoading] = useState(false);
 
   const contentWidth = useWindowDimensions().width - 32;
 
@@ -70,12 +71,14 @@ export const Profile = (props: ProfileProps) => {
   ];
 
   const getUser = async () => {
+    setLoading(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const response = await backendAPI
       .get(`/user/${authToken}`)
       .catch((err) => console.log(err));
     const user = response.data.user;
     setUserData(user);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -88,7 +91,7 @@ export const Profile = (props: ProfileProps) => {
   }, [navigation]);
 
   return (
-    <ContainerWithSafeArea padding="24px 16px">
+    <ContainerWithSafeArea padding="24px 16px" loading={loading}>
       <Container>
         <ImageWrapper width={`${-contentWidth / 4}px`}>
           <ProfileImage size={154} color={userData.user_color} />
