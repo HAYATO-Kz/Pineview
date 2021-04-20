@@ -81,7 +81,8 @@ export const EditProfile = (props: EditProfileProps) => {
         hasBorder: true,
       }}
       isInTabMode
-      padding="23px 17px"
+      paddingTop={23}
+      paddingRear={17}
       loading={false}>
       <Wrapper>
         <ProfileImage size={154} color={userColor} />

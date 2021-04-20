@@ -94,7 +94,8 @@ export const ChangePassword = (props: ChangePasswordProps) => {
 
   return (
     <ContainerWithSafeArea
-      padding="22px 33px"
+      paddingTop={22}
+      paddingRear={33}
       header={{
         leftComponent: (
           <TouchableIcon

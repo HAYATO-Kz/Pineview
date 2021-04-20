@@ -227,7 +227,8 @@ export const Map = (props: MapProps) => {
       </MapView>
       <AbsoluteWrapper>
         <ContainerWithSafeArea
-          padding="0px 10px"
+          paddingTop={0}
+          paddingRear={10}
           isTransparent
           loading={loading}>
           <Container>

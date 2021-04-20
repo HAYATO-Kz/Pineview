@@ -52,7 +52,8 @@ export const FAQ = (props: FAQProps) => {
   const { navigation } = props;
   return (
     <ContainerWithSafeArea
-      padding="30px 16px"
+      paddingTop={30}
+      paddingRear={16}
       isInTabMode
       header={{
         leftComponent: (

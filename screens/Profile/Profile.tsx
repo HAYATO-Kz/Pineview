@@ -91,7 +91,7 @@ export const Profile = (props: ProfileProps) => {
   }, [navigation]);
 
   return (
-    <ContainerWithSafeArea padding="24px 16px" loading={loading}>
+    <ContainerWithSafeArea paddingTop={24} paddingRear={16} loading={loading}>
       <Container>
         <ImageWrapper width={`${-contentWidth / 4}px`}>
           <ProfileImage size={154} color={userData.user_color} />

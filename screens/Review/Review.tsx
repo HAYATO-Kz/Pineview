@@ -202,7 +202,8 @@ export const Review = (props: ReviewProps) => {
         ),
         hasBorder: true,
       }}
-      padding="26px"
+      paddingTop={26}
+      paddingRear={26}
       loading={loading}>
       {kratoo && (
         <>

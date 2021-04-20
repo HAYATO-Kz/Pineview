@@ -31,7 +31,8 @@ export const Info = (props: InfoProps) => {
   const { navigation } = props;
   return (
     <ContainerWithSafeArea
-      padding="4px 16px"
+      paddingTop={4}
+      paddingRear={16}
       loading={false}
       header={{
         leftComponent: (
