@@ -11,7 +11,6 @@ import {
   ProfileImage,
 } from '../../components';
 import { backendAPI } from '../../utils/api';
-import DefaultImage from '../../assets/images/mascot.png';
 import BackIcon from '../../assets/icons/back_icon.svg';
 
 interface EditProfileProps {
@@ -27,8 +26,10 @@ export const EditProfile = (props: EditProfileProps) => {
     username: '',
     color: '#ffffff',
   });
+  const [waiting, setWaiting] = useState(false);
 
   const handleUpdateProfile = async () => {
+    setWaiting(true);
     const authToken = await AsyncStorage.getItem('authToken');
     let update_profile = {};
     if (username !== checkDirty.username && username !== '') {
@@ -41,6 +42,8 @@ export const EditProfile = (props: EditProfileProps) => {
     const response = await backendAPI
       .patch(`/user/${authToken}`, update_profile)
       .catch((err) => console.log(err));
+
+    setWaiting(false);
 
     if (response) {
       const { authToken } = response.data;
@@ -78,7 +81,8 @@ export const EditProfile = (props: EditProfileProps) => {
         hasBorder: true,
       }}
       isInTabMode
-      padding="23px 17px">
+      padding="23px 17px"
+      loading={false}>
       <Wrapper>
         <ProfileImage size={154} color={userColor} />
         <PaletteWrapper>
@@ -93,6 +97,7 @@ export const EditProfile = (props: EditProfileProps) => {
           defaultValue={username}
           onChangeText={(value) => setUsername(value)}
           autoCapitalize="none"
+          maxLength={15}
         />
         <Input label="อีเมล" disabled defaultValue={userEmail} />
         <Button
@@ -100,8 +105,9 @@ export const EditProfile = (props: EditProfileProps) => {
           block
           onPress={handleUpdateProfile}
           disabled={
-            (checkDirty.username === username || username === '') &&
-            checkDirty.color === userColor
+            ((checkDirty.username === username || username === '') &&
+              checkDirty.color === userColor) ||
+            waiting
           }
         />
       </Wrapper>

@@ -20,7 +20,7 @@ interface FavoriteProps {
   options: any[];
   initialValue: string[];
   visible: boolean;
-  onDone: (selectedValue: string[], initialValue: string) => void;
+  onDone: (selectedValue: string[], initialValue: any) => void;
   onCreateNewCollection: () => void;
 }
 

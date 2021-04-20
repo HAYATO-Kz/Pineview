@@ -35,8 +35,10 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
     isOwner: false,
     review_blogs: [],
   });
+  const [loading, setLoading] = useState(false);
 
   const getCollection = async () => {
+    setLoading(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const response = await backendAPI
       .get(`/collection/${route.params.collectionId}?token=${authToken}`)
@@ -46,7 +48,6 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
 
     if (response) {
       const { title, owner, isOwner, blogs } = response.data;
-      console.log(response.data);
       setCollectionData({
         title: title,
         isOwner: isOwner,
@@ -57,6 +58,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
         review_blogs: blogs,
       });
     }
+    setLoading(false);
   };
 
   const onCopy = () => {
@@ -75,7 +77,6 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
       .catch((err) => console.log(err));
 
     if (response) {
-      console.log(response);
       navigation.goBack();
     }
   };
@@ -89,7 +90,7 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
     return unsubscribe;
   }, [navigation]);
   return (
-    <ContainerWithSafeArea padding="16px" isInTabMode>
+    <ContainerWithSafeArea padding="16px" isInTabMode loading={loading}>
       <Title>{collectionData.title}</Title>
       <SubText>
         มี {collectionData.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้

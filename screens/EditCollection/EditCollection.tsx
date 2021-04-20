@@ -31,8 +31,10 @@ export const EditCollection = (props: EditCollectionProps) => {
     icon: 'heart',
     color: '#ffffff',
   });
+  const [waiting, setWaiting] = useState(false);
 
   const handleCreateEditCollection = async () => {
+    setWaiting(true);
     const authToken = await AsyncStorage.getItem('authToken');
     let editCollection = {
       collection_id: route.params.collectionId,
@@ -44,7 +46,7 @@ export const EditCollection = (props: EditCollectionProps) => {
     const response = await backendAPI
       .put(`/edit_collection`, editCollection)
       .catch((err) => console.log(err));
-
+    setWaiting(false);
     if (response) {
       navigation.goBack();
     }
@@ -54,7 +56,6 @@ export const EditCollection = (props: EditCollectionProps) => {
     const response = await backendAPI
       .get(`/collection_detail/${route.params.collectionId}`)
       .catch((err) => console.log(err));
-
     if (response) {
       const {
         collection_color,
@@ -88,7 +89,9 @@ export const EditCollection = (props: EditCollectionProps) => {
         title: 'แก้ไขคอลเลกชัน',
         hasBorder: true,
       }}
-      padding="16px 32px">
+      padding="16px 32px"
+      loading={false}
+      isInTabMode>
       <Wrapper>
         <CollectionIcon
           size={135}
@@ -119,6 +122,7 @@ export const EditCollection = (props: EditCollectionProps) => {
             autoCapitalize="none"
             defaultValue={collectionTitle}
             onChangeText={(value) => setCollectionTitle(value)}
+            maxLength={15}
           />
         </MarginWrapper>
         <Button
@@ -126,9 +130,10 @@ export const EditCollection = (props: EditCollectionProps) => {
           block
           onPress={handleCreateEditCollection}
           disabled={
-            (collectionTitle === checkDirty.title || collectionTitle === '') &&
-            collectionIconSelected === checkDirty.icon &&
-            collectionColorSelected === checkDirty.color
+            ((collectionTitle === checkDirty.title || collectionTitle === '') &&
+              collectionIconSelected === checkDirty.icon &&
+              collectionColorSelected === checkDirty.color) ||
+            waiting
           }
         />
       </Wrapper>

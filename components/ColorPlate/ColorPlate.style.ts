@@ -8,7 +8,7 @@ export const Plate = styled.View<{ color: string; isActive?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   border-width: 2px;
   border-radius: 4px;
   background: ${(p) => p.color};

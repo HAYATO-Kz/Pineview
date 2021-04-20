@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { Tab, TabProps } from '../Tab/Tab';
-import { FilterContainer} from './FilterBar.style'
+import { FilterContainer } from './FilterBar.style';
 
 interface FilterBarProps {
   /**

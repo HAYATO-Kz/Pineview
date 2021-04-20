@@ -25,7 +25,7 @@ export const Title = styled(DefaultText)`
 export const MiddleBox = styled.View`
   display: flex;
   flex-direction: row;
-  z-index:-1;
+  z-index: -1;
   justify-content: center;
   align-items: center;
   position: absolute;

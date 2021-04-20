@@ -9,7 +9,6 @@ import {
   Login,
   Register,
   Main,
-  CollectionBlog,
   NewCollection,
 } from './screens';
 

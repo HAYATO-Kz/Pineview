@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { DefaultText } from '../DefaultText/DefaultText.style'
+import { DefaultText } from '../DefaultText/DefaultText.style';
 
 export const TabWrapper = styled.TouchableOpacity<{
   active?: boolean;
@@ -13,7 +13,10 @@ export const TabWrapper = styled.TouchableOpacity<{
   border: 1px solid ${(p) => p.color};
 `;
 
-export const TextWithStyled = styled(DefaultText)<{ active?: boolean; color: string }>`
+export const TextWithStyled = styled(DefaultText)<{
+  active?: boolean;
+  color: string;
+}>`
   color: ${(p) => (p.active ? '#fff' : p.color)};
   font-size: 14px;
   font-weight: ${(p) => (p.active ? 700 : 400)};

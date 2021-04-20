@@ -39,6 +39,7 @@ export const Collection = (props: CollectionProps) => {
   const [actionModalVisible, setActionModalVisible] = useState(false);
   const [collectionDatas, setCollectionData] = useState([]);
   const [activeCollectionId, setActiveCollectionId] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onDelete = async () => {
     const deleted = { collection_id: activeCollectionId };
@@ -49,12 +50,14 @@ export const Collection = (props: CollectionProps) => {
     setConfirmationModalVisible(false);
     getCollection();
   };
+
   const onShare = () => {
     Clipboard.setString(`${activeCollectionId}`);
     setShareModalVisible(false);
   };
 
   const getCollection = async () => {
+    setLoading(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const response = await backendAPI
       .get(`/collections?token=${authToken}`)
@@ -63,6 +66,7 @@ export const Collection = (props: CollectionProps) => {
     if (response) {
       setCollectionData(response.data);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -75,7 +79,7 @@ export const Collection = (props: CollectionProps) => {
   }, [navigation]);
 
   return (
-    <ContainerWithSafeArea isInTabMode>
+    <ContainerWithSafeArea isInTabMode loading={loading}>
       <Title>คอลเลกชัน</Title>
       <SubContainer>
         <SubContainerText>คอลเลกชันทั้งหมด</SubContainerText>

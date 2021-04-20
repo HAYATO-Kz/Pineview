@@ -25,8 +25,10 @@ export const NewCollection = (props: NewCollectionProps) => {
   const [collectionColorSelected, setCollectionColorSelected] = useState(
     '#ffffff',
   );
+  const [waiting, setWaiting] = useState(false);
 
   const handleCreateNewCollection = async () => {
+    setWaiting(true);
     const authToken = await AsyncStorage.getItem('authToken');
     const newCollection = {
       collection_icon: collectionIconSelected,
@@ -38,7 +40,7 @@ export const NewCollection = (props: NewCollectionProps) => {
     const response = await backendAPI
       .post('/create_new_collection', newCollection)
       .catch((err) => console.log(err));
-
+    setWaiting(false);
     if (response) {
       navigation.goBack();
     }
@@ -56,7 +58,9 @@ export const NewCollection = (props: NewCollectionProps) => {
         title: 'สร้างคอลเลกชันใหม่',
         hasBorder: true,
       }}
-      padding="16px 32px">
+      padding="16px 32px"
+      isInTabMode
+      loading={false}>
       <Wrapper>
         <CollectionIcon
           size={135}
@@ -86,13 +90,14 @@ export const NewCollection = (props: NewCollectionProps) => {
             label="ชื่อคอลเลกชัน"
             autoCapitalize="none"
             onChangeText={(value) => setCollectionTitle(value)}
+            maxLength={15}
           />
         </MarginWrapper>
         <Button
           text="สร้างคอลเลกชัน"
           block
           onPress={handleCreateNewCollection}
-          disabled={collectionTitle === ''}
+          disabled={collectionTitle === '' || waiting}
         />
       </Wrapper>
     </ContainerWithSafeArea>
