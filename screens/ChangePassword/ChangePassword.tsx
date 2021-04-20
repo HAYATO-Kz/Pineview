@@ -55,7 +55,7 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
     errors.confirmPassword = 'รหัสผ่านที่ใช้ในการยืนยันต้องตรงกับรหัสผ่านใหม่';
   }
 
-  //  No error detected
+  //  No error detect
   if (
     errors.oldPassword === '' &&
     errors.newPassword === '' &&
