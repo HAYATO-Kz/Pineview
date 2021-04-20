@@ -21,9 +21,9 @@ const listOfInfo = [
   },
   {
     header: 'ทีมพัฒนา :',
-    description: ` Ms. Kunyaruk Katebunlu
- Mr. Hayato Kawai
- Mr. Thanapoom Rattanathummawat`,
+    description: `Ms. Kunyaruk Katebunlu
+Mr. Hayato Kawai
+Mr. Thanapoom Rattanathummawat`,
   },
 ];
 

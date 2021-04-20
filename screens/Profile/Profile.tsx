@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AsyncStorage, useWindowDimensions } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import {
   ImageWrapper,
@@ -11,6 +11,7 @@ import {
   Username,
   Tab,
   Divider,
+  DividerColor,
 } from './Profile.style';
 import {
   ContainerWithSafeArea,
@@ -39,8 +40,6 @@ export const Profile = (props: ProfileProps) => {
     user_color: '#ffffff',
   });
   const [loading, setLoading] = useState(false);
-
-  const contentWidth = useWindowDimensions().width - 32;
 
   const handleSignOut = async () => {
     await AsyncStorage.removeItem('authToken');
@@ -93,7 +92,7 @@ export const Profile = (props: ProfileProps) => {
   return (
     <ContainerWithSafeArea paddingTop={24} paddingRear={16} loading={loading}>
       <Container>
-        <ImageWrapper width={`${-contentWidth / 4}px`}>
+        <ImageWrapper>
           <ProfileImage size={154} color={userData.user_color} />
         </ImageWrapper>
         <Username>{userData.username}</Username>
@@ -107,7 +106,9 @@ export const Profile = (props: ProfileProps) => {
               </IconContainer>
               <ArrowRightIcon />
             </ButtonTab>
-            <Divider />
+            <Divider>
+              <DividerColor />
+            </Divider>
           </React.Fragment>
         ))}
         <ButtonTab onPress={() => {}}>
@@ -116,14 +117,18 @@ export const Profile = (props: ProfileProps) => {
             <IconLabel>ให้คะแนนบน App Store</IconLabel>
           </IconContainer>
         </ButtonTab>
-        <Divider />
+        <Divider>
+          <DividerColor />
+        </Divider>
         <Tab>
           <IconContainer>
             <VersionIcon />
             <IconLabel>เวอร์ชัน {packageJson.version}</IconLabel>
           </IconContainer>
         </Tab>
-        <Divider />
+        <Divider>
+          <DividerColor />
+        </Divider>
       </Container>
       <ErrorButton text="ออกจากระบบ" onPress={handleSignOut} block />
     </ContainerWithSafeArea>
