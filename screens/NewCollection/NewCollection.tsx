@@ -58,7 +58,8 @@ export const NewCollection = (props: NewCollectionProps) => {
         title: 'สร้างคอลเลกชันใหม่',
         hasBorder: true,
       }}
-      padding="16px 32px"
+      paddingTop={16}
+      paddingRear={32}
       isInTabMode
       loading={false}>
       <Wrapper>

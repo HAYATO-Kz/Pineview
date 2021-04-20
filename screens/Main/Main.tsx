@@ -34,7 +34,7 @@ export const Main = (props: MainProps) => {
       {isSignIn ? (
         <Tab.Navigator
           tabBarOptions={{
-            style: { height: '90px' },
+            style: { height: 100, paddingTop: 15 },
             activeTintColor: '#613400',
             inactiveTintColor: '#bfbfbf',
             labelStyle: { fontFamily: 'Kanit' },

@@ -18,11 +18,10 @@ export const ContentContainer = styled.ScrollView`
 `;
 
 export const Content = styled.View<{
-  padding: string;
-  isTransparent?: boolean;
-  fullscreen?: boolean;
+  paddingTop: number;
+  paddingRear: number;
 }>`
-  padding: ${(p) => p.padding};
+  padding: ${p => `${p.paddingTop}px ${p.paddingRear}px`};
   display: flex;
   flex-direction: column;
   flex: 1;

@@ -88,7 +88,8 @@ export const Register = (props: RegisterProps) => {
 
   return (
     <ContainerWithSafeArea
-      padding="16px"
+      paddingTop={16}
+      paddingRear={16}
       header={{
         leftComponent: (
           <TouchableIcon

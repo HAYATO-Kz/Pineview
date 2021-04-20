@@ -89,7 +89,8 @@ export const EditCollection = (props: EditCollectionProps) => {
         title: 'แก้ไขคอลเลกชัน',
         hasBorder: true,
       }}
-      padding="16px 32px"
+      paddingTop={16}
+      paddingRear={32}
       loading={false}
       isInTabMode>
       <Wrapper>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const backendAPI = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://backendfinalendpoint.herokuapp.com',
 });
 
 export const geocodingAPI = axios.create({

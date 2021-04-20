@@ -55,7 +55,7 @@ const changePasswordValidator = (values: ChangePasswordFormValueProps) => {
     errors.confirmPassword = 'รหัสผ่านที่ใช้ในการยืนยันต้องตรงกับรหัสผ่านใหม่';
   }
 
-  //  No error detected
+  //  No error detect
   if (
     errors.oldPassword === '' &&
     errors.newPassword === '' &&
@@ -94,7 +94,8 @@ export const ChangePassword = (props: ChangePasswordProps) => {
 
   return (
     <ContainerWithSafeArea
-      padding="22px 33px"
+      paddingTop={22}
+      paddingRear={33}
       header={{
         leftComponent: (
           <TouchableIcon

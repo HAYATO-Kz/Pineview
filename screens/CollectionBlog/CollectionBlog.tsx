@@ -90,7 +90,11 @@ export const CollectionBlog = (props: CollectionBlogProps) => {
     return unsubscribe;
   }, [navigation]);
   return (
-    <ContainerWithSafeArea padding="16px" isInTabMode loading={loading}>
+    <ContainerWithSafeArea
+      paddingTop={16}
+      paddingRear={16}
+      isInTabMode
+      loading={loading}>
       <Title>{collectionData.title}</Title>
       <SubText>
         มี {collectionData.review_blogs.length} รีวิวอยู่ในคอลเลกชันนี้

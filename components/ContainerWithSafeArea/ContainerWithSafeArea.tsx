@@ -10,7 +10,8 @@ import { LoadingModal } from '../LoadingModal/LoadingModal';
 import { Header, HeaderProps } from '../Header/Header';
 
 interface ContainerWithSafeAreaProps {
-  padding?: string;
+  paddingTop?: number;
+  paddingRear?: number;
   header?: HeaderProps;
   isTransparent?: boolean;
   isInTabMode?: boolean;
@@ -26,7 +27,8 @@ export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps
 ) => {
   const {
     children,
-    padding = '0px',
+    paddingTop = 0,
+    paddingRear = 0,
     header,
     isTransparent,
     isInTabMode,
@@ -46,7 +48,7 @@ export const ContainerWithSafeArea: FunctionComponent<ContainerWithSafeAreaProps
       <ContentContainer
         scrollEnabled={screenHeight > (isInTabMode ? height - 175 : height)}
         onContentSizeChange={onContentSizeChange}>
-        <Content padding={padding} fullscreen={fullscreen}>
+        <Content paddingTop={paddingTop} paddingRear={paddingRear} fullscreen={fullscreen}>
           {children}
         </Content>
         <LoadingModal visible={loading} />

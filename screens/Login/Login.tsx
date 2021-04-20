@@ -53,7 +53,8 @@ export const Login = (props: LoginProps) => {
 
   return (
     <ContainerWithSafeArea
-      padding="16px"
+      paddingTop={16}
+      paddingRear={16}
       loading={false}
       header={{
         leftComponent: (

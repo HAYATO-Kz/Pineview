@@ -21,9 +21,9 @@ const listOfInfo = [
   },
   {
     header: 'ทีมพัฒนา :',
-    description: ` Ms. Kunyaruk Katebunlu
- Mr. Hayato Kawai
- Mr. Thanapoom Rattanathummawat`,
+    description: `Ms. Kunyaruk Katebunlu
+Mr. Hayato Kawai
+Mr. Thanapoom Rattanathummawat`,
   },
 ];
 
@@ -31,7 +31,8 @@ export const Info = (props: InfoProps) => {
   const { navigation } = props;
   return (
     <ContainerWithSafeArea
-      padding="4px 16px"
+      paddingTop={4}
+      paddingRear={16}
       loading={false}
       header={{
         leftComponent: (
