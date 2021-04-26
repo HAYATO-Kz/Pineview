@@ -5,15 +5,20 @@ Xcode application with iOS Simulator
 
 # Setup
 
-Install Node
-`brew install node`
-
-Install Watchman
-`brew install watchman`
-
-Install node
-`sudo gem install cocoapods`
+Install Node, Watchman and Cocoapods
+```
+brew install node
+brew install watchman
+sudo gem install cocoapods
+```
 
 # Installation
 
-1. yarn
+1. `yarn`
+2. `cd ios/ && pod install`
+
+# Running
+
+ There 2 ways to run the Pineview application
+ - build with `npx react-native run-ios` commnad in terminal
+ - open the demo.xcworkspace file in Xcode and click build button
