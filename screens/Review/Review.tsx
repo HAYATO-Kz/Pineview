@@ -83,8 +83,10 @@ export const Review = (props: ReviewProps) => {
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
+          setActionVisible(false);
           // shared with activity type of result.activityType
         } else {
+          setActionVisible(false);
           // shared
         }
       } else if (result.action === Share.dismissedAction) {
@@ -264,7 +266,6 @@ export const Review = (props: ReviewProps) => {
         visible={actionVisible}
         onShare={() => {
           share(kratoo.kratooId);
-          setActionVisible(false);
         }}
         onRedirect={() => {
           openInGoogleMap(kratoo.postions.latitude, kratoo.postions.longtitude);
