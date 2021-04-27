@@ -265,10 +265,10 @@ export const Review = (props: ReviewProps) => {
       <ReviewAction
         visible={actionVisible}
         onShare={() => {
-          share(kratoo.kratooId);
+          share(kratoo.kratooID);
         }}
         onRedirect={() => {
-          openInGoogleMap(kratoo.postions.latitude, kratoo.postions.longtitude);
+          openInGoogleMap(kratoo.postions.lat, kratoo.postions.lng);
           setActionVisible(false);
         }}
         onCancel={() => setActionVisible(false)}
