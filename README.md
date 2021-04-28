@@ -25,7 +25,7 @@ $ cd ios/ && pod install
 ### Running
 
 There 2 ways to run the Pineview application
- - build with `npx react-native run-ios` command in terminal
+ - build with `npx react-native run-ios` command in terminal 
  - open the `demo.xcworkspace` file in Xcode and click build button
 
 ### Front-end Developer
